@@ -34,18 +34,29 @@ unhsjm-plantilla-proyecto-grado/
 
 ## 📄 Compilación del Informe en LaTeX (Normas APA 7)
 
-El informe académico final se encuentra en la carpeta [`informe-latex/`](file:///Users/jdnarvaezf/Documents/UNHSJM/Formas%20de%20culminaci%C3%B3n%20de%20estudios/unhsjm-plantilla-proyecto-grado/informe-latex) y cumple con las especificaciones del estándar APA 7 (estilo estudiante/institucional en español) utilizando `biblatex` con motor `biber`.
+El informe académico final se encuentra en la carpeta `informe-latex/` y cumple con las especificaciones del estándar APA 7 (estilo estudiante/institucional en español) utilizando `biblatex` con motor `biber`.
 
-### 1. Uso en Overleaf (Recomendado)
-1. Comprima la carpeta `informe-latex/` en un archivo `.zip`.
-2. Inicie sesión en [Overleaf](https://www.overleaf.com/) y cree un nuevo proyecto importando el archivo `.zip`.
-3. Verifique en la configuración del proyecto (*Menu* -> *Settings*) que el motor de bibliografía esté configurado en **Biber** (`Biblatex engine: biber`) y el compilador en **pdfLaTeX** o **XeLaTeX**.
-4. Defina el archivo `main.tex` como el documento principal de compilación (*Main document*).
+### 1. Compilación con TeXstudio (Recomendado)
 
-### 2. Compilación Local
-Si prefiere trabajar en su computadora local, asegúrese de tener instalada una distribución de LaTeX completa (TeX Live, MiKTeX o MacTeX) junto con `biber`.
+Para una experiencia de trabajo local óptima y estructurada:
 
-Desde una terminal, navegue a la carpeta `informe-latex/` y ejecute:
+1. **Instalar una Distribución de LaTeX:**
+   - **Windows:** [MiKTeX](https://miktex.org/) o [TeX Live](https://www.tug.org/texlive/).
+   - **macOS:** [MacTeX](https://www.tug.org/mactex/).
+   - **Linux:** TeX Live (`sudo apt install texlive-full`).
+2. **Instalar TeXstudio:** Descargue e instale el entorno de desarrollo desde [texstudio.org](https://www.texstudio.org/).
+3. **Configurar el Motor de Bibliografía (Biber):**
+   - En TeXstudio, vaya a **Opciones** -> **Configurar TeXstudio** -> **Construcción** (*Build*).
+   - En la opción **Herramienta Bibliográfica por Defecto** (*Default Bibliography Tool*), asegúrese de seleccionar **Biber**.
+4. **Abrir y Compilar:**
+   - Abra el archivo `informe-latex/main.tex` en TeXstudio.
+   - Presione **F5** (o la opción *Construir y Ver*) para compilar y visualizar el PDF resultante.
+
+---
+
+### 2. Compilación por Línea de Comandos (CLI)
+
+Si prefiere compilar manualmente desde una terminal con una distribución de LaTeX instalada:
 
 ```bash
 cd informe-latex
