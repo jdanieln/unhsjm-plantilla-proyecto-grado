@@ -1,0 +1,63 @@
+\documentclass[stu, 12pt, spanish]{apa7}
+
+% ==========================================
+% Paquetes de Idioma, Codificación y Fuentes
+% ==========================================
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, es-tabla]{babel}
+\usepackage{csquotes}
+
+% ==========================================
+% Paquetes Gráficos y Utilidades
+% ==========================================
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+% ==========================================
+% Configuración Bibliográfica (APA 7 - BibLaTeX + Biber)
+% ==========================================
+\usepackage[backend=biber, style=apa]{biblatex}
+\addbibresource{referencias.bib}
+
+% ==========================================
+% Estilos Personalizados UNHSJM
+% ==========================================
+\usepackage{unhsjm-formato}
+% Descomenta la siguiente línea y pon el nombre de tu imagen cuando subas el logo a la carpeta 'figuras'
+% \unhsjmlogo{figuras/logo-unhsjm.png}
+
+% ==========================================
+% Portada e Información Institucional (UNHSJM)
+% ==========================================
+\title{Título del Proyecto de Grado}
+\shorttitle{Título Corto del Proyecto}
+\author{Nombre del Estudiante}
+\authorsaffil{Carrera de Ingeniería en Sistemas de Información\\Universidad Nacional Hermanos San Juan María (UNHSJM)}
+\course{Proyecto de Grado}
+\professor{Nombre del Tutor / Asesor}
+\duedate{\today}
+
+\begin{document}
+
+% Generar Portada Institucional
+\maketitle
+
+% Tabla de Contenidos / Índice
+\tableofcontents
+\newpage
+
+% ==========================================
+% Inclusión de Capítulos
+% ==========================================
+\include{capitulos/01-introduccion}
+\include{capitulos/02-marco-teorico}
+\include{capitulos/03-metodologia}
+\include{capitulos/04-desarrollo}
+\include{capitulos/05-conclusiones}
+
+% ==========================================
+% Referencias Bibliográficas
+% ==========================================
+\printbibliography[heading=bibintoc, title={Referencias}]
+
+\end{document}

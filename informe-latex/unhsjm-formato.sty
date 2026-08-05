@@ -1,0 +1,28 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{unhsjm-formato}[2026/08/05 Formato personalizado UNHSJM]
+
+% Paquetes adicionales para manejo de gráficos y tipografía
+\RequirePackage{graphicx}
+\RequirePackage{mathptmx} % Fuerza tipografía similar a Times New Roman
+\RequirePackage{etoolbox} % Para inyectar código en la portada
+
+% Comando para definir el logo
+\newcommand{\unhsjmlogo}[1]{\def\@unhsjmlogo{#1}}
+\unhsjmlogo{} % Vacío por defecto
+
+% Inyectar el logo en la parte superior de la portada de apa7
+\makeatletter
+\patchcmd{\maketitle}
+  {\vspace*{1in}}
+  {\vspace*{0.5in}
+   \begin{center}
+     \ifx\@unhsjmlogo\@empty
+       % Si no hay logo, no hace nada
+     \else
+       \includegraphics[width=5cm]{\@unhsjmlogo}\\[1cm]
+     \fi
+   \end{center}}
+  {}{}
+\makeatother
+
+\endinput
