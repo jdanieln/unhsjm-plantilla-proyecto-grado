@@ -34,7 +34,32 @@ unhsjm-plantilla-proyecto-grado/
 
 ## 📄 Compilación del Informe en LaTeX (Normas APA 7)
 
-El informe académico final se encuentra en la carpeta `informe-latex/` y cumple con las especificaciones del estándar APA 7 (estilo estudiante/institucional en español) utilizando `biblatex` con motor `biber`.
+El informe académico final se encuentra en la carpeta `informe-latex/` y cumple con las especificaciones del estándar APA 7 (estilo institucional en español) utilizando `biblatex` con motor `biber`.
+
+### 🎨 Configuración de la Portada Institucional
+
+La plantilla incluye un paquete de formato institucional (`unhsjm-formato.sty`) que genera automáticamente una portada académica estandarizada con soporte para:
+- **Logo Institucional:** Centrado en la parte superior (ubicado en `figuras/logo-unhsjm.jpeg`).
+- **Modalidades de Culminación de Estudios:** Configurable para `PROYECTO DE GRADO` o `MONOGRAFÍA`.
+- **Trabajos Grupales o Individuales:** Múltiples autores/estudiantes con carnet/ID.
+- **Tutor / Asesor, Ubicación y Fecha.**
+
+Ejemplo de configuración en `main.tex`:
+```latex
+\unhsjmlogo{figuras/logo-unhsjm.jpeg}
+\modalidad{PROYECTO DE GRADO} % O 'MONOGRAFÍA'
+
+\title{Título del Trabajo}
+\subtitulo{Subtítulo opcional}
+
+\autores{
+  Estudiante 1 (Carnet: 2022-0001U) \\
+  Estudiante 2 (Carnet: 2022-0002U)
+}
+\tutor{Ing. Nombre del Tutor / Asesor, M.Sc.}
+\ciudad{Managua, Nicaragua}
+\fecha{Agosto, 2026}
+```
 
 ### 1. Compilación con TeXstudio (Recomendado)
 

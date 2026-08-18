@@ -1,28 +1,121 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{unhsjm-formato}[2026/08/05 Formato personalizado UNHSJM]
+\ProvidesPackage{unhsjm-formato}[2026/08/18 Formato personalizado y Portada Institucional UNHSJM]
 
-% Paquetes adicionales para manejo de gráficos y tipografía
+% Paquetes requeridos para gráficos y espaciado
 \RequirePackage{graphicx}
-\RequirePackage{mathptmx} % Fuerza tipografía similar a Times New Roman
-\RequirePackage{etoolbox} % Para inyectar código en la portada
+\RequirePackage{etoolbox}
+\RequirePackage{setspace}
 
-% Comando para definir el logo
+% ==========================================
+% Comandos de Configuración Institucional
+% ==========================================
+
+% Logo institucional (Ruta relativa a informe-latex/)
 \newcommand{\unhsjmlogo}[1]{\def\@unhsjmlogo{#1}}
-\unhsjmlogo{} % Vacío por defecto
+\unhsjmlogo{figuras/logo-unhsjm.jpeg} % Valor por defecto
 
-% Inyectar el logo en la parte superior de la portada de apa7
-\makeatletter
-\patchcmd{\maketitle}
-  {\vspace*{1in}}
-  {\vspace*{0.5in}
-   \begin{center}
-     \ifx\@unhsjmlogo\@empty
-       % Si no hay logo, no hace nada
-     \else
-       \includegraphics[width=5cm]{\@unhsjmlogo}\\[1cm]
-     \fi
-   \end{center}}
-  {}{}
-\makeatother
+% Universidad, Facultad y Carrera
+\newcommand{\universidad}[1]{\def\@universidad{#1}}
+\universidad{UNIVERSIDAD NACIONAL HERMANOS SAN JUAN MARÍA}
+
+\newcommand{\facultad}[1]{\def\@facultad{#1}}
+\facultad{FACULTAD DE CIENCIAS E INGENIERÍAS}
+
+\newcommand{\carrera}[1]{\def\@carrera{#1}}
+\carrera{CARRERA DE INGENIERÍA EN SISTEMAS DE INFORMACIÓN}
+
+% Modalidad de Culminación de Estudios (ej: "PROYECTO DE GRADO" o "MONOGRAFÍA")
+\newcommand{\modalidad}[1]{\def\@modalidad{#1}}
+\modalidad{PROYECTO DE GRADO}
+
+% Subtítulo opcional del trabajo
+\newcommand{\subtitulo}[1]{\def\@subtitulo{#1}}
+\subtitulo{}
+
+% Autores (Soporta múltiples integrantes para trabajos grupales)
+\newcommand{\autores}[1]{\def\@autores{#1}}
+\autores{}
+
+% Tutor / Asesor
+\newcommand{\tutor}[1]{\def\@tutor{#1}}
+\tutor{}
+
+% Ciudad y País
+\newcommand{\ciudad}[1]{\def\@ciudad{#1}}
+\ciudad{Managua, Nicaragua}
+
+% Fecha
+\newcommand{\fecha}[1]{\def\@fecha{#1}}
+\fecha{\today}
+
+% ==========================================
+% Definición de Portada Institucional (\maketitle)
+% ==========================================
+\renewcommand{\maketitle}{%
+  \begin{titlepage}
+    \centering
+    \setstretch{1.15}
+    
+    % 1. Logo Institucional en la Parte Superior Centro
+    \ifx\@unhsjmlogo\@empty
+      \vspace*{0.5cm}
+    \else
+      \vspace*{-0.5cm}
+      \IfFileExists{\@unhsjmlogo}{%
+        \includegraphics[width=4.2cm, height=4.2cm, keepaspectratio]{\@unhsjmlogo}\\[0.4cm]
+      }{%
+        \vspace*{0.5cm}
+      }
+    \fi
+
+    % 2. Encabezado Institucional
+    {\bfseries\large \@universidad}\\[0.2cm]
+    {\bfseries\normalsize \@facultad}\\[0.15cm]
+    {\bfseries\normalsize \@carrera}\\[1.2cm]
+
+    \vfill
+
+    % 3. Modalidad de Culminación de Estudios y Título
+    {\bfseries\large \MakeUppercase{\@modalidad}}\\[0.8cm]
+    {\bfseries\Large \@title}\\[0.3cm]
+    \ifx\@subtitulo\@empty
+    \else
+      {\large \textit{\@subtitulo}}\\[0.5cm]
+    \fi
+
+    \vfill
+
+    % 4. Bloque de Autores (Grupales / Individual) y Tutor
+    \begin{singlespace}
+      \begin{center}
+        \begin{tabular}{r l}
+          \ifx\@autores\@empty
+            \textbf{Presentado por:} & \@author \\
+          \else
+            \textbf{Presentado por:} & \begin{tabular}[t]{@{}l@{}}\@autores\end{tabular} \\
+          \fi
+          \\[0.4cm]
+          \ifx\@tutor\@empty
+            \ifdefined\@professor
+              \textbf{Tutor / Asesor:} & \@professor \\
+            \fi
+          \else
+            \textbf{Tutor / Asesor:} & \@tutor \\
+          \fi
+        \end{tabular}
+      \end{center}
+    \end{singlespace}
+
+    \vfill
+
+    % 5. Pie de Página (Ciudad, Fecha)
+    {\normalsize \@ciudad}\\[0.15cm]
+    {\normalsize \@fecha}
+
+    \thispagestyle{empty}
+  \end{titlepage}
+  \newpage
+  \setcounter{page}{1}
+}
 
 \endinput

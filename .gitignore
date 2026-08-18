@@ -50,8 +50,12 @@ obj/
 *.user
 
 # ==========================================
-# Archivos temporales generados por LaTeX
+# Archivos temporales generados por LaTeX y TeXstudio
 # ==========================================
+# Compilados de salida (PDFs)
+*.pdf
+
+# Archivos auxiliares de LaTeX
 *.aux
 *.log
 *.out
@@ -63,8 +67,43 @@ obj/
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+*.synctex(busy)
+*.synctex
 *.bcf
 *.run.xml
+*.nav
+*.snm
+*.vrb
+*.dvi
+*.xdv
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+
+# Glosarios, Índices y Listas
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ist
+*.idx
+*.ind
+*.ilg
+*.nlo
+*.nls
+*.nlg
+*.ent
+*.thm
+
+# TeXstudio, TeXmaker y respaldos de editores
+*.bak
+*.cwl
+.texstudio/
 
 # ==========================================
 # Archivos del Sistema Operativo
