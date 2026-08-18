@@ -1,6 +1,6 @@
 # Plantilla de Proyecto de Grado - Ingeniería en Sistemas (UNHSJM)
 
-Este repositorio constituye la plantilla estandarizada para el desarrollo de los Proyectos de Grado de la carrera de **Ingeniería en Sistemas de Información** de la **Universidad Nacional Hermanos San Juan María (UNHSJM)**.
+Este repositorio constituye la plantilla estandarizada para el desarrollo de los Proyectos de Grado de la carrera de **Ingeniería en Sistemas de Información** de la **Universidad Nacional Héroes San José de las Mulas (UNHSJM)**.
 
 Su estructura está diseñada para mantener una clara separación de responsabilidades entre el desarrollo del código fuente (`src/`), la documentación técnica del proyecto (`docs/`) y el informe académico escrito final (`informe-latex/`).
 
