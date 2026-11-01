@@ -78,15 +78,18 @@ export default class CloudinaryService {
    * Deletes an asset from Cloudinary by its public_id.
    * Safe to call with a null/undefined publicId (no-op).
    */
-  async delete(publicId: string | null | undefined): Promise<void> {
-    if (!publicId) return
+  async delete(publicId: string | null | undefined): Promise<boolean> {
+    if (!publicId) return true
 
     try {
-      await cloudinary.uploader.destroy(publicId)
+      const result = await cloudinary.uploader.destroy(publicId, { invalidate: true })
+      if (!['ok', 'not found'].includes(result.result)) return false
       logger.info({ publicId }, 'Image deleted from Cloudinary')
+      return true
     } catch (error: any) {
       // Non-fatal: log but don't throw so the main flow is not interrupted.
       logger.warn({ err: error, publicId }, 'Failed to delete image from Cloudinary')
+      return false
     }
   }
 }

@@ -42,14 +42,13 @@ export default class CategoryService {
     }
   }
 
-  async list(filters: { page?: number; perPage?: number } = {}) {
+  async list(filters: { page?: number; perPage?: number; search?: string } = {}) {
     try {
       const page = filters.page || 1
       const perPage = filters.perPage || 10
-      return await Category.query()
-        .whereNull('deletedAt')
-        .orderBy('idCategory', 'desc')
-        .paginate(page, perPage)
+      const query = Category.query().whereNull('deletedAt')
+      if (filters.search) query.whereILike('nameCategory', `%${filters.search}%`)
+      return await query.orderBy('idCategory', 'desc').paginate(page, perPage)
     } catch (error: any) {
       logger.error({ err: error }, 'Failed to list categories')
       throw new Error('Failed to retrieve categories.')

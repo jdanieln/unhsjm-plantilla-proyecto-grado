@@ -8,7 +8,9 @@ import db from '@adonisjs/lucid/services/db'
 export default class TruckService {
   private async ensureStatusColumn() {
     try {
-      await db.rawQuery('ALTER TABLE trucks ADD COLUMN IF NOT EXISTS status VARCHAR(255) DEFAULT \'active\';')
+      await db.rawQuery(
+        "ALTER TABLE trucks ADD COLUMN IF NOT EXISTS status VARCHAR(255) DEFAULT 'active';"
+      )
     } catch (dbErr) {
       logger.error({ err: dbErr }, 'Failed to check/create status column in trucks table')
     }
@@ -21,8 +23,12 @@ export default class TruckService {
     chassis: string
     plate: string
     status?: string
+    maintenanceReason?: string
   }): Promise<Truck> {
     await this.ensureStatusColumn()
+    if (data.status === 'mantenimiento' && !data.maintenanceReason?.trim()) {
+      throw new Error('Indica el motivo del mantenimiento del camión.')
+    }
     if (data.idDriver) {
       const existing = await Truck.query()
         .whereNull('deletedAt')
@@ -51,6 +57,7 @@ export default class TruckService {
       chassis: string
       plate: string
       status: string
+      maintenanceReason: string
     }>
   ): Promise<Truck> {
     await this.ensureStatusColumn()
@@ -66,7 +73,11 @@ export default class TruckService {
     }
     try {
       const truck = await Truck.query().whereNull('deletedAt').where('id_truck', id).firstOrFail()
+      if (data.status === 'mantenimiento' && !(data.maintenanceReason || truck.maintenanceReason)) {
+        throw new Error('Indica el motivo del mantenimiento del camión.')
+      }
       truck.merge(data)
+      if (data.status && data.status !== 'mantenimiento') truck.maintenanceReason = null
       await truck.save()
       logger.info({ idTruck: truck.idTruck }, 'Truck updated successfully')
       return truck
@@ -79,7 +90,9 @@ export default class TruckService {
     }
   }
 
-  async list(filters: { page?: number; perPage?: number; idCompany?: number } = {}) {
+  async list(
+    filters: { page?: number; perPage?: number; idCompany?: number; search?: string } = {}
+  ) {
     await this.ensureStatusColumn()
     try {
       const page = filters.page || 1
@@ -95,6 +108,13 @@ export default class TruckService {
 
       if (filters.idCompany) {
         query.where('id_company', filters.idCompany)
+      }
+      if (filters.search) {
+        query.where((builder) =>
+          builder
+            .whereILike('plate', `%${filters.search}%`)
+            .orWhereILike('chassis', `%${filters.search}%`)
+        )
       }
 
       return await query.orderBy('id_truck', 'desc').paginate(page, perPage)
@@ -147,9 +167,10 @@ export default class TruckService {
     }
   }
 
-  async reportMaintenanceForDriver(idDriver: number): Promise<Truck> {
+  async reportMaintenanceForDriver(idDriver: number, reason: string): Promise<Truck> {
     const truck = await this.findByDriverId(idDriver)
     truck.status = 'mantenimiento'
+    truck.maintenanceReason = reason
     await truck.save()
     logger.info({ idTruck: truck.idTruck, idDriver }, 'Driver reported truck maintenance')
     return await this.findById(truck.idTruck)

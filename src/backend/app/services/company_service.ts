@@ -2,6 +2,8 @@ import { inject } from '@adonisjs/core'
 import { DateTime } from 'luxon'
 import Company from '#models/company'
 import logger from '@adonisjs/core/services/logger'
+import db from '@adonisjs/lucid/services/db'
+import { OrderStatus } from '#enums/order_status'
 
 export interface CompanyFilters {
   page?: number
@@ -77,7 +79,30 @@ export default class CompanyService {
           })
       })
     }
-    return await query.orderBy('idCompany', 'desc').paginate(page, perPage)
+    const paginator = await query.orderBy('idCompany', 'desc').paginate(page, perPage)
+    const companies = paginator.all()
+    if (companies.length === 0) return paginator.serialize()
+
+    const delivered = await db
+      .from('orders')
+      .select('id_company')
+      .count('* as total')
+      .whereIn(
+        'id_company',
+        companies.map((company) => company.idCompany)
+      )
+      .where('status', OrderStatus.DELIVERED)
+      .whereNull('deletedAt')
+      .groupBy('id_company')
+    const counts = new Map(delivered.map((row) => [Number(row.id_company), Number(row.total)]))
+
+    return {
+      ...paginator.serialize(),
+      data: companies.map((company) => ({
+        ...company.serialize(),
+        deliveredShipmentsCount: counts.get(company.idCompany) ?? 0,
+      })),
+    }
   }
 
   async findById(id: number): Promise<Company> {

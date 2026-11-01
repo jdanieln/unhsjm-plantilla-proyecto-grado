@@ -1,0 +1,7 @@
+.float{animation:float 5s ease-in-out infinite}
+.hover{transition:transform .22s ease}
+:global(a:hover) .hover,:global(button:hover) .hover{transform:scale(1.12) rotate(-6deg)}
+.nav{transition:transform .2s ease}
+:global(a:hover) .nav,:global(a:focus-visible) .nav{transform:translateY(-2px) rotate(-7deg)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@media(prefers-reduced-motion:reduce){.float{animation:none}.hover,.nav{transition:none}:global(a:hover) .hover,:global(button:hover) .hover,:global(a:hover) .nav,:global(a:focus-visible) .nav{transform:none}}

@@ -2,6 +2,10 @@ import { inject } from '@adonisjs/core'
 import { DateTime } from 'luxon'
 import logger from '@adonisjs/core/services/logger'
 import DetailsOrder from '#models/details_order'
+import Order from '#models/order'
+import Payment from '#models/payment'
+import { OrderStatus } from '#enums/order_status'
+import { PaymentStatus } from '#enums/payment_status'
 
 @inject()
 export default class DetailsOrderService {
@@ -15,10 +19,22 @@ export default class DetailsOrderService {
     typePackaging: any
   }): Promise<DetailsOrder> {
     try {
+      const order = await Order.query()
+        .where('idOrder', data.idOrder)
+        .whereNull('deletedAt')
+        .firstOrFail()
+      if (
+        order.status !== OrderStatus.PENDING ||
+        (data.idDriver !== undefined && data.idDriver !== null)
+      ) {
+        throw new Error('Solo se pueden añadir cargas sin conductor a pedidos pendientes.')
+      }
       const detail = await DetailsOrder.create(data)
       logger.info({ idDetails: detail.idDetails }, 'Order detail created successfully')
       return detail
     } catch (error: any) {
+      if (error.message === 'Solo se pueden añadir cargas sin conductor a pedidos pendientes.')
+        throw error
       logger.error({ err: error }, 'Failed to create order detail')
       throw new Error('Failed to create order detail.')
     }
@@ -41,6 +57,24 @@ export default class DetailsOrderService {
         .where('idDetails', id)
         .firstOrFail()
 
+      if (data.amount !== undefined) {
+        throw new Error(
+          'El precio de las cargas solo se cambia mediante una cotización del pedido.'
+        )
+      }
+      if (data.idDriver !== undefined && data.idDriver !== null) {
+        const order = await Order.query().where('idOrder', detail.idOrder).firstOrFail()
+        const payment = await Payment.query()
+          .where('idOrder', detail.idOrder)
+          .whereNull('deletedAt')
+          .first()
+        if (order.status !== OrderStatus.ACCEPTED || payment?.status !== PaymentStatus.PAID) {
+          throw new Error(
+            'Solo se puede asignar un conductor cuando el pedido está aceptado y pagado.'
+          )
+        }
+      }
+
       detail.merge(data)
       await detail.save()
 
@@ -49,6 +83,12 @@ export default class DetailsOrderService {
     } catch (error: any) {
       if (error.code === 'E_ROW_NOT_FOUND') {
         throw new Error('Detail not found.')
+      }
+      if (
+        error.message?.startsWith('El precio de las cargas') ||
+        error.message?.startsWith('Solo se puede asignar')
+      ) {
+        throw error
       }
       logger.error({ err: error }, 'Failed to update order detail')
       throw new Error('Failed to update order detail.')
@@ -85,6 +125,13 @@ export default class DetailsOrderService {
   }
   async createWithCalculation(data: any): Promise<DetailsOrder> {
     try {
+      const order = await Order.query()
+        .where('idOrder', data.idOrder)
+        .whereNull('deletedAt')
+        .firstOrFail()
+      if (order.status !== OrderStatus.PENDING || data.idDriver !== undefined) {
+        throw new Error('Solo se pueden añadir cargas sin conductor a pedidos pendientes.')
+      }
       const rate = data.rate || 0
       const quantity = data.quantity || 1
       const numericWeight = Number.parseFloat(String(data.unitWeight).replace(/[^\d.]/g, '')) || 0
@@ -101,6 +148,8 @@ export default class DetailsOrderService {
       logger.info({ idDetails: detail.idDetails }, 'Order detail created with calculation')
       return detail
     } catch (error: any) {
+      if (error.message === 'Solo se pueden añadir cargas sin conductor a pedidos pendientes.')
+        throw error
       logger.error({ err: error }, 'Failed to create order detail')
       throw new Error('Failed to create order detail.')
     }

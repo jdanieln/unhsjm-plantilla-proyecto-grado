@@ -1,0 +1,5 @@
+.meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 16px;padding:2px 4px}
+.meta div{display:grid;gap:5px}.meta strong{font-size:17px}.meta span,.info{color:var(--theme-muted, #ac9bb9);font-size:13px}
+.live{padding:8px 12px;border:1px solid var(--theme-border, #554067);border-radius:999px;background:var(--theme-soft, #281d32);color:var(--theme-accent, #cda7f0)!important;white-space:nowrap}
+.info{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px;padding:0 4px}
+@media(max-width:600px){.meta{align-items:flex-start;flex-direction:column}.live{white-space:normal}}

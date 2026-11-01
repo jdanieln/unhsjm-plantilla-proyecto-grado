@@ -250,13 +250,13 @@ En cuanto a la organización tecnológica, el diseño documentado contempla una 
 \subsection{Metodología de Desarrollo}
 \label{sec:metodologia-desarrollo}
 
-El nivel táctico de TravelDLS corresponde al proceso de desarrollo del software y se integra en la fase 3 de la metodología de investigación en ciencia del diseño (Design Science Research Methodology, DSRM), denominada Diseño y Desarrollo del Artefacto. En esta fase, las decisiones de diseño y arquitectura derivadas de los meta-requisitos se utilizan como base para construir la plataforma web. Para organizar este proceso, se propone combinar Scrum y Extreme Programming (XP): Scrum se utilizará para planificar y distribuir el trabajo de forma incremental, mientras que XP orientará las prácticas de ingeniería hacia la calidad técnica del software \parencite{beck2000xp, schwaber2020scrum}.
+La metodología de desarrollo de TravelDLS se integra en la fase 3 de la metodología de investigación en ciencia del diseño (Design Science Research Methodology, DSRM), denominada Diseño y Desarrollo del Artefacto. En esta fase, las decisiones de diseño y arquitectura derivadas de los meta-requisitos se utilizan como base para construir la plataforma web. Para organizar este proceso, se propone combinar Scrum y Extreme Programming (XP). Scrum se utilizará para planificar y distribuir el trabajo de forma incremental, mientras que XP orientará las prácticas de ingeniería hacia la calidad técnica del software \parencite{beck2000xp, schwaber2020scrum}.
 
 Esta combinación se enmarca en el enfoque de investigación adoptado para TravelDLS. \textcite{peffers2007dsrm} describen la metodología DSRM como un proceso que comprende la identificación del problema, la definición de los objetivos de la solución, el diseño y desarrollo del artefacto, su demostración, su evaluación y la comunicación de los resultados. En consecuencia, el nivel táctico se concentra en la construcción del sistema a partir de los meta-requisitos establecidos, sin confundir la implementación de las funcionalidades con los resultados que deberán obtenerse durante su evaluación.
 
-El nivel táctico describe cómo se organizará la construcción del artefacto TravelDLS a partir de los siete meta-requisitos definidos en la Tabla 3. Esta actividad se relaciona con la fase de diseño y desarrollo del artefacto dentro de la metodología de investigación en ciencia del diseño (DSRM).\textcite{peffers2007dsrm} presentan la DSRM como un proceso que vincula la identificación del problema, los objetivos de la solución, el diseño y desarrollo, la demostración, la evaluación y la comunicación de resultados. Por ello, las matrices de esta sección conectan las necesidades del sistema con las decisiones de diseño, las historias de usuario y las formas previstas de comprobar su cumplimiento.
+La metodología de desarrollo describe cómo se organizará la construcción del artefacto TravelDLS a partir de los siete meta-requisitos definidos en la Tabla~\ref{tab:meta-requisitos-traveldls}. Esta actividad se relaciona con la fase de diseño y desarrollo del artefacto dentro de la metodología de investigación en ciencia del diseño (DSRM).\textcite{peffers2007dsrm} presentan la DSRM como un proceso que vincula la identificación del problema, los objetivos de la solución, el diseño y desarrollo, la demostración, la evaluación y la comunicación de resultados. Por ello, las matrices de esta sección conectan las necesidades del sistema con las decisiones de diseño, las historias de usuario y las formas previstas de comprobar su cumplimiento.
 
-Para organizar el trabajo se propone Scrum como marco de gestión y se consideran prácticas técnicas de Extreme Programming (XP) para apoyar la calidad del código. Bahit (2012) explica cómo pueden combinarse ambos enfoques, utilizando Scrum para organizar el trabajo en iteraciones y XP para reforzar las prácticas de desarrollo. La aplicación de estas prácticas en TravelDLS deberá verificarse durante la implementación y mediante las pruebas correspondientes \parencite{beck2000xp, bahit2012scrum, schwaber2020scrum}.
+Para organizar el trabajo se propone Scrum como marco de gestión y se consideran prácticas técnicas de Extreme Programming (XP) para apoyar la calidad del código. \textcite{bahit2012scrum} explica cómo pueden combinarse ambos enfoques, utilizando Scrum para organizar el trabajo en iteraciones y XP para reforzar las prácticas de desarrollo. La aplicación de estas prácticas en TravelDLS deberá verificarse durante la implementación y mediante las pruebas correspondientes \parencite{beck2000xp, bahit2012scrum, schwaber2020scrum}.
 
 \subsubsection{Gestión del desarrollo mediante Scrum}
 
@@ -268,30 +268,56 @@ El trabajo se organizará en Sprints de dos a tres semanas, según la planificac
 
 La planificación tendrá en cuenta la arquitectura tecnológica definida para TravelDLS: Next.js para el frontend, AdonisJS para el backend y PostgreSQL para la persistencia de datos. El backend se organizará mediante el patrón MVC y una capa de servicios para separar las responsabilidades de los controladores y la lógica de negocio. La distribución de actividades considerará las dependencias entre los componentes, de modo que la implementación de las interfaces se integre con los servicios y las estructuras de datos correspondientes.
 
+\subsubsection{Prácticas de ingeniería mediante Extreme Programming (XP)}
+
+Extreme Programming (XP) propone prácticas de ingeniería que buscan mejorar la calidad del software y facilitar su adaptación durante el desarrollo. \textcite{beck2000xp} describe este enfoque a partir de prácticas que promueven la retroalimentación frecuente, la simplicidad del diseño y la colaboración entre los integrantes del equipo. En TravelDLS se propone incorporar cuatro prácticas: desarrollo guiado por pruebas, refactorización continua, programación en pares y propiedad colectiva del código, e integración continua.
+
+\begin{itemize}
+	\item \textbf{Desarrollo guiado por pruebas (TDD):} El desarrollo guiado por pruebas (\textit{Test-Driven Development}, TDD) consiste en escribir una prueba automatizada antes del código funcional que permitirá satisfacerla. A partir del resultado de la prueba, se implementa la funcionalidad y se realizan los ajustes necesarios hasta que se cumpla el comportamiento esperado \parencite{beck2000xp}. En TravelDLS se propone aplicar esta práctica principalmente a las reglas de negocio del backend, como las validaciones de usuarios, la asignación de vehículos y conductores, la gestión de órdenes y el procesamiento de información relacionada con los recorridos. Las pruebas permitirán comprobar el comportamiento esperado de cada componente y detectar errores durante su implementación.
+\end{itemize}
+
+\begin{itemize}
+	\item \textbf{Refactorización continua:} La refactorización consiste en mejorar la estructura interna del código sin modificar su comportamiento observable \parencite{beck2000xp}. En TravelDLS se propone revisar y reorganizar el código conforme se incorporen nuevas funcionalidades, especialmente cuando existan instrucciones repetidas, responsabilidades mezcladas o procedimientos que puedan simplificarse. Esta práctica se aplicará a los componentes del frontend desarrollado con Next.js y a los módulos del backend construido con AdonisJS, procurando conservar la separación entre la interfaz, los controladores, la capa de servicios y el acceso a los datos.
+	
+	\item \textbf{Programación en pares y propiedad colectiva del código:} La programación en pares consiste en que dos integrantes colaboren en una misma tarea de programación, mientras que la propiedad colectiva permite que los integrantes del equipo puedan revisar y modificar diferentes partes del código, en lugar de limitar cada componente a una sola persona \parencite{beck2000xp}. Para TravelDLS se propone utilizar estas prácticas en funcionalidades que involucren varios componentes del sistema, como la autenticación, la gestión de órdenes y la optimización de recorridos. La colaboración facilitará el intercambio de conocimientos, la revisión de las soluciones implementadas y el mantenimiento del código. Su aplicación se ajustará a la disponibilidad de los integrantes y a la distribución de las tareas de cada sprint.
+\end{itemize}
+
+\begin{itemize}
+	\item \textbf{Integración continua:} \textcite{bahit2012scrum} explica que el objetivo de la integración continua es incorporar las nuevas funcionalidades a las existentes, procurando que los cambios realizados no afecten el funcionamiento de las funcionalidades anteriores. En TravelDLS, se propone aplicar esta práctica mediante la integración progresiva de los cambios en el código y la ejecución de pruebas que permitan comprobar que las nuevas funcionalidades se incorporen correctamente sin alterar las ya desarrolladas. Esto contribuirá a detectar errores durante el desarrollo y a mantener el funcionamiento conjunto de los componentes del sistema.
+\end{itemize}
+
 \subsubsection{Matriz de meta-diseños}
 
 Los meta-diseños resumen las decisiones técnicas previstas para responder a los meta-requisitos; su cumplimiento se comprobará durante el desarrollo.
 
-{\small
-	\begin{longtable}{|l|l|p{4.5cm}|p{2.8cm}|p{4.5cm}|}
+
+\begingroup
+	\small
+	\setlength{\tabcolsep}{4.5pt}
+	\renewcommand{\arraystretch}{1.45}
+	\begin{longtable}{@{}>{\RaggedRight\arraybackslash}p{1.5cm}>{\RaggedRight\arraybackslash}p{1.8cm}>{\RaggedRight\arraybackslash}p{4.1cm}>{\RaggedRight\arraybackslash}p{2.3cm}>{\RaggedRight\arraybackslash}p{5.3cm}@{}}
 		\caption{Matriz de meta-diseños asociados a los meta-requisitos de TravelDLS}\label{tab:meta_disenos}\\
-		\hline
-		\textbf{Código} & \textbf{MR asociado} & \textbf{Decisión de diseño} & \textbf{Historias} & \textbf{Verificación} \\ \hline
+		\toprule
+		\textbf{Código} & \textbf{MR asociado} & \textbf{Decisión de diseño} & \textbf{Historias} & \textbf{Verificación} \\
+		\midrule
 		\endfirsthead
-		\hline
-		\textbf{Código} & \textbf{MR asociado} & \textbf{Decisión de diseño} & \textbf{Historias} & \textbf{Verificación} \\ \hline
+		\caption[]{Matriz de meta-diseños asociados a los meta-requisitos de TravelDLS (continuación)}\\
+		\toprule
+		\textbf{Código} & \textbf{MR asociado} & \textbf{Decisión de diseño} & \textbf{Historias} & \textbf{Verificación} \\
+		\midrule
 		\endhead
-		\hline
 		\endfoot
-		MD-01 & MR-01 & Modelo relacional en PostgreSQL para usuarios, roles, empresas, clientes, conductores, vehículos, órdenes y registros asociados; operaciones CRUD mediante AdonisJS, organizadas con MVC y capa de servicios. & HU-01, HU-05, HU-14, HU-29 & Integridad de relaciones; persistencia de altas y cambios; consulta paginada; errores de validación. \\ \hline
-		MD-02 & MR-02 & Flujo de órdenes con estados definidos y operaciones para crear solicitud, cotizar, aceptar o rechazar, consultar y modificar según el estado permitido. & HU-16, HU-20 & Transiciones válidas; cotización visible antes de decidir; rechazo de operaciones incompatibles. \\ \hline
-		MD-03 & MR-03 & Registros de ubicación y estado vinculados a una orden; consulta restringida a participantes autorizados; mapa y ubicación real separados de la simulación del recorrido. & HU-22, HU-24 & Última ubicación asociada al viaje correcto; permisos aplicados; simulación sin modificar GPS ni estado real. \\ \hline
-		MD-04 & MR-04 & Relaciones entre empresas, conductores, camiones y pedidos, con reglas de disponibilidad, asignación, estado operativo y reporte de mantenimiento. & HU-11, HU-15, HU-21, HU-22 & No permitir asignaciones incompatibles; conductor consulta solo su vehículo/viajes; cambios de disponibilidad coherentes. \\ \hline
-		MD-05 & MR-05 & Módulo de recorridos con origen y destinos, matriz de costo, integración de Google OR-Tools y comparación con Vecino Más Cercano y 2-opt; visualización mediante Mapbox. & HU-30, HU-33 & Mismas entradas y condiciones en la comparación; costo y tiempo de cálculo registrados; no afirmar óptimo garantizado. \\ \hline
-		MD-06 & MR-06 & Presentación del precio final antes de la aceptación, incluyendo el porcentaje de mantenimiento previsto en el modelo económico; flujo de pago del prototipo identificado explícitamente como simulado. & HU-16, HU-19, HU-20, HU-25, HU-28 & Importe final visible antes de aceptar; reglas de estado y total consistentes; ninguna operación se presenta como cobro bancario real. \\ \hline
-		MD-07 & MR-07 & Autenticación, sesión y autorización por rol, con comprobación de pertenencia de los registros a la empresa, cliente, conductor o pedido correspondiente. & HU-03, HU-04, HU-06, HU-07, HU-11, HU-14, HU-16, HU-18, HU-21, HU-23, HU-26, HU-29, HU-30, HU-33 & Denegar acceso directo o por API a datos ajenos; mantener separada la información por empresa y perfil. \\ \hline
+		\bottomrule
+		\endlastfoot
+		MD-01 & MR-01 & Modelo relacional en PostgreSQL para usuarios, roles, empresas, clientes, conductores, vehículos, órdenes y registros asociados; operaciones CRUD mediante AdonisJS, organizadas con MVC y capa de servicios. & HU-01, HU-05, HU-14, HU-29 & Integridad de relaciones; persistencia de altas y cambios; consulta paginada; errores de validación. \\ \midrule
+		MD-02 & MR-02 & Flujo de órdenes con estados definidos y operaciones para crear solicitud, cotizar, aceptar o rechazar, consultar y modificar según el estado permitido. & HU-16, HU-20 & Transiciones válidas; cotización visible antes de decidir; rechazo de operaciones incompatibles. \\ \midrule
+		MD-03 & MR-03 & Registros de ubicación y estado vinculados a una orden; consulta restringida a participantes autorizados; mapa y ubicación real separados de la simulación del recorrido. & HU-22, HU-24 & Última ubicación asociada al viaje correcto; permisos aplicados; simulación sin modificar GPS ni estado real. \\ \midrule
+		MD-04 & MR-04 & Relaciones entre empresas, conductores, camiones y pedidos, con reglas de disponibilidad, asignación, estado operativo y reporte de mantenimiento. & HU-11, HU-15, HU-21, HU-22 & No permitir asignaciones incompatibles; conductor consulta solo su vehículo/viajes; cambios de disponibilidad coherentes. \\ \midrule
+		MD-05 & MR-05 & Módulo de recorridos con origen y destinos, matriz de costo, integración de Google OR-Tools y comparación con Vecino Más Cercano y 2-opt; visualización mediante Mapbox. & HU-30, HU-33 & Mismas entradas y condiciones en la comparación; costo y tiempo de cálculo registrados; no afirmar óptimo garantizado. \\ \midrule
+		MD-06 & MR-06 & Presentación del precio final antes de la aceptación, incluyendo el porcentaje de mantenimiento previsto en el modelo económico; flujo de pago del prototipo identificado explícitamente como simulado. & HU-16, HU-19, HU-20, HU-25, HU-28 & Importe final visible antes de aceptar; reglas de estado y total consistentes; ninguna operación se presenta como cobro bancario real. \\ \midrule
+		MD-07 & MR-07 & Autenticación, sesión y autorización por rol, con comprobación de pertenencia de los registros a la empresa, cliente, conductor o pedido correspondiente. & HU-03, HU-04, HU-06, HU-07, HU-11, HU-14, HU-16, HU-18, HU-21, HU-23, HU-26, HU-29, HU-30, HU-33 & Denegar acceso directo o por API a datos ajenos; mantener separada la información por empresa y perfil. \\ \midrule
 	\end{longtable}
-}
+\endgroup
 
 \textit{Nota.} Elaboración propia a partir de los meta-requisitos, los diagramas de diseño y las historias de usuario de TravelDLS.
 
@@ -299,130 +325,154 @@ Los meta-diseños resumen las decisiones técnicas previstas para responder a lo
 
 La Tabla \ref{tab:trazabilidad_tactica} muestra la contribución de cada historia de usuario a los meta-requisitos de la Tabla\ref{tab:meta-requisitos-traveldls}.
 
-{\small
-	\begin{longtable}{|l|p{4cm}|p{2.5cm}|p{5.5cm}|}
+
+\begingroup
+	\small
+	\setlength{\tabcolsep}{4.5pt}
+	\renewcommand{\arraystretch}{1.45}
+	\begin{longtable}{@{}>{\RaggedRight\arraybackslash}p{1.7cm}>{\RaggedRight\arraybackslash}p{3.9cm}>{\RaggedRight\arraybackslash}p{2.8cm}>{\RaggedRight\arraybackslash}p{7cm}@{}}
 		\caption{Matriz de trazabilidad entre historias de usuario y meta-requisitos}\label{tab:trazabilidad_tactica}\\
-		\hline
-		\textbf{Historia} & \textbf{Resumen} & \textbf{Meta-requisitos} & \textbf{Área funcional} \\ \hline
+		\toprule
+		\textbf{Historia} & \textbf{Resumen} & \textbf{Meta-requisitos} & \textbf{Área funcional} \\
+		\midrule
 		\endfirsthead
-		\hline
-		\textbf{Historia} & \textbf{Resumen} & \textbf{Meta-requisitos} & \textbf{Área funcional} \\ \hline
+		\caption[]{Matriz de trazabilidad entre historias de usuario y meta-requisitos (continuación)}\\
+		\toprule
+		\textbf{Historia} & \textbf{Resumen} & \textbf{Meta-requisitos} & \textbf{Área funcional} \\
+		\midrule
 		\endhead
-		\hline
 		\endfoot
-		HU-01 & Cimientos de base de datos y backend & MR-01 & Preparación de infraestructura y persistencia \\ \hline
-		HU-02 & Registrarse como cliente & MR-01, MR-07 & Registro de clientes y asignación del rol cliente \\ \hline
-		HU-03 & Iniciar, conservar y cerrar sesión & MR-01, MR-07 & Autenticación y ciclo de sesión \\ \hline
-		HU-04 & Acceder a navegación y operaciones por rol & MR-07 & Navegación y autorización por perfil \\ \hline
-		HU-05 & Registrar usuarios con rol desde administración & MR-01, MR-07 & Administración de usuarios \\ \hline
-		HU-06 & Administrar empresas & MR-01, MR-07 & Gestión de empresas \\ \hline
-		HU-07 & Consultar y dar de baja clientes desde administración & MR-01, MR-07 & Consulta y baja de clientes \\ \hline
-		HU-08 & Completar y actualizar perfil de cliente & MR-01, MR-07 & Perfil de cliente \\ \hline
-		HU-09 & Actualizar perfil y tarifa de empresa & MR-01, MR-06, MR-07 & Perfil y tarifa de empresa \\ \hline
-		HU-10 & Completar y actualizar perfil de conductor & MR-01, MR-07 & Perfil de conductor \\ \hline
-		HU-11 & Registrar, vincular y administrar conductores & MR-01, MR-04, MR-07 & Gestión y vinculación de conductores \\ \hline
-		HU-12 & Administrar categorías de vehículos & MR-01, MR-04 & Categorías de vehículos \\ \hline
-		HU-13 & Administrar camiones y asignarlos a conductores & MR-01, MR-04, MR-07 & Gestión de camiones y asignación de conductores \\ \hline
-		HU-14 & Consultar camión asignado & MR-01, MR-04, MR-07 & Consulta del camión asignado \\ \hline
-		HU-15 & Reportar mantenimiento del camión & MR-04 & Reporte de mantenimiento \\ \hline
-		HU-16 & Solicitar transporte con empresa, carga y direcciones & MR-02, MR-07 & Solicitud de transporte \\ \hline
-		HU-17 & Consultar y gestionar pedidos del cliente & MR-02, MR-07 & Consulta y cambios permitidos de pedidos \\ \hline
-		HU-18 & Consultar solicitudes recibidas por empresa & MR-02, MR-07 & Consulta de solicitudes por empresa \\ \hline
-		HU-19 & Establecer el precio de un pedido & MR-02, MR-07 & Cotización del servicio \\ \hline
-		HU-20 & Responder a la cotización de transporte & MR-02, MR-07 & Aceptación o rechazo de cotización \\ \hline
-		HU-21 & Asignar conductor a un pedido & MR-04, MR-07 & Asignación de conductor al pedido \\ \hline
-		HU-22 & Consultar, iniciar y finalizar viajes & MR-03, MR-04, MR-07 & Gestión de viajes \\ \hline
-		HU-23 & Compartir y consultar ubicación del viaje & MR-03, MR-07 & Ubicación real y consulta del seguimiento \\ \hline
-		HU-24 & Visualizar simulación del recorrido & MR-03, MR-07 & Simulación visual separada del seguimiento real \\ \hline
-		HU-25 & Realizar pago simulado por tarjeta o transferencia & MR-02, MR-07 & Pago simulado de una cotización \\ \hline
-		HU-26 & Consultar historial y detalle de pagos como cliente & MR-01, MR-07 & Historial y detalle de pagos del cliente \\ \hline
-		HU-27 & Consultar pagos recibidos como empresa & MR-01, MR-07 & Consulta de pagos por empresa \\ \hline
-		HU-28 & Cancelar pago simulado con motivo & MR-02, MR-07 & Cancelación permitida de pago simulado \\ \hline
-		HU-29 & Consultar indicadores de los cuatro perfiles & MR-01, MR-07 & Indicadores filtrados por perfil \\ \hline
-		HU-30 & Definir un recorrido con múltiples destinos & MR-05, MR-07 & Definición de recorrido con múltiples destinos \\ \hline
-		HU-31 & Calcular una ruta optimizada & MR-05, MR-07 & Cálculo de una ruta propuesta \\ \hline
-		HU-32 & Visualizar y guardar la ruta propuesta & MR-03, MR-07 & Visualización y persistencia de ruta planificada \\ \hline
-		HU-33 & Comparar los métodos de optimización & MR-05, MR-07 & Comparación experimental de métodos \\ \hline
+		\bottomrule
+		\endlastfoot
+		HU-01 & Cimientos de base de datos y backend & MR-01 & Preparación de infraestructura y persistencia \\ \midrule
+		HU-02 & Registrarse como cliente & MR-01, MR-07 & Registro de clientes y asignación del rol cliente \\ \midrule
+		HU-03 & Iniciar, conservar y cerrar sesión & MR-01, MR-07 & Autenticación y ciclo de sesión \\ \midrule
+		HU-04 & Acceder a navegación y operaciones por rol & MR-07 & Navegación y autorización por perfil \\ \midrule
+		HU-05 & Registrar usuarios con rol desde administración & MR-01, MR-07 & Administración de usuarios \\ \midrule
+		HU-06 & Administrar empresas & MR-01, MR-07 & Gestión de empresas \\ \midrule
+		HU-07 & Consultar y dar de baja clientes desde administración & MR-01, MR-07 & Consulta y baja de clientes \\ \midrule
+		HU-08 & Completar y actualizar perfil de cliente & MR-01, MR-07 & Perfil de cliente \\ \midrule
+		HU-09 & Actualizar perfil y tarifa de empresa & MR-01, MR-06, MR-07 & Perfil y tarifa de empresa \\ \midrule
+		HU-10 & Completar y actualizar perfil de conductor & MR-01, MR-07 & Perfil de conductor \\ \midrule
+		HU-11 & Registrar, vincular y administrar conductores & MR-01, MR-04, MR-07 & Gestión y vinculación de conductores \\ \midrule
+		HU-12 & Administrar categorías de vehículos & MR-01, MR-04 & Categorías de vehículos \\ \midrule
+		HU-13 & Administrar camiones y asignarlos a conductores & MR-01, MR-04, MR-07 & Gestión de camiones y asignación de conductores \\ \midrule
+		HU-14 & Consultar camión asignado & MR-01, MR-04, MR-07 & Consulta del camión asignado \\ \midrule
+		HU-15 & Reportar mantenimiento del camión & MR-04 & Reporte de mantenimiento \\ \midrule
+		HU-16 & Solicitar transporte con empresa, carga y direcciones & MR-02, MR-07 & Solicitud de transporte \\ \midrule
+		HU-17 & Consultar y gestionar pedidos del cliente & MR-02, MR-07 & Consulta y cambios permitidos de pedidos \\ \midrule
+		HU-18 & Consultar solicitudes recibidas por empresa & MR-02, MR-07 & Consulta de solicitudes por empresa \\ \midrule
+		HU-19 & Establecer el precio de un pedido & MR-02, MR-07 & Cotización del servicio \\ \midrule
+		HU-20 & Responder a la cotización de transporte & MR-02, MR-07 & Aceptación o rechazo de cotización \\ \midrule
+		HU-21 & Asignar conductor a un pedido & MR-04, MR-07 & Asignación de conductor al pedido \\ \midrule
+		HU-22 & Consultar, iniciar y finalizar viajes & MR-03, MR-04, MR-07 & Gestión de viajes \\ \midrule
+		HU-23 & Compartir y consultar ubicación del viaje & MR-03, MR-07 & Ubicación real y consulta del seguimiento \\ \midrule
+		HU-24 & Visualizar simulación del recorrido & MR-03, MR-07 & Simulación visual separada del seguimiento real \\ \midrule
+		HU-25 & Realizar pago simulado por tarjeta o transferencia & MR-02, MR-07 & Pago simulado de una cotización \\ \midrule
+		HU-26 & Consultar historial y detalle de pagos como cliente & MR-01, MR-07 & Historial y detalle de pagos del cliente \\ \midrule
+		HU-27 & Consultar pagos recibidos como empresa & MR-01, MR-07 & Consulta de pagos por empresa \\ \midrule
+		HU-28 & Cancelar pago simulado con motivo & MR-02, MR-07 & Cancelación permitida de pago simulado \\ \midrule
+		HU-29 & Consultar indicadores de los cuatro perfiles & MR-01, MR-07 & Indicadores filtrados por perfil \\ \midrule
+		HU-30 & Definir un recorrido con múltiples destinos & MR-05, MR-07 & Definición de recorrido con múltiples destinos \\ \midrule
+		HU-31 & Calcular una ruta optimizada & MR-05, MR-07 & Cálculo de una ruta propuesta \\ \midrule
+		HU-32 & Visualizar y guardar la ruta propuesta & MR-03, MR-07 & Visualización y persistencia de ruta planificada \\ \midrule
+		HU-33 & Comparar los métodos de optimización & MR-05, MR-07 & Comparación experimental de métodos \\ \midrule
 	\end{longtable}
-}
+\endgroup
 \textit{Nota.} Elaboración propia a partir de las historias de usuario de TravelDLS. Los vínculos MR–HU son una propuesta de trazabilidad elaborada a partir de los resúmenes y descripciones disponibles.
 
 \subsubsection{Matriz de criterios de aceptación}
 
 Los criterios siguientes sintetizan las condiciones previstas para las historias de usuario de TravelDLS. Constituyen condiciones previstas para comprobar el comportamiento de las historias y no resultados de pruebas ya ejecutadas. En la implementación, los criterios deberán probarse con casos válidos, datos inválidos, permisos insuficientes y escenarios de error cuando corresponda.
 
-{\small
-	\begin{longtable}{|l|p{3.5cm}|p{9.5cm}|}
+
+\begingroup
+	\small
+	\setlength{\tabcolsep}{4.5pt}
+	\renewcommand{\arraystretch}{1.45}
+	\begin{longtable}{@{}>{\RaggedRight\arraybackslash}p{1.7cm}>{\RaggedRight\arraybackslash}p{3.9cm}>{\RaggedRight\arraybackslash}p{10.1cm}@{}}
 		\caption{Matriz de criterios de aceptación}\label{tab:criterios_tactica}\\
-		\hline
-		\textbf{Historia} & \textbf{Funcionalidad} & \textbf{Criterios de aceptación propuestos} \\ \hline
+		\toprule
+		\textbf{Historia} & \textbf{Funcionalidad} & \textbf{Criterios de aceptación propuestos} \\
+		\midrule
 		\endfirsthead
-		\hline
-		\textbf{Historia} & \textbf{Funcionalidad} & \textbf{Criterios de aceptación propuestos} \\ \hline
+		\caption[]{Matriz de criterios de aceptación (continuación)}\\
+		\toprule
+		\textbf{Historia} & \textbf{Funcionalidad} & \textbf{Criterios de aceptación propuestos} \\
+		\midrule
 		\endhead
-		\hline
 		\endfoot
-		HU-01 & Cimientos de base de datos y backend & Preparar el backend y la persistencia de la aplicación. Configurar AdonisJS y PostgreSQL. Crear migraciones y modelos con sus relaciones. Verificar arranque, conexión y operaciones básicas. \\ \hline
-		HU-02 & Registrarse como cliente & Crear una cuenta con nombre, correo y contraseña válidos, siempre con rol cliente. Informar campos inválidos o correo duplicado sin crear cuentas repetidas. Acceder al área de cliente al completar el registro. \\ \hline
-		HU-03 & Iniciar, conservar y cerrar sesión & Acceder con credenciales válidas y mostrar error si son incorrectas. Conservar la sesión al recargar y solicitar acceso cuando expire. Cerrar sesión e impedir volver a consultar contenido privado. \\ \hline
-		HU-04 & Acceder a navegación y operaciones por rol & Mostrar las áreas y acciones correspondientes a cada rol. Impedir el acceso directo a áreas de otro perfil. Rechazar operaciones no autorizadas también desde la API. \\ \hline
-		HU-05 & Registrar usuarios con rol desde administración & Registrar nombre, correo, contraseña y un rol permitido. Informar datos inválidos o correo duplicado. Guardar el usuario con el rol elegido y confirmar el registro. \\ \hline
-		HU-06 & Administrar empresas & Consultar y buscar empresas en un listado paginado. Registrar y actualizar sus datos, usuario asociado y fotografía. Confirmar la baja antes de retirar una empresa del listado. \\ \hline
-		HU-07 & Consultar y dar de baja clientes desde administración & Consultar clientes y sus datos en un listado paginado. Solicitar confirmación antes de dar de baja a un cliente. Actualizar el listado tras la baja y mostrar errores si falla. \\ \hline
-		HU-08 & Completar y actualizar perfil de cliente & Consultar y completar los datos del perfil propio. Actualizar datos y fotografía, validando la información ingresada. Conservar los cambios después de recargar. \\ \hline
-		HU-09 & Actualizar perfil y tarifa de empresa & Consultar los datos de la empresa asociada a la sesión. Actualizar datos, fotografía y tarifa por kilogramo. Conservar los cambios e informar valores inválidos. \\ \hline
-		HU-10 & Completar y actualizar perfil de conductor & Consultar y completar el perfil del conductor. Actualizar datos y fotografía respetando las validaciones de identificación y licencia. Conservar los cambios y mostrar errores de validación. \\ \hline
-		HU-11 & Registrar, vincular y administrar conductores & Registrar conductores y vincularlos a una empresa según los permisos del usuario. Consultar y mantener los conductores mediante las acciones habilitadas para cada rol. Rechazar datos inválidos y operaciones sobre empresas no autorizadas. \\ \hline
-		HU-12 & Administrar categorías de vehículos & Consultar categorías y su estado en un listado paginado. Crear y editar categorías con datos válidos. Confirmar la baja y actualizar las opciones de los formularios de camiones. \\ \hline
-		HU-13 & Administrar camiones y asignarlos a conductores & Registrar y editar placa, chasis, categoría, empresa, conductor y estado. Impedir asignar un conductor que ya tenga otro camión activo. Consultar la flota y confirmar la baja de un camión. \\ \hline
-		HU-14 & Consultar camión asignado & Mostrar los datos del camión asignado al conductor autenticado. Indicar cuando no existe un camión asignado. Mostrar los errores de consulta sin presentar datos de otro conductor. \\ \hline
-		HU-15 & Reportar mantenimiento del camión & Reportar mantenimiento únicamente del camión asignado. Guardar el estado de mantenimiento y mostrarlo al recargar. Informar si no existe asignación o si falla la operación. \\ \hline
-		HU-16 & Solicitar transporte con empresa, carga y direcciones & Seleccionar empresa e indicar carga, cantidad, peso, embalaje y direcciones. Guardar el pedido y sus detalles, validando los datos obligatorios. Informar fallos o registros parciales sin duplicar la solicitud. \\ \hline
-		HU-17 & Consultar y gestionar pedidos del cliente & Consultar pedidos propios con estado, importe y detalle. Permitir cambios y bajas únicamente en los estados habilitados. Actualizar los datos después de cada operación y respetar filtros y paginación. \\ \hline
-		HU-18 & Consultar solicitudes recibidas por empresa & Consultar las solicitudes correspondientes a la empresa. Mostrar cliente, carga, estado e importe con filtros y paginación. Reflejar cambios de estado e informar cuando no existan solicitudes. \\ \hline
-		HU-19 & Establecer el precio de un pedido & Asignar un importe válido a un pedido de la empresa. Dejar el pedido pendiente de aprobación del cliente. Mostrar al cliente el precio actualizado e informar si la operación falla. \\ \hline
-		HU-20 & Responder a la cotización de transporte & Consultar el precio propuesto antes de decidir. Rechazar la cotización y reflejar el estado denegado. Confirmar la aceptación mediante el flujo de pago simulado, sin cambios de estado incompatibles. \\ \hline
-		HU-21 & Asignar conductor a un pedido & Seleccionar un conductor autorizado para el pedido. Rechazar la asignación al alcanzar cinco viajes activos según la regla vigente. Mostrar el pedido entre los viajes del conductor asignado. \\ \hline
-		HU-22 & Consultar, iniciar y finalizar viajes & Consultar únicamente los viajes asignados al conductor. Registrar inicio y entrega, actualizando la disponibilidad del conductor. Impedir iniciar pedidos anulados y detener el seguimiento al finalizar. \\ \hline
-		HU-23 & Compartir y consultar ubicación del viaje & Compartir la ubicación del conductor durante el viaje. Permitir que cliente y empresa participantes consulten la última posición. Informar falta de señal, permiso GPS o ubicación, sin exponer viajes ajenos. \\ \hline
-		HU-24 & Visualizar simulación del recorrido & Identificar el recorrido como una simulación, separada de la ubicación real. Permitir iniciar, pausar y reiniciar la animación con progreso y tiempo estimado. No modificar la ubicación real ni el estado del pedido. \\ \hline
-		HU-25 & Realizar pago simulado por tarjeta o transferencia & Simular el pago de un pedido propio pendiente de aprobación y con importe válido. Validar tarjeta o transferencia e impedir pagos duplicados. Guardar la referencia y aceptar el pedido, indicando que no existe un cobro real. \\ \hline
-		HU-26 & Consultar historial y detalle de pagos como cliente & Consultar pagos propios con estado, método, importe y referencia. Filtrar, paginar y abrir el detalle de un pago. Mostrar totales según el alcance consultado y gestionar listas vacías o errores. \\ \hline
-		HU-27 & Consultar pagos recibidos como empresa & Consultar únicamente los pagos asociados a la empresa. Filtrar, paginar y abrir el detalle de las operaciones. Mostrar importes y estados de los pagos simulados. \\ \hline
-		HU-28 & Cancelar pago simulado con motivo & Solicitar motivo válido y confirmación para cancelar un pago propio. Impedir cancelar pagos ya cancelados o de pedidos en tránsito o entregados. Guardar la cancelación y anular el pedido si estaba aceptado. \\ \hline
-		HU-29 & Consultar indicadores de los cuatro perfiles & Mostrar a cada perfil sus indicadores y accesos rápidos. Calcular los valores con datos reales y respetar el alcance de la consulta. Distinguir ausencia de actividad de errores de consulta y permitir vista móvil. \\ \hline
-		HU-30 & Definir un recorrido con múltiples destinos & Permitir agregar, editar y eliminar destinos antes de calcular la ruta. Validar coordenadas y datos obligatorios, indicando puntos inválidos o repetidos. Guardar el recorrido asociado a la empresa y limitar su acceso a usuarios autorizados. \\ \hline
-		HU-31 & Calcular una ruta optimizada & Visitar todos los destinos válidos respetando el origen y la condición de finalización definidos. Mostrar el orden recomendado y el costo total, con la unidad utilizada. Informar entradas incompletas, destinos inaccesibles o ausencia de solución sin mostrar resultados engañosos. \\ \hline
-		HU-32 & Visualizar y guardar la ruta propuesta & Representar el recorrido y los destinos numerados en el orden calculado. Guardar la propuesta únicamente tras la confirmación del usuario y permitir consultarla nuevamente. Distinguir la ruta planificada de la ubicación real y de la simulación del recorrido. \\ \hline
-		HU-33 & Comparar los métodos de optimización & Comparar Vecino Más Cercano, su mejora con 2-opt y OR-Tools con los mismos puntos, matriz y condiciones. Mostrar por método el recorrido, costo total y tiempo de cálculo. Conservar entradas, parámetros y resultados para repetir la evaluación, sin asumir un método ganador. \\ \hline
+		\bottomrule
+		\endlastfoot
+		HU-01 & Cimientos de base de datos y backend & Preparar el backend y la persistencia de la aplicación. Configurar AdonisJS y PostgreSQL. Crear migraciones y modelos con sus relaciones. Verificar arranque, conexión y operaciones básicas. \\ \midrule
+		HU-02 & Registrarse como cliente & Crear una cuenta con nombre, correo y contraseña válidos, siempre con rol cliente. Informar campos inválidos o correo duplicado sin crear cuentas repetidas. Acceder al área de cliente al completar el registro. \\ \midrule
+		HU-03 & Iniciar, conservar y cerrar sesión & Acceder con credenciales válidas y mostrar error si son incorrectas. Conservar la sesión al recargar y solicitar acceso cuando expire. Cerrar sesión e impedir volver a consultar contenido privado. \\ \midrule
+		HU-04 & Acceder a navegación y operaciones por rol & Mostrar las áreas y acciones correspondientes a cada rol. Impedir el acceso directo a áreas de otro perfil. Rechazar operaciones no autorizadas también desde la API. \\ \midrule
+		HU-05 & Registrar usuarios con rol desde administración & Registrar nombre, correo, contraseña y un rol permitido. Informar datos inválidos o correo duplicado. Guardar el usuario con el rol elegido y confirmar el registro. \\ \midrule
+		HU-06 & Administrar empresas & Consultar y buscar empresas en un listado paginado. Registrar y actualizar sus datos, usuario asociado y fotografía. Confirmar la baja antes de retirar una empresa del listado. \\ \midrule
+		HU-07 & Consultar y dar de baja clientes desde administración & Consultar clientes y sus datos en un listado paginado. Solicitar confirmación antes de dar de baja a un cliente. Actualizar el listado tras la baja y mostrar errores si falla. \\ \midrule
+		HU-08 & Completar y actualizar perfil de cliente & Consultar y completar los datos del perfil propio. Actualizar datos y fotografía, validando la información ingresada. Conservar los cambios después de recargar. \\ \midrule
+		HU-09 & Actualizar perfil y tarifa de empresa & Consultar los datos de la empresa asociada a la sesión. Actualizar datos, fotografía y tarifa por kilogramo. Conservar los cambios e informar valores inválidos. \\ \midrule
+		HU-10 & Completar y actualizar perfil de conductor & Consultar y completar el perfil del conductor. Actualizar datos y fotografía respetando las validaciones de identificación y licencia. Conservar los cambios y mostrar errores de validación. \\ \midrule
+		HU-11 & Registrar, vincular y administrar conductores & Registrar conductores y vincularlos a una empresa según los permisos del usuario. Consultar y mantener los conductores mediante las acciones habilitadas para cada rol. Rechazar datos inválidos y operaciones sobre empresas no autorizadas. \\ \midrule
+		HU-12 & Administrar categorías de vehículos & Consultar categorías y su estado en un listado paginado. Crear y editar categorías con datos válidos. Confirmar la baja y actualizar las opciones de los formularios de camiones. \\ \midrule
+		HU-13 & Administrar camiones y asignarlos a conductores & Registrar y editar placa, chasis, categoría, empresa, conductor y estado. Impedir asignar un conductor que ya tenga otro camión activo. Consultar la flota y confirmar la baja de un camión. \\ \midrule
+		HU-14 & Consultar camión asignado & Mostrar los datos del camión asignado al conductor autenticado. Indicar cuando no existe un camión asignado. Mostrar los errores de consulta sin presentar datos de otro conductor. \\ \midrule
+		HU-15 & Reportar mantenimiento del camión & Reportar mantenimiento únicamente del camión asignado. Guardar el estado de mantenimiento y mostrarlo al recargar. Informar si no existe asignación o si falla la operación. \\ \midrule
+		HU-16 & Solicitar transporte con empresa, carga y direcciones & Seleccionar empresa e indicar carga, cantidad, peso, embalaje y direcciones. Guardar el pedido y sus detalles, validando los datos obligatorios. Informar fallos o registros parciales sin duplicar la solicitud. \\ \midrule
+		HU-17 & Consultar y gestionar pedidos del cliente & Consultar pedidos propios con estado, importe y detalle. Permitir cambios y bajas únicamente en los estados habilitados. Actualizar los datos después de cada operación y respetar filtros y paginación. \\ \midrule
+		HU-18 & Consultar solicitudes recibidas por empresa & Consultar las solicitudes correspondientes a la empresa. Mostrar cliente, carga, estado e importe con filtros y paginación. Reflejar cambios de estado e informar cuando no existan solicitudes. \\ \midrule
+		HU-19 & Establecer el precio de un pedido & Asignar un importe válido a un pedido de la empresa. Dejar el pedido pendiente de aprobación del cliente. Mostrar al cliente el precio actualizado e informar si la operación falla. \\ \midrule
+		HU-20 & Responder a la cotización de transporte & Consultar el precio propuesto antes de decidir. Rechazar la cotización y reflejar el estado denegado. Confirmar la aceptación mediante el flujo de pago simulado, sin cambios de estado incompatibles. \\ \midrule
+		HU-21 & Asignar conductor a un pedido & Seleccionar un conductor autorizado para el pedido. Rechazar la asignación al alcanzar cinco viajes activos según la regla vigente. Mostrar el pedido entre los viajes del conductor asignado. \\ \midrule
+		HU-22 & Consultar, iniciar y finalizar viajes & Consultar únicamente los viajes asignados al conductor. Registrar inicio y entrega, actualizando la disponibilidad del conductor. Impedir iniciar pedidos anulados y detener el seguimiento al finalizar. \\ \midrule
+		HU-23 & Compartir y consultar ubicación del viaje & Compartir la ubicación del conductor durante el viaje. Permitir que cliente y empresa participantes consulten la última posición. Informar falta de señal, permiso GPS o ubicación, sin exponer viajes ajenos. \\ \midrule
+		HU-24 & Visualizar simulación del recorrido & Identificar el recorrido como una simulación, separada de la ubicación real. Permitir iniciar, pausar y reiniciar la animación con progreso y tiempo estimado. No modificar la ubicación real ni el estado del pedido. \\ \midrule
+		HU-25 & Realizar pago simulado por tarjeta o transferencia & Simular el pago de un pedido propio pendiente de aprobación y con importe válido. Validar tarjeta o transferencia e impedir pagos duplicados. Guardar la referencia y aceptar el pedido, indicando que no existe un cobro real. \\ \midrule
+		HU-26 & Consultar historial y detalle de pagos como cliente & Consultar pagos propios con estado, método, importe y referencia. Filtrar, paginar y abrir el detalle de un pago. Mostrar totales según el alcance consultado y gestionar listas vacías o errores. \\ \midrule
+		HU-27 & Consultar pagos recibidos como empresa & Consultar únicamente los pagos asociados a la empresa. Filtrar, paginar y abrir el detalle de las operaciones. Mostrar importes y estados de los pagos simulados. \\ \midrule
+		HU-28 & Cancelar pago simulado con motivo & Solicitar motivo válido y confirmación para cancelar un pago propio. Impedir cancelar pagos ya cancelados o de pedidos en tránsito o entregados. Guardar la cancelación y anular el pedido si estaba aceptado. \\ \midrule
+		HU-29 & Consultar indicadores de los cuatro perfiles & Mostrar a cada perfil sus indicadores y accesos rápidos. Calcular los valores con datos reales y respetar el alcance de la consulta. Distinguir ausencia de actividad de errores de consulta y permitir vista móvil. \\ \midrule
+		HU-30 & Definir un recorrido con múltiples destinos & Permitir agregar, editar y eliminar destinos antes de calcular la ruta. Validar coordenadas y datos obligatorios, indicando puntos inválidos o repetidos. Guardar el recorrido asociado a la empresa y limitar su acceso a usuarios autorizados. \\ \midrule
+		HU-31 & Calcular una ruta optimizada & Visitar todos los destinos válidos respetando el origen y la condición de finalización definidos. Mostrar el orden recomendado y el costo total, con la unidad utilizada. Informar entradas incompletas, destinos inaccesibles o ausencia de solución sin mostrar resultados engañosos. \\ \midrule
+		HU-32 & Visualizar y guardar la ruta propuesta & Representar el recorrido y los destinos numerados en el orden calculado. Guardar la propuesta únicamente tras la confirmación del usuario y permitir consultarla nuevamente. Distinguir la ruta planificada de la ubicación real y de la simulación del recorrido. \\ \midrule
+		HU-33 & Comparar los métodos de optimización & Comparar Vecino Más Cercano, su mejora con 2-opt y OR-Tools con los mismos puntos, matriz y condiciones. Mostrar por método el recorrido, costo total y tiempo de cálculo. Conservar entradas, parámetros y resultados para repetir la evaluación, sin asumir un método ganador. \\ \midrule
 	\end{longtable}
-}
+\endgroup
 \textit{Nota.} HU-01 reúne las tareas iniciales de configuración y comprobación de la persistencia.
 
 \subsubsection{Planificación propuesta de los sprints}
 
 La Tabla \ref{tab:sprints} presenta una agrupación funcional inicial de las historias de usuario. Las fechas y la duración de los sprints deben validarse con el cronograma general antes de establecerse como planificación definitiva.
 
-{\small
-	\begin{longtable}{|l|p{3.5cm}|p{2.5cm}|p{7cm}|}
+
+\begingroup
+	\small
+	\setlength{\tabcolsep}{4.5pt}
+	\renewcommand{\arraystretch}{1.45}
+	\begin{longtable}{@{}>{\RaggedRight\arraybackslash}p{1.9cm}>{\RaggedRight\arraybackslash}p{3.45cm}>{\RaggedRight\arraybackslash}p{2.6cm}>{\RaggedRight\arraybackslash}p{7.45cm}@{}}
 		\caption{Planificación propuesta de los sprints}\label{tab:sprints}\\
-		\hline
-		\textbf{Iteración} & \textbf{Objetivo} & \textbf{Historias} & \textbf{Entregable previsto} \\ \hline
+		\toprule
+		\textbf{Iteración} & \textbf{Objetivo} & \textbf{Historias} & \textbf{Entregable previsto} \\
+		\midrule
 		\endfirsthead
-		\hline
-		\textbf{Iteración} & \textbf{Objetivo} & \textbf{Historias} & \textbf{Entregable previsto} \\ \hline
+		\caption[]{Planificación propuesta de los sprints (continuación)}\\
+		\toprule
+		\textbf{Iteración} & \textbf{Objetivo} & \textbf{Historias} & \textbf{Entregable previsto} \\
+		\midrule
 		\endhead
-		\hline
 		\endfoot
-		Sprint 1 & Fundamentos y acceso & HU-01 a HU-04 & Backend y PostgreSQL configurados; registro, autenticación, sesión y control de acceso básico comprobados. \\ \hline
-		Sprint 2 & Administración y perfiles & HU-05 a HU-10 & Gestión de usuarios, empresas y clientes; actualización de perfiles con validaciones. \\ \hline
-		Sprint 3 & Conductores y flota & HU-11 a HU-15 & Gestión de conductores, categorías y camiones; asignaciones, disponibilidad y reporte de mantenimiento. \\ \hline
-		Sprint 4 & Pedidos y cotizaciones & HU-16 a HU-20 & Solicitud, consulta, cotización y respuesta del cliente; reglas de estados y visualización del importe. \\ \hline
-		Sprint 5 & Asignación, viajes y seguimiento & HU-21 a HU-24 & Asignación de conductor, inicio y finalización de viajes, ubicación real y simulación separada. \\ \hline
-		Sprint 6 & Pagos simulados e indicadores & HU-25 a HU-29 & Pago simulado, historial y consultas por perfil, cancelación permitida e indicadores con permisos. \\ \hline
-		Sprint 7 & Planificación y comparación de rutas & HU-30 a HU-33 & Definición de destinos, cálculo, mapa, persistencia y comparación de métodos con entradas equivalentes. \\ \hline
+		\bottomrule
+		\endlastfoot
+		Sprint 1 & Fundamentos y acceso & HU-01 a HU-04 & Backend y PostgreSQL configurados; registro, autenticación, sesión y control de acceso básico comprobados. \\ \midrule
+		Sprint 2 & Administración y perfiles & HU-05 a HU-10 & Gestión de usuarios, empresas y clientes; actualización de perfiles con validaciones. \\ \midrule
+		Sprint 3 & Conductores y flota & HU-11 a HU-15 & Gestión de conductores, categorías y camiones; asignaciones, disponibilidad y reporte de mantenimiento. \\ \midrule
+		Sprint 4 & Pedidos y cotizaciones & HU-16 a HU-20 & Solicitud, consulta, cotización y respuesta del cliente; reglas de estados y visualización del importe. \\ \midrule
+		Sprint 5 & Asignación, viajes y seguimiento & HU-21 a HU-24 & Asignación de conductor, inicio y finalización de viajes, ubicación real y simulación separada. \\ \midrule
+		Sprint 6 & Pagos simulados e indicadores & HU-25 a HU-29 & Pago simulado, historial y consultas por perfil, cancelación permitida e indicadores con permisos. \\ \midrule
+		Sprint 7 & Planificación y comparación de rutas & HU-30 a HU-33 & Definición de destinos, cálculo, mapa, persistencia y comparación de métodos con entradas equivalentes. \\ \midrule
 	\end{longtable}
-}
+\endgroup
 \textit{Nota.} Elaboración propia.
 
 
@@ -433,17 +483,16 @@ el proceso de documentación y desarrollo del software TravelDLS,
 indicando el período establecido para cada una y su estado de avance.
 
 \begin{center}
-	
 	\begin{ganttchart}[
 		hgrid,
 		vgrid,
-		x unit=1.45cm,          
-		y unit title=0.55cm,
-		y unit chart=0.70cm,
+		x unit=1.35cm,
+		y unit title=0.75cm,
+		y unit chart=0.60cm,
 		title height=1,
-		bar height=0.45,
-		group height=0.55,
-		title label font=\bfseries\tiny,
+		bar height=0.32,
+		group height=0.36,
+		title label font=\scriptsize,
 		bar label font=\scriptsize,
 		group label font=\bfseries\scriptsize,
 		title/.style={
@@ -456,99 +505,86 @@ indicando el período establecido para cada una y su estado de avance.
 		},
 		bar/.style={
 			draw=none
+		},
+		bar label node/.append style={
+			align=right,
+			text width=6.1cm,
+			anchor=east,
+			xshift=-0.2cm
+		},
+		group label node/.append style={
+			align=right,
+			text width=6.1cm,
+			anchor=east,
+			xshift=-0.2cm
 		}
-		]{1}{6}                  
+		]{1}{7}
 		
-		% =========================================================
-		% ENCABEZADO
-		% =========================================================
+		% ENCABEZADO DE SEMANAS
+		\gantttitle{\shortstack{\scriptsize Semana 1\\\tiny 7--11 sep}}{1}
+		\gantttitle{\shortstack{\scriptsize Semana 2\\\tiny 14--18 sep}}{1}
+		\gantttitle{\shortstack{\scriptsize Semana 3\\\tiny 21--25 sep}}{1}
+		\gantttitle{\shortstack{\scriptsize Semana 4\\\tiny 28 sep--2 oct}}{1}
+		\gantttitle{\shortstack{\scriptsize Semana 5\\\tiny 5--9 oct}}{1}
+		\gantttitle{\shortstack{\scriptsize Semana 6\\\tiny 12--16 oct}}{1}
+		\gantttitle{\shortstack{\scriptsize Semana 7\\\tiny 19--23 oct}}{1}\\
 		
-		\gantttitle{\shortstack{\textbf{Semana 1}\\[-1pt]7--11 sep}}{1}
-		\gantttitle{\shortstack{\textbf{Semana 2}\\[-1pt]14--18 sep}}{1}
-		\gantttitle{\shortstack{\textbf{Semana 3}\\[-1pt]21--25 sep}}{1}
-		\gantttitle{\shortstack{\textbf{Semana 4}\\[-1pt]28 sep--2 oct}}{1}
-		\gantttitle{\shortstack{\textbf{Semana 5}\\[-1pt]5--9 oct}}{1}
-		\gantttitle{\shortstack{\textbf{Semana 6}\\[-1pt]12--16 oct}}{1}  % <-- NUEVO: Semana 6
-		\\
-		
-		% =========================================================
 		% DOCUMENTACIÓN
-		% =========================================================
+		\ganttgroup{DOCUMENTACIÓN}{1}{7}\\
 		
-		\ganttgroup{DOCUMENTACIÓN}{1}{6}  
-		\\
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Revisión bibliográfica}{1}{1}\\
 		
-		\ganttbar[
-		bar/.style={fill=completado, draw=none}
-		]{Revisión bibliográfica}{1}{1}
-		\\
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Objetivos y tema}{1}{1}\\
 		
-		\ganttbar[
-		bar/.style={fill=completado, draw=none}
-		]{Objetivos y tema}{1}{1}
-		\\
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Planteamiento, alcance y limitaciones}{2}{2}\\
 		
-		\ganttbar[
-		bar/.style={fill=completado, draw=none}
-		]{Planteamiento del proyecto, alcance y limitaciones}{2}{2}
-		\\
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Marco teórico}{2}{2}\\
 		
-		\ganttbar[
-		bar/.style={fill=completado, draw=none}
-		]{Marco teórico}{2}{2}
-		\\
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Factibilidad del proyecto}{3}{3}\\
 		
-		\ganttbar[
-		bar/.style={fill=completado, draw=none}
-		]{Factibilidad del proyecto}{3}{3}
-		\\
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Metodología}{4}{6}\\
 		
-		\ganttbar[
-		bar/.style={fill=proceso, draw=none}
-		]{Metodología}{4}{6}  % <-- CAMBIO 3: Extendido hasta la semana 6
-		\\
+		\ganttbar[bar/.style={fill=proceso,draw=none}]
+		{Plan de ejecución}{6}{6}\\
 		
-		% =========================================================
-		% DESARROLLO DEL SOFTWARE -- BACKEND
-		% =========================================================
+		\ganttbar[bar/.style={fill=proceso,draw=none}]
+		{Resultados del plan de ejecución}{7}{7}\\
 		
-		\ganttgroup{DESARROLLO DEL SOFTWARE -- BACKEND}{1}{6}  % <-- CAMBIO 4: de {1}{5} a {1}{6}
-		\\
+		% BACKEND
+		\ganttgroup{BACKEND}{1}{6}\\
 		
-		\ganttbar[
-		bar/.style={fill=completado, draw=none}
-		]{Diagrama Entidad--Relación (DER)}{1}{1}
-		\\
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Diagrama entidad-relación (DER)}{1}{1}\\
 		
-		\ganttbar[
-		bar/.style={fill=completado, draw=none}
-		]{Usuarios, roles y compañía -- CRUD}{2}{2}
-		\\
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Usuarios, roles y compañía -- CRUD}{2}{2}\\
 		
-		\ganttbar[
-		bar/.style={fill=completado, draw=none}
-		]{Clientes, conductores y camiones -- CRUD}{3}{3}
-		\\
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Clientes, conductores y camiones -- CRUD}{3}{3}\\
 		
-		\ganttbar[
-		bar/.style={fill=completado, draw=none}
-		]{Categoría de camiones, órdenes y detalles de órdenes -- CRUD}{4}{4}
-		\\
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Categorías de camiones y órdenes -- CRUD}{4}{4}\\
 		
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Autenticación JWT y pruebas de integración}{4}{4}\\
 		
-		\ganttbar[
-		bar/.style={fill=completado, draw=none}
-		]{Autenticación JWT y pruebas de integración}{4}{4}
-		\\
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Migraciones, modelos y validaciones}{5}{5}\\
 		
-		\ganttbar[
-		bar/.style={fill=completado, draw=none}   
-		]{Implementar migración, modelos y validaciones}{5}{5}
-		\\
+		\ganttbar[bar/.style={fill=proceso,draw=none}]
+		{Finalización de CRUD y pruebas del backend}{6}{6}\\
 		
-		\ganttbar[
-		bar/.style={fill=proceso, draw=none}  
-		]{Completar CRUD y pruebas finales del Backend}{6}{6}
+		% FRONTEND
+		\ganttgroup{FRONTEND}{7}{7}\\
+		
+		\ganttbar[bar/.style={fill=proceso,draw=none}]
+		{Configuración de Next.js y autenticación JWT}{7}{7}
 		
 	\end{ganttchart}
 	
@@ -558,56 +594,141 @@ indicando el período establecido para cada una y su estado de avance.
 		\scriptsize
 		\textbf{Estado:}
 		\quad
-		\textcolor{completado}{\rule{0.55cm}{0.2cm}}
+		\textcolor{completado}{\rule{0.45cm}{0.16cm}}
 		\; Completado
 		\qquad
-		\textcolor{proceso}{\rule{0.55cm}{0.2cm}}
+		\textcolor{proceso}{\rule{0.45cm}{0.16cm}}
 		\; En proceso
 	\end{flushleft}
-	
 \end{center}
+
 \subsection{Plan de ejecución}
 
 El plan de ejecución organiza las acciones previstas para los tres objetivos específicos de TravelDLS, junto con sus instrumentos de verificación, protagonistas y resultados esperados. Para el primer objetivo se contempla una revisión documental con cadenas de búsqueda en Google Académico, tomando como referencia el mapeo sistemático de \textcite{petersen2008systematic}. La identificación de requisitos se fundamenta en la documentación y los modelos del proyecto; no corresponde a un levantamiento formal con usuarios.
 
-\begingroup
-\scriptsize
-\setlength{\tabcolsep}{2pt}
-\renewcommand{\arraystretch}{1.15}
-\begin{longtable}{@{}>{\RaggedRight\arraybackslash}p{1.5cm}>{\RaggedRight\arraybackslash}p{2.3cm}>{\RaggedRight\arraybackslash}p{3.75cm}>{\RaggedRight\arraybackslash}p{2.9cm}>{\RaggedRight\arraybackslash}p{2.1cm}>{\RaggedRight\arraybackslash}p{2.85cm}@{}}
-\caption{Plan de ejecución de TravelDLS}\label{tab:plan_ejecucion}\\
-\toprule
-\textbf{Objetivos} & \textbf{Acciones} & \textbf{Descripción de las acciones} & \textbf{Instrumento de verificación} & \textbf{Protagonistas} & \textbf{Resultados esperados} \\
-\midrule
-\endfirsthead
-\caption[]{Plan de ejecución de TravelDLS (continuación)}\\
-\toprule
-\textbf{Objetivos} & \textbf{Acciones} & \textbf{Descripción de las acciones} & \textbf{Instrumento de verificación} & \textbf{Protagonistas} & \textbf{Resultados esperados} \\
-\midrule
-\endhead
-\endfoot
-\bottomrule
-\endlastfoot
-OE1 & Revisión documental y diagnóstico & Seleccionar antecedentes, examinar los procesos de transporte de carga pesada y delimitar necesidades de gestión, seguimiento y planificación de rutas. & Cadenas de búsqueda aplicadas en Google Académico, tomando como referencia el procedimiento de mapeo sistemático (Systematic Mapping) de Petersen et al. (2008). & Equipo investigador. & Problemática fundamentada y necesidades iniciales identificadas. \\ \midrule
-OE1 & Identificación de requisitos del sistema & Analizar los objetivos, el alcance y los modelos de TravelDLS para identificar las funcionalidades y necesidades técnicas de la plataforma. No se realizó levantamiento directo con usuarios. & Documento del proyecto, diagramas UML y entidad-relación. & Equipo investigador. & Se identificaron preliminarmente las funcionalidades y componentes de TravelDLS mediante análisis documental, sin validación directa con usuarios. \\ \midrule
-OE1 & Comparación de algoritmos & Definir escenarios con múltiples destinos, obtener una matriz de distancias y comparar Vecino Más Cercano, su mejora con 2-opt y Google OR-Tools. & Matriz de distancias, pruebas de recorridos y cuadro comparativo. & Equipo de desarrollo. & Comparación documentada para sustentar decisiones del módulo de optimización. \\ \midrule
-OE2 & Definición de arquitectura & Establecer la organización del frontend con Next.js, el backend con AdonisJS bajo MVC y capa de servicios, la base de datos PostgreSQL y los mecanismos de acceso por empresa. & Documento de arquitectura y esquema de componentes. & Equipo de desarrollo. & Arquitectura y responsabilidades técnicas de los componentes definidas. \\ \midrule
-OE2 & Modelado de datos y clases & Elaborar y revisar los diagramas de clases y entidad-relación, considerando usuarios, roles, empresas, vehículos, conductores, clientes, órdenes y pagos. & Diagramas UML y entidad-relación revisados. & Equipo de desarrollo. & Modelos coherentes con las entidades y relaciones previstas en TravelDLS. \\ \midrule
-OE2 & Modelado de procesos & Revisar los diagramas de casos de uso, estados y secuencia, unificando las reglas sobre cotización, pago, asignación del conductor y seguimiento de las órdenes. & Diagramas de casos de uso, estados y secuencia; registro de revisión. & Equipo de desarrollo y asesoría académica. & Flujos de negocio y responsabilidades consistentes entre los modelos. \\ \midrule
-OE3 & Construcción del backend & Desarrollar la autenticación mediante JWT y las operaciones de administración de usuarios, roles, empresas, clientes, conductores, vehículos y órdenes. & Repositorio de código, endpoints y pruebas de API. & Equipo de desarrollo. & Servicios principales del backend funcionales. \\ \midrule
-OE3 & Desarrollo del frontend & Construir las interfaces para los tres perfiles de TravelDLS e incorporar los procesos de consulta de empresas, solicitud de transporte, cotización y aceptación de servicios. & Pantallas implementadas y pruebas de navegación. & Equipo de desarrollo y usuarios de prueba. & Flujos de interacción disponibles en la plataforma web. \\ \midrule
-OE3 & Integración de seguimiento & Incorporar Mapbox, registrar las ubicaciones reportadas por el conductor y permitir consultas autorizadas del estado y el historial de cada orden. Gestionar con Cloudinary las fotografías de perfiles y empresas. & Pruebas de integración, registros de seguimiento y consultas del mapa. & Equipo de desarrollo y conductores de prueba. & Información de ubicación y progreso de las cargas disponible según los permisos. \\ \midrule
-OE3 & Implementación de pagos & Mostrar el precio final del servicio, incluido el recargo del 8\,\% para mantenimiento, antes de su aceptación. Desarrollar el registro o simulación del pago según el alcance del prototipo. & Casos de prueba de cotización, aceptación y pago. & Equipo de desarrollo y clientes de prueba. & Proceso de contratación y pago coherente con las reglas de negocio aprobadas. \\ \midrule
-OE3 & Módulo de optimización & Integrar Google OR-Tools con los destinos y costos de desplazamiento definidos para el prototipo, permitiendo calcular recorridos que apoyen la planificación. & Código del módulo, pruebas de rutas y resultados de ejecución. & Equipo de desarrollo. & Módulo de optimización integrado y recorridos calculados para escenarios establecidos. \\ \midrule
-OE3 & Pruebas y documentación & Ejecutar pruebas funcionales en escenarios académicos, registrar incidencias identificadas y elaborar documentación técnica y manuales de usuario. & Matriz de pruebas, registro de incidencias y manuales. & Equipo de desarrollo y participantes de las pruebas. & Prototipo verificado en los escenarios definidos y documentación inicial del sistema. \\
-\end{longtable}
-\endgroup
+	\begingroup
+	\scriptsize
+	\setlength{\tabcolsep}{2pt}
+	\renewcommand{\arraystretch}{1.15}
+	\begin{longtable}{@{}>{\RaggedRight\arraybackslash}p{1.5cm}>{\RaggedRight\arraybackslash}p{2.3cm}>{\RaggedRight\arraybackslash}p{3.75cm}>{\RaggedRight\arraybackslash}p{2.9cm}>{\RaggedRight\arraybackslash}p{2.1cm}>{\RaggedRight\arraybackslash}p{2.85cm}@{}}
+	\caption{Plan de ejecución de TravelDLS}\label{tab:plan_ejecucion}\\
+	\toprule
+	\textbf{Objetivos} & \textbf{Acciones} & \textbf{Descripción de las acciones} & \textbf{Instrumento de verificación} & \textbf{Protagonistas} & \textbf{Resultados esperados} \\
+	\midrule
+	\endfirsthead
+	\caption[]{Plan de ejecución de TravelDLS (continuación)}\\
+	\toprule
+	\textbf{Objetivos} & \textbf{Acciones} & \textbf{Descripción de las acciones} & \textbf{Instrumento de verificación} & \textbf{Protagonistas} & \textbf{Resultados esperados} \\
+	\midrule
+	\endhead
+	\endfoot
+	\bottomrule
+	\endlastfoot
+	\hypertarget{plan-oe1}{OE1} & Revisión documental y diagnóstico & Seleccionar antecedentes, examinar los procesos de transporte de carga pesada y delimitar necesidades de gestión, seguimiento y planificación de rutas. & Cadenas de búsqueda aplicadas en Google Académico, tomando como referencia el procedimiento de mapeo sistemático (Systematic Mapping) de Petersen et al. (2008). & Equipo investigador. & Problemática fundamentada y necesidades iniciales identificadas. \\ \midrule
+	OE1 & Identificación de requisitos del sistema & Analizar los objetivos, el alcance y los modelos de TravelDLS para identificar las funcionalidades y necesidades técnicas de la plataforma. No se realizó levantamiento directo con usuarios. & Documento del proyecto, diagramas UML y entidad-relación. & Equipo investigador. & Se identificaron preliminarmente las funcionalidades y componentes de TravelDLS mediante análisis documental, sin validación directa con usuarios. \\ \midrule
+	OE1 & Comparación de algoritmos & Definir escenarios con múltiples destinos, obtener una matriz de distancias y comparar Vecino Más Cercano, su mejora con 2-opt y Google OR-Tools. & Matriz de distancias, pruebas de recorridos y cuadro comparativo. & Equipo de desarrollo. & Comparación documentada para sustentar decisiones del módulo de optimización. \\ \midrule
+	OE2 & Definición de arquitectura & Establecer la organización del frontend con Next.js, el backend con AdonisJS bajo MVC y capa de servicios, la base de datos PostgreSQL y los mecanismos de acceso por empresa. & Documento de arquitectura y esquema de componentes. & Equipo de desarrollo. & Arquitectura y responsabilidades técnicas de los componentes definidas. \\ \midrule
+	\hypertarget{plan-oe2}{OE2} & Modelado de datos y clases & Elaborar y revisar los diagramas de clases y entidad-relación, considerando usuarios, roles, empresas, vehículos, conductores, clientes, órdenes y pagos. & Diagramas UML y entidad-relación revisados. & Equipo de desarrollo. & Modelos coherentes con las entidades y relaciones previstas en TravelDLS. \\ \midrule
+	OE2 & Modelado de procesos & Revisar los diagramas de casos de uso, estados y secuencia, unificando las reglas sobre cotización, pago, asignación del conductor y seguimiento de las órdenes. & Diagramas de casos de uso, estados y secuencia; registro de revisión. & Equipo de desarrollo y asesoría académica. & Flujos de negocio y responsabilidades consistentes entre los modelos. \\ \midrule
+	OE3 & Construcción del backend & Desarrollar la autenticación mediante JWT y las operaciones de administración de usuarios, roles, empresas, clientes, conductores, vehículos y órdenes. & Repositorio de código, endpoints y pruebas de API. & Equipo de desarrollo. & Servicios principales del backend funcionales. \\ \midrule
+	\hypertarget{plan-oe3}{OE3} & Desarrollo del frontend & Construir las interfaces para los tres perfiles de TravelDLS e incorporar los procesos de consulta de empresas, solicitud de transporte, cotización y aceptación de servicios. & Pantallas implementadas y pruebas de navegación. & Equipo de desarrollo y usuarios de prueba. & Flujos de interacción disponibles en la plataforma web. \\ \midrule
+	OE3 & Integración de seguimiento & Incorporar Mapbox, registrar las ubicaciones reportadas por el conductor y permitir consultas autorizadas del estado y el historial de cada orden. Gestionar con Cloudinary las fotografías de perfiles y empresas. & Pruebas de integración, registros de seguimiento y consultas del mapa. & Equipo de desarrollo y conductores de prueba. & Información de ubicación y progreso de las cargas disponible según los permisos. \\ \midrule
+	OE3 & Implementación de pagos & Mostrar el precio final del servicio, incluido el recargo del 8\,\% para mantenimiento, antes de su aceptación. Desarrollar el registro o simulación del pago según el alcance del prototipo. & Casos de prueba de cotización, aceptación y pago. & Equipo de desarrollo y clientes de prueba. & Proceso de contratación y pago coherente con las reglas de negocio aprobadas. \\ \midrule
+	OE3 & Módulo de optimización & Integrar Google OR-Tools con los destinos y costos de desplazamiento definidos para el prototipo, permitiendo calcular recorridos que apoyen la planificación. & Código del módulo, pruebas de rutas y resultados de ejecución. & Equipo de desarrollo. & Módulo de optimización integrado y recorridos calculados para escenarios establecidos. \\ \midrule
+	OE3 & Pruebas y documentación & Ejecutar pruebas funcionales en escenarios académicos, registrar incidencias identificadas y elaborar documentación técnica y manuales de usuario. & Matriz de pruebas, registro de incidencias y manuales. & Equipo de desarrollo y participantes de las pruebas. & Prototipo verificado en los escenarios definidos y documentación inicial del sistema. \\
+	\end{longtable}
+	\endgroup
 
 \clearpage
 \subsection{Resultados del plan de ejecución}
 \label{sec:resultados-plan-ejecucion}
 
-Los diagramas de clases y entidad-relación son productos de la acción «Modelado de datos y clases» del OE2, presentada en la Tabla~\ref{tab:plan_ejecucion}. Representan las entidades principales de TravelDLS y sus relaciones. Frente al resultado esperado de contar con modelos coherentes con la estructura prevista, se observa un avance, pero el informe aún no documenta una revisión cruzada de clases, tablas y relaciones. Por ello, el cumplimiento de esta acción se considera parcial.
+Los resultados obtenidos durante el desarrollo de TravelDLS se presentan de acuerdo con los objetivos y las acciones establecidos en el plan de ejecución. En relación con el \hyperlink{plan-oe1}{OE1}, se realizó la revisión documental y la identificación preliminar de los requisitos del sistema, lo que permitió fundamentar la problemática e identificar las necesidades iniciales de la plataforma. Para orientar la búsqueda de información, se definieron términos en español e inglés relacionados con el seguimiento y rastreo de vehículos y carga, el transporte de mercancías, la logística, los envíos y la optimización de rutas. Asimismo, se analizaron los objetivos, el alcance y los modelos del proyecto para establecer las funcionalidades y los componentes principales de TravelDLS, sin realizar un levantamiento directo con usuarios.
+
+Las cadenas de búsqueda utilizadas para la revisión documental combinan palabras clave y operadores booleanos, como \texttt{AND} y \texttt{OR}, con el propósito de orientar la consulta de información relacionada con el transporte de carga, el seguimiento de vehículos, la optimización de rutas y las herramientas tecnológicas consideradas para el desarrollo de TravelDLS.
+
+\textbf{Cadenas de búsqueda utilizadas}
+
+\textbf{1. Seguimiento y transporte de carga}
+
+\begin{quote}
+	\begin{lstlisting}[style=cadenas]
+		("tracking" OR "seguimiento" OR "rastreo" OR "monitoreo") AND ("carga" OR "transporte de carga" OR "freight" OR "freight transportation" OR "logistics")
+	\end{lstlisting}
+\end{quote}
+
+\begin{quote}
+	\begin{lstlisting}[style=cadenas]
+		("freight transportation" OR "heavy freight" OR "cargo transportation" OR "logistics") AND ("tracking" OR "real-time tracking" OR "vehicle tracking" OR "cargo tracking") AND ("resource management" OR "fleet management" OR "transport management" OR "logistics management")
+	\end{lstlisting}
+\end{quote}
+
+Las cadenas de búsqueda de este apartado se utilizaron para localizar investigaciones relacionadas con el seguimiento de cargas, la localización de vehículos y la gestión del transporte. La información obtenida sirvió principalmente para elaborar los antecedentes del proyecto, identificando sistemas e investigaciones que abordan la administración de fletes, el seguimiento en tiempo real y la coordinación de las operaciones logísticas. También contribuyó al marco teórico, especialmente en la definición de conceptos relacionados con la gestión logística, el seguimiento de cargas y la localización de vehículos.
+
+\textbf{2. Optimización de rutas y algoritmos}
+
+\begin{quote}
+	\begin{lstlisting}[style=cadenas]
+		("traveling salesman problem" OR TSP OR "vehicle routing problem" OR VRP) AND ("nearest neighbor" OR "nearest neighbour" OR "2-opt" OR "OR-Tools") AND ("logistics" OR "freight transportation" OR "delivery routing")
+	\end{lstlisting}
+\end{quote}
+
+
+\begin{quote}
+	\begin{lstlisting}[style=cadenas]
+		("2-opt" OR "two-opt" OR "2 opt") AND ("traveling salesman problem" OR "vehicle routing problem" OR "route optimization") AND ("logistics" OR "transportation" OR "freight transport")
+	\end{lstlisting}
+\end{quote}
+Estas cadenas se utilizaron para buscar investigaciones sobre la planificación y optimización de rutas, con énfasis en el Problema del Agente Viajero (TSP), el algoritmo Vecino Más Cercano y el método 2-opt. Los resultados se emplearon en los antecedentes para identificar trabajos que han aplicado métodos de optimización en el transporte y la distribución de mercancías. Asimismo, sirvieron para desarrollar las bases teóricas del proyecto, explicar los métodos considerados y fundamentar la comparación de alternativas para la planificación de recorridos en TravelDLS.
+
+\textbf{3. Google OR-Tools y matrices de distancias}
+
+\begin{quote}
+	\begin{lstlisting}[style=cadenas]
+		("Google OR-Tools" OR "OR-Tools" OR "Google Operations Research Tools") AND ("vehicle routing problem" OR "traveling salesman problem" OR "route optimization") AND ("logistics" OR "transportation" OR "delivery")
+	\end{lstlisting}
+\end{quote}
+
+\begin{quote}
+	\begin{lstlisting}[style=cadenas]
+		("distance matrix" OR "travel time matrix" OR "road network distances") AND ("route optimization" OR "vehicle routing problem" OR "traveling salesman problem") AND ("logistics" OR "freight transportation" OR "delivery routing")
+	\end{lstlisting}
+\end{quote}
+
+Las cadenas de este apartado se utilizaron para investigar el funcionamiento y la aplicación de Google OR-Tools en problemas de optimización de rutas, así como el uso de matrices de distancias y tiempos de recorrido. La información recopilada contribuyó principalmente a las bases teóricas y a la fundamentación técnica del módulo de optimización de TravelDLS. Además, permitió identificar elementos necesarios para comparar diferentes recorridos y comprender cómo estas herramientas pueden apoyar la planificación de viajes con múltiples destinos.
+
+\textbf{4. Geolocalización y seguimiento mediante Mapbox}
+
+\begin{quote}
+	\begin{lstlisting}[style=cadenas]
+		("Mapbox" OR "Mapbox API") AND ("truck tracking" OR "vehicle tracking" OR "fleet tracking" OR "GPS tracking") AND ("logistics" OR "freight transportation" OR "cargo transportation" OR "delivery")
+	\end{lstlisting}
+\end{quote}
+
+\begin{quote}
+	\begin{lstlisting}[style=cadenas]
+		("Mapbox" OR "Mapbox API" OR "Mapbox SDK") AND ("real-time tracking" OR "vehicle tracking" OR "GPS tracking" OR geolocation) AND (logistics OR transportation OR "fleet management" OR delivery OR travel)
+	\end{lstlisting}
+\end{quote}
+
+La consulta de documentación sobre Mapbox, sus API y SDK permitió conocer las herramientas disponibles para trabajar con mapas, geolocalización y seguimiento de vehículos. La información obtenida se consideró en la selección de tecnologías y en el análisis de la viabilidad técnica del proyecto, como parte de la evaluación de las herramientas que podrían apoyar las funcionalidades de ubicación y seguimiento de recorridos.
+
+\textbf{5. Almacenamiento de imágenes mediante Cloudinary}
+
+\begin{quote}
+	\begin{lstlisting}[style=cadenas]
+		("Cloudinary" OR "Cloudinary API") AND ("web application" OR "mobile application" OR platform OR system) AND (logistics OR transportation OR travel OR delivery OR tracking OR fleet) AND ("image storage" OR "image management" OR "media storage" OR "cloud storage")
+	\end{lstlisting}
+\end{quote}
+
+Las búsquedas sobre Cloudinary y el almacenamiento de imágenes y recursos multimedia en aplicaciones web permitieron consultar información sobre servicios para gestionar este tipo de archivos. Los resultados se consideraron en la selección de tecnologías y en el análisis de la viabilidad técnica de TravelDLS, con el propósito de evaluar una alternativa para el almacenamiento y la gestión de recursos gráficos asociados al sistema.
+
+En relación con el \hyperlink{plan-oe2}{OE2}, se definió la arquitectura del sistema y se elaboraron modelos para representar la estructura de TravelDLS y la organización de sus datos. Entre estos resultados se encuentra el diagrama entidad-relación, que representa las principales entidades de la plataforma, como usuarios, roles, empresas, vehículos, conductores, clientes, órdenes y pagos, así como las relaciones entre ellas. Estos modelos sirven de referencia para organizar la información y describir los componentes y procesos principales del sistema.
+
+Por último, en cuanto al  \hyperlink{plan-oe3}{OE3}, se completó la construcción del backend de TravelDLS, incluyendo la autenticación mediante JWT y las operaciones de administración de usuarios, roles, empresas, clientes, conductores, vehículos y órdenes. Con ello, se implementaron los principales servicios del backend previstos en el plan de ejecución. El desarrollo del frontend continúa en proceso, por lo que los resultados descritos corresponden a los avances alcanzados hasta la finalización del backend.
+
+
+En la Figura~\ref{fig:diagrama-clases} se presentan las clases principales de TravelDLS, sus atributos y las relaciones entre usuarios, empresas, clientes, conductores y órdenes. También se muestran los servicios encargados de la autenticación, la gestión de órdenes y los pagos simulados.
 
 \begin{figure}[H]
 	\centering
@@ -615,6 +736,8 @@ Los diagramas de clases y entidad-relación son productos de la acción «Modela
 	\caption{Diagrama de clases de TravelDLS}
 	\label{fig:diagrama-clases}
 \end{figure}
+
+En la Figura~\ref{fig:diagrama-er} se presenta el diagrama entidad-relación de TravelDLS, que muestra las tablas de la base de datos y cómo se relacionan entre sí. Este diagrama permite comprender cómo se almacena la información del sistema y sirve como guía para organizar los datos durante el desarrollo.
 
 \begin{figure}[H]
 	\centering
@@ -626,6 +749,8 @@ Los diagramas de clases y entidad-relación son productos de la acción «Modela
 \clearpage
 Los diagramas de casos de uso, estados y secuencia corresponden a la acción «Modelado de procesos» del OE2. El primero presenta las funciones por actor; el segundo, los estados de una orden; y el tercero, las interacciones del flujo principal de transporte. En comparación con el resultado esperado de obtener flujos y responsabilidades consistentes entre los modelos, también se considera un cumplimiento parcial: los procesos previstos están representados, pero no se incorpora un registro de revisión comparativa que confirme la coherencia de todas sus reglas.
 
+En la Figura~\ref{fig:diagrama-casos-uso} se describen las funciones previstas para el cliente, la empresa transportista y el conductor, como solicitar transporte, gestionar recursos y reportar la ubicación del viaje. El actor «Usuario» agrupa las funciones compartidas de acceso y administración de la cuenta.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{diagrama-casos-uso.png}
@@ -633,12 +758,16 @@ Los diagramas de casos de uso, estados y secuencia corresponden a la acción «M
 	\label{fig:diagrama-casos-uso}
 \end{figure}
 
+En la Figura~\ref{fig:diagrama-estados} se representa el recorrido de una orden desde su creación y cotización hasta la entrega o anulación. El diagrama incluye el procesamiento del pago, la asignación del conductor y las transiciones previstas ante fallos de pago o interrupciones del viaje.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{diagrama-estado-actualizado.png}
 	\caption{Diagrama de estados de una orden de transporte}
 	\label{fig:diagrama-estados}
 \end{figure}
+
+En la Figura~\ref{fig:diagrama-secuencia} se muestra el intercambio de solicitudes y respuestas entre el cliente, la empresa, el conductor, el frontend, el backend y la base de datos. Las interacciones se organizan en creación del pedido, aprobación del precio, pago simulado, asignación del conductor y seguimiento hasta la entrega.
 
 \begin{figure}[H]
 	\centering

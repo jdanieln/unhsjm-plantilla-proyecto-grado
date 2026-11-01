@@ -1,0 +1,7 @@
+.map{width:100%;height:100%;background:#d9ddd8;z-index:0}
+.choosing,.choosing :global(.leaflet-container){cursor:crosshair!important}
+.driverMarker{display:grid;place-items:center;width:54px;height:54px;border:5px solid #ffffff;border-radius:50%;background:#772bc6;box-shadow:0 4px 0 #351059,0 6px 20px #23153288;color:#e8ffff}
+.driverMarker svg{width:27px;height:27px;fill:#64d5ed;stroke:#fff;stroke-width:2}
+.destinationMarker{display:block;width:42px;height:50px;filter:drop-shadow(0 4px 6px #2a124c66)}
+.destinationMarker svg{width:100%;height:100%;fill:#6b27c7;stroke:#fff;stroke-width:2}
+.destinationMarker circle{fill:#fff;stroke:none}

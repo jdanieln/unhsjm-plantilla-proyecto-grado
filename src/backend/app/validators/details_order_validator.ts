@@ -6,7 +6,7 @@ export const createDetailsOrderValidator = vine.compile(
     idOrder: vine.number().exists({ table: 'orders', column: 'idOrder' }),
     idDriver: vine.number().exists({ table: 'drivers', column: 'idDriver' }).optional(),
     cargoDescription: vine.string().trim().minLength(3).maxLength(255),
-    amount: vine.number().positive().min(0),
+    amount: vine.number().min(0),
     unitWeight: vine.string().trim().maxLength(50),
     deliveryAddress: vine.string().trim().minLength(5).maxLength(255),
     typePackaging: vine.enum(Object.values(PackagingType)),

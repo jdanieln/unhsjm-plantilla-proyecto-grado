@@ -21,6 +21,10 @@ src/
 │   ├── package.json         # Dependencias y scripts del backend
 │   ├── adonisrc.ts          # Configuración principal de AdonisJS
 │   └── .env.example         # Variables de entorno de referencia
+├── frontend/                # Aplicación web con Next.js, App Router y TypeScript
+│   ├── src/app/             # Rutas, layout y estilos iniciales
+│   ├── package.json         # Dependencias y scripts del frontend
+│   └── README.md            # Comandos y convenciones de organización
 └── README.md                # Esta guía
 ```
 
@@ -46,8 +50,16 @@ pnpm build        # Genera la compilación de producción
 
 Las variables de entorno deben configurarse copiando `src/backend/.env.example` como `.env`. El archivo `.env` puede contener credenciales y no debe subirse al repositorio.
 
-## Organización futura
+## Frontend
 
-Si se incorpora una interfaz web, puede agregarse como `src/frontend/`, manteniendo su propio `package.json` y configuración independiente del backend.
+La base del frontend está en `src/frontend/`, con dependencias y configuración independientes del backend.
+
+```bash
+cd src/frontend
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+La página inicial está disponible en http://localhost:3000. Consulta [la guía del frontend](frontend/README.md) para localizar componentes, organizar futuros módulos y ejecutar las validaciones.
 
 Las dependencias instaladas, archivos compilados y temporales deben mantenerse fuera del control de versiones mediante los archivos `.gitignore` correspondientes.

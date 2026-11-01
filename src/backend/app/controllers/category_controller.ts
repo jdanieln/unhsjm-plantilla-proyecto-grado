@@ -19,7 +19,11 @@ export default class CategoriesController {
     const page = request.input('page', 1)
     const perPage = request.input('perPage', 10)
     try {
-      const categories = await this.categoryService.list({ page, perPage })
+      const categories = await this.categoryService.list({
+        page,
+        perPage,
+        search: request.input('search'),
+      })
       return response.ok(categories)
     } catch {
       return response.internalServerError({ message: 'Failed to retrieve categories.' })

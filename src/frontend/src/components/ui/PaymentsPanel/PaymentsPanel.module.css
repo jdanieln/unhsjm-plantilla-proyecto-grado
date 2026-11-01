@@ -1,0 +1,24 @@
+.summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:24px}.summary>div{display:flex;flex-direction:column;gap:6px;background:var(--theme-surface, #14131f);border:1px solid var(--theme-border, #2b2538);border-radius:12px;padding:20px}.summary span{color:var(--theme-muted, #a79aad);font-size:11px}.summary strong{color:var(--theme-text, #eee7f7);font-size:24px;font-weight:600}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:18px 20px;border-bottom:1px solid var(--theme-border, #292534)}.search{display:flex;align-items:center;gap:8px;min-width:0;width:min(360px,100%);background:var(--theme-canvas, #0f0e19);border:1px solid var(--theme-border, #302b40);border-radius:9px;padding:4px 5px 4px 12px;color:var(--theme-muted, #9385a1)}.search input{flex:1;min-width:0;background:none;border:0;color:var(--theme-text, #eee8f8);outline:0;font-size:12px}.search button{min-height:34px;padding:6px 10px}.filters{display:flex;gap:8px;flex-wrap:wrap}.filters>div{min-width:160px}.footnote{color:var(--theme-muted, #7d718a);font-size:11px;margin-top:16px}
+@media(max-width:850px){.toolbar{align-items:stretch}.search{width:100%}.filters{width:100%}.filters>div{flex:1;min-width:140px}}
+@media(max-width:600px){.summary{grid-template-columns:1fr 1fr;gap:10px}.summary>div{padding:15px}.summary>div:last-child{grid-column:1/-1}.summary strong{font-size:20px}.toolbar{padding:12px}}
+
+.detailCard{display:grid;gap:16px;min-width:0}
+.detailHero{position:relative;isolation:isolate;display:grid;gap:8px;overflow:hidden;padding:22px;border:1px solid var(--theme-border, #654382);border-radius:15px;background:radial-gradient(circle at 90% 0%,var(--theme-overlay, #6c3b8c69),transparent 55%),linear-gradient(125deg,var(--theme-soft, #271b37),var(--theme-surface, #1b1627));box-shadow:0 14px 32px var(--theme-shadow, #09050f29)}
+.detailHero[data-status="cancelado"],.detailHero[data-status="fallido"]{border-color:var(--theme-border, #744658);background:radial-gradient(circle at 90% 0%,var(--theme-overlay, #7839575c),transparent 55%),linear-gradient(125deg,var(--theme-surface, #2b1b2a),var(--theme-surface, #1b1622))}
+.detailWatermark{position:absolute;right:-12px;bottom:-23px;z-index:-1;color:var(--theme-accent, #b987e71f);transform:rotate(-16deg)}
+.detailHeroTop{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:11px}
+.detailIcon{display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--theme-border-strong, #8c61b07a);border-radius:12px;background:var(--theme-overlay, #5d397374);color:var(--theme-accent, #d1a8f5)}
+.detailEyebrow{color:var(--theme-accent, #bea4d3);font-size:11px;font-weight:650;letter-spacing:.1em;text-transform:uppercase}
+.detailAmount{color:var(--theme-text, #f7ecff);font-size:clamp(27px,5vw,36px);font-weight:750;letter-spacing:-.045em;line-height:1.15;overflow-wrap:anywhere}
+.detailHeroCaption{color:var(--theme-muted, #c8b6d7);font-size:12px}
+.detailReference{display:grid;gap:6px;min-width:0;padding:15px 17px;border:1px solid var(--theme-border, #4c365e);border-radius:11px;background:var(--theme-soft, #211a2d)}
+.detailReference span{color:var(--theme-accent, #aa92c2);font-size:10px;font-weight:650;letter-spacing:.09em;text-transform:uppercase}
+.detailReference strong{color:var(--theme-text, #f0defe);font-size:14px;font-weight:650;letter-spacing:.02em;overflow-wrap:anywhere}
+.detailFacts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0}
+.detailFacts>div{min-width:0;padding:14px 15px;border:1px solid var(--theme-border, #352a40);border-radius:11px;background:var(--theme-surface, #1d1827)}
+.detailFacts .detailFactWide{grid-column:1/-1}
+.detailFacts dt{display:flex;align-items:center;gap:8px;margin-bottom:8px;color:var(--theme-accent, #aa94bd);font-size:11px}
+.detailFacts dt svg{flex:none;color:var(--theme-accent, #bd8bdf)}
+.detailFacts dd{margin:0;color:var(--theme-text, #eae0f3);font-size:14px;font-weight:600;overflow-wrap:anywhere}
+.detailFooter{display:flex;justify-content:flex-end;padding-top:4px}
+@media(max-width:520px){.detailHero{padding:18px}.detailFacts{grid-template-columns:1fr}.detailFacts .detailFactWide{grid-column:auto}.detailFooter>span{width:100%}.detailFooter button{width:100%}}

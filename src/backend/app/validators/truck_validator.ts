@@ -8,6 +8,7 @@ export const createTruckValidator = vine.compile(
     chassis: vine.string().trim().minLength(5).maxLength(100),
     plate: vine.string().trim().minLength(3).maxLength(50),
     status: vine.string().trim().optional(),
+    maintenanceReason: vine.string().trim().minLength(10).maxLength(500).optional(),
   })
 )
 
@@ -22,5 +23,13 @@ export const updateTruckValidator = vine.compile(
     chassis: vine.string().trim().minLength(5).maxLength(100).optional(),
     plate: vine.string().trim().minLength(3).maxLength(50).optional(),
     status: vine.string().trim().optional(),
+    maintenanceReason: vine.string().trim().minLength(10).maxLength(500).optional(),
+  })
+)
+
+export const reportTruckMaintenanceValidator = vine.compile(
+  vine.object({
+    status: vine.string().trim(),
+    reason: vine.string().trim().minLength(10).maxLength(500),
   })
 )

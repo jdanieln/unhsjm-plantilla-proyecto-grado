@@ -5,7 +5,7 @@ import swaggerConfig from '#config/swagger'
 import { middleware } from './kernel.js'
 
 const UserController = () => import('#controllers/user_controller')
-//const RolesController = () => import('#controllers/role_controller')
+const RolesController = () => import('#controllers/role_controller')
 const ClientsController = () => import('#controllers/client_controller')
 const CompaniesController = () => import('#controllers/company_controller')
 const DriversController = () => import('#controllers/driver_controller')
@@ -19,7 +19,15 @@ const OrderTrackingsController = () => import('#controllers/order_trackings_cont
 const PaymentsController = () => import('#controllers/payment_controller')
 
 //Role routes
-//router.post('/api/roles', [RolesController, 'store'])
+router
+  .get('/api/roles', [RolesController, 'index'])
+  .use([middleware.auth(), middleware.roleGuard(['platform_admin'])])
+router
+  .get('/api/users', [UserController, 'index'])
+  .use([middleware.auth(), middleware.roleGuard(['platform_admin'])])
+router
+  .get('/api/users/unassigned-driver-accounts', [UserController, 'getUnassignedDriverAccounts'])
+  .use([middleware.auth(), middleware.roleGuard(['platform_admin'])])
 
 router
   .group(() => {
@@ -38,7 +46,6 @@ router
   .post('/api/auth/register-driver', [DriverAuthController, 'registerDriver'])
   .use([middleware.auth(), middleware.roleGuard(['company'])])
 
-
 router
   .get('/api/driver/truck', [TrucksController, 'myTruck'])
   .use([middleware.auth(), middleware.roleGuard(['driver'])])
@@ -55,7 +62,7 @@ router
     router.delete('/:id', [TrucksController, 'destroy'])
   })
   .prefix('/api/trucks')
-  .use([middleware.auth(), middleware.roleGuard(['company', 'platform_admin'])])
+  .use([middleware.auth(), middleware.roleGuard(['company'])])
 
 // Driver routes
 router
@@ -75,7 +82,7 @@ router
   .use([middleware.auth(), middleware.roleGuard(['driver', 'company', 'platform_admin'])])
 router
   .post('/api/drivers', [DriversController, 'store'])
-  .use([middleware.auth(), middleware.roleGuard(['company', 'driver'])])
+  .use([middleware.auth(), middleware.roleGuard(['company', 'driver', 'platform_admin'])])
 
 //Register routes
 router
@@ -114,7 +121,7 @@ router
 
 router
   .put('/api/clients/:id', [ClientsController, 'update'])
-  .use([middleware.auth(), middleware.roleGuard(['client'])])
+  .use([middleware.auth(), middleware.roleGuard(['client', 'platform_admin'])])
 router
   .post('/api/clients', [ClientsController, 'store'])
   .use([middleware.auth(), middleware.roleGuard(['platform_admin', 'client'])])
@@ -244,3 +251,12 @@ router.get('/swagger', async ({ response }) => {
 router.get('/docs', async () => {
   return AutoSwagger.default.ui('/swagger', swaggerConfig)
 })
+
+const DeliveriesController = () => import('#controllers/deliveries_controller')
+router.get('/api/orders/:id/deliveries', [DeliveriesController, 'index']).use([middleware.auth(), middleware.roleGuard(['client', 'company', 'driver', 'platform_admin'])])
+router.post('/api/orders/:id/deliveries/:detailId/report', [DeliveriesController, 'report']).use([middleware.auth(), middleware.roleGuard(['driver'])])
+router.post('/api/orders/:id/deliveries/:reportId/respond', [DeliveriesController, 'respond']).use([middleware.auth(), middleware.roleGuard(['client'])])
+router.post('/api/orders/:id/deliveries/:reportId/resolve', [DeliveriesController, 'resolve']).use([middleware.auth(), middleware.roleGuard(['platform_admin'])])
+router.get('/api/deliveries/review', [DeliveriesController, 'review']).use([middleware.auth(), middleware.roleGuard(['platform_admin'])])
+
+router.get('/api/deliveries/pending', [DeliveriesController, 'pending']).use([middleware.auth(), middleware.roleGuard(['client'])])

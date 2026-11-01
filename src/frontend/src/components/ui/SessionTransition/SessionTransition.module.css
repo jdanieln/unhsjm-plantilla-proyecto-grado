@@ -1,0 +1,330 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  padding: 24px;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 50% 42%, var(--theme-overlay, #55219242) 0, transparent 33%),
+    linear-gradient(145deg, var(--theme-canvas, #080812) 0%, var(--theme-surface, #100b1c) 55%, var(--theme-canvas, #080a13) 100%);
+  animation: overlayIn 260ms ease-out both;
+}
+
+.overlay::before,
+.overlay::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: min(68vw, 880px);
+  aspect-ratio: 1;
+  border: 1px solid var(--theme-border, #9a65e614);
+  border-radius: 50%;
+}
+
+.overlay::before {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.overlay::after {
+  top: 50%;
+  left: 50%;
+  width: min(51vw, 650px);
+  transform: translate(-50%, -50%);
+  border-color: var(--theme-border, #1f8bb21a);
+}
+
+.glow {
+  position: absolute;
+  z-index: -1;
+  width: min(80vw, 760px);
+  height: 260px;
+  border-radius: 50%;
+  background: var(--theme-overlay, #6d28d966);
+  filter: blur(110px);
+  opacity: 0.42;
+  animation: glowPulse 2.4s ease-in-out infinite;
+}
+
+.content {
+  width: min(100%, 520px);
+  text-align: center;
+}
+
+.emblemWrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 218px;
+  height: 218px;
+  margin: 0 auto 30px;
+}
+
+.emblem {
+  position: relative;
+  z-index: 2;
+  width: 188px;
+  height: 188px;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 30px var(--theme-shadow, #4b0ba466));
+  animation: emblemFloat 2.25s ease-in-out infinite;
+}
+
+.orbit,
+.orbitAccent {
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-top-color: var(--theme-border-strong, #ae7cff);
+  border-right-color: var(--theme-border-strong, #51349b80);
+  border-radius: 50%;
+  animation: orbitSpin 1.65s linear infinite;
+}
+
+.orbit::after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  right: 29px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d4b6ff;
+  box-shadow: 0 0 18px var(--theme-shadow, #b67bff);
+}
+
+.orbitAccent {
+  inset: 13px;
+  border-width: 1px;
+  border-top-color: transparent;
+  border-right-color: var(--theme-border-strong, #1380ae);
+  border-bottom-color: var(--theme-border-strong, #5e21be73);
+  animation-direction: reverse;
+  animation-duration: 2.2s;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: var(--theme-accent, #b997f0);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+}
+
+.content h1 {
+  margin: 0;
+  color: var(--theme-text, #faf7ff);
+  font-size: clamp(30px, 5vw, 46px);
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 1.15;
+}
+
+.description {
+  max-width: 430px;
+  margin: 13px auto 25px;
+  color: var(--theme-muted, #aaa2b8);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.progress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  min-height: 18px;
+}
+
+.progress span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #b989ff;
+  box-shadow: 0 0 13px var(--theme-shadow, #9f5cff8f);
+  animation: progressPulse 1.1s ease-in-out infinite;
+}
+
+.progress span:nth-child(2) {
+  animation-delay: 140ms;
+}
+
+.progress span:nth-child(3) {
+  animation-delay: 280ms;
+}
+
+.brand {
+  margin: 25px 0 0;
+  color: var(--theme-muted, #6e647e);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
+
+.speedLines {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.speedLines span {
+  position: absolute;
+  right: -18%;
+  width: 42%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--theme-overlay, #9d64e833), transparent);
+  animation: lineTravel 3.2s ease-in-out infinite;
+}
+
+.speedLines span:nth-child(1) {
+  top: 27%;
+}
+
+.speedLines span:nth-child(2) {
+  top: 58%;
+  animation-delay: 700ms;
+}
+
+.speedLines span:nth-child(3) {
+  top: 76%;
+  animation-delay: 1.4s;
+}
+
+@keyframes overlayIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes orbitSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes emblemFloat {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.018);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.32;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes progressPulse {
+  0%,
+  70%,
+  100% {
+    opacity: 0.32;
+    transform: translateY(0) scale(0.72);
+  }
+  35% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1);
+  }
+}
+
+@keyframes lineTravel {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  35% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0;
+    transform: translateX(-180vw);
+  }
+}
+
+@media (max-width: 480px) {
+  .overlay {
+    padding: 20px;
+  }
+
+  .emblemWrap {
+    width: 176px;
+    height: 176px;
+    margin-bottom: 25px;
+  }
+
+  .emblem {
+    width: 150px;
+    height: 150px;
+  }
+
+  .description {
+    max-width: 310px;
+    font-size: 13px;
+  }
+}
+
+@media (max-height: 540px) {
+  .emblemWrap {
+    width: 138px;
+    height: 138px;
+    margin-bottom: 14px;
+  }
+
+  .emblem {
+    width: 116px;
+    height: 116px;
+  }
+
+  .eyebrow {
+    margin-bottom: 6px;
+  }
+
+  .description {
+    margin-block: 8px 14px;
+  }
+
+  .brand {
+    margin-top: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .glow,
+  .emblem,
+  .orbit,
+  .orbitAccent,
+  .progress span,
+  .speedLines span {
+    animation: none;
+  }
+
+  .orbit {
+    border-color: var(--theme-border-strong, #6e4ba8);
+  }
+
+  .progress span {
+    opacity: 0.75;
+    transform: none;
+  }
+}

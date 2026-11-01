@@ -6,6 +6,18 @@ import UserService from '#services/user_service'
 
 @inject()
 export default class UsersController {
+  async index({ request, response }: HttpContext) {
+    const page = Math.max(1, Number(request.input('page', 1)) || 1)
+    const perPage = Math.min(100, Math.max(1, Number(request.input('perPage', 10)) || 10))
+    return response.ok(
+      await this.userService.list({ page, perPage, search: request.input('search') })
+    )
+  }
+
+  async getUnassignedDriverAccounts({ response }: HttpContext) {
+    return response.ok(await this.userService.getUnassignedDriverAccounts())
+  }
+
   constructor(
     private registerService: RegisterService,
     private userService: UserService

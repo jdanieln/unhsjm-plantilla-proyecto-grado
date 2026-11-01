@@ -22,9 +22,7 @@ out/
 .angular/
 
 # ASP.NET / .NET / C#
-bin/
 obj/
-[Bb]in/
 [Oo]bj/
 *.user
 *.userosscache

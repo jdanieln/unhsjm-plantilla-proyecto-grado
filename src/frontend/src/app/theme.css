@@ -1,0 +1,31 @@
+/* Dark colors remain the original component fallbacks. Shared light tokens
+   also reach dialogs and portals, since they live on the document root. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --background: #f7f6fb;
+  --foreground: #252033;
+  --muted: #6a6178;
+  --accent: #7440b9;
+  --theme-canvas: #f7f6fb;
+  --theme-surface: #ffffff;
+  --theme-soft: #f3eff8;
+  --theme-tint: #ebe1f6;
+  --theme-text: #252033;
+  --theme-muted: #6a6178;
+  --theme-accent: #7038ac;
+  --theme-border: #ddd3e8;
+  --theme-border-strong: #b49bcc;
+  --theme-overlay: #7745a90d;
+  --theme-shadow: #301b4b18;
+  --theme-success-bg: #e3f3ea;
+  --theme-success-text: #246746;
+  --theme-danger-bg: #fbe8ee;
+  --theme-danger-text: #9c3154;
+  --theme-warning-bg: #fff0d6;
+  --theme-warning-text: #835719;
+  --theme-info-bg: #e5effc;
+  --theme-info-text: #305f99;
+  --theme-color-scheme: light;
+  --theme-logo-filter: none;
+  --theme-logo-blend: multiply;
+}

@@ -34,6 +34,7 @@ TravelDLS-proyecto-grado/
 │   │   ├── package.json       # Dependencias y scripts del backend
 │   │   ├── adonisrc.ts        # Configuración de AdonisJS
 │   │   └── .env.example       # Variables de entorno de referencia
+│   ├── frontend/             # Aplicación web con Next.js, App Router y TypeScript
 │   └── README.md              # Guía adicional sobre el código fuente
 ├── output/                   # Archivos generados durante el desarrollo
 ├── tmp/                      # Archivos temporales locales
@@ -65,6 +66,20 @@ pnpm build        # Genera la compilación de producción
 ```
 
 Las variables de entorno deben configurarse a partir de `src/backend/.env.example`. El archivo `.env` local no debe subirse al repositorio.
+
+---
+
+## Frontend
+
+La aplicación web está en `src/frontend/`. Para iniciar la página de bienvenida:
+
+```bash
+cd src/frontend
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+Abre http://localhost:3000. La [guía del frontend](src/frontend/README.md) describe la estructura, las convenciones y los comandos de validación.
 
 ---
 

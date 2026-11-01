@@ -3,6 +3,24 @@ import Rol from '#models/rol'
 import Driver from '#models/driver'
 
 export default class UserService {
+  async list(filters: { page: number; perPage: number; search?: string }) {
+    const query = User.query().preload('role')
+    if (filters.search) {
+      query.where((builder) => {
+        builder
+          .whereILike('name', `%${filters.search}%`)
+          .orWhereILike('email', `%${filters.search}%`)
+      })
+    }
+    return query.orderBy('idUser', 'desc').paginate(filters.page, filters.perPage)
+  }
+
+  async getUnassignedDriverAccounts() {
+    const role = await Rol.findBy('name', 'driver')
+    if (!role) return []
+    return User.query().where('role_id', role.id).doesntHave('driver')
+  }
+
   /**
    * Obtiene todos los usuarios que tienen el rol de 'company'
    * pero que aún no están asignados a ninguna empresa.

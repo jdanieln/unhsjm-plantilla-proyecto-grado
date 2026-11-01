@@ -1,0 +1,24 @@
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  gap: 8px;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid var(--theme-border, #423350);
+  border-radius: 10px;
+  background: var(--theme-surface, #1a1624);
+  color: var(--theme-accent, #c5a4f5);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.toggle:hover { background: var(--theme-tint, #2c213d); }
+.toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+@media (max-width: 600px) {
+  .toggle { padding: 8px; }
+  .toggle span { display: none; }
+}

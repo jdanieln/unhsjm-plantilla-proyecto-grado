@@ -1,0 +1,132 @@
+.select {
+  position: relative;
+  min-width: 0;
+  width: 100%;
+}
+.trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 43px;
+  padding: 10px 12px;
+  border: 1px solid var(--theme-border, #3a2d49);
+  background: var(--theme-canvas, #0f0d18);
+  color: var(--theme-text, #eee5f9);
+  border-radius: 8px;
+  font: inherit;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.18s,
+    background 0.18s;
+}
+.trigger span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.trigger svg {
+  flex-shrink: 0;
+  color: var(--theme-accent, #bb94e6);
+  transform: rotate(90deg);
+  transition: transform 0.18s;
+}
+.trigger[aria-expanded="true"] {
+  background: var(--theme-surface, #1b1327);
+  border-color: var(--theme-border-strong, #a366df);
+  box-shadow: 0 0 0 3px var(--theme-shadow, #a366df18);
+}
+.trigger[aria-expanded="true"] svg {
+  transform: rotate(-90deg);
+}
+.trigger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.select .native {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+}
+.popup {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  padding: 6px;
+  border: 1px solid var(--theme-border, #5c3c78);
+  border-radius: 11px;
+  background: var(--theme-surface, #1a1424);
+  color: var(--theme-text, #eee5f9);
+  box-shadow:
+    0 16px 45px var(--theme-shadow, #0008),
+    0 0 0 1px var(--theme-shadow, #ba89e90c);
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--theme-border-strong, #654080) transparent;
+  font-family: inherit;
+}
+.popup:popover-open {
+  animation: reveal 0.14s ease-out;
+}
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 11px;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.5;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.option > span:first-child {
+  min-width: 0;
+}
+.option[aria-selected="true"] {
+  color: var(--theme-accent, #e1c7ff);
+  background: var(--theme-tint, #342047);
+}
+.option[data-active="true"] {
+  background: var(--theme-tint, #482b61);
+  color: var(--theme-text, #fff);
+}
+.option[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.check {
+  color: var(--theme-accent, #ce9bff);
+  flex-shrink: 0;
+}
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .trigger,
+  .trigger svg {
+    transition: none;
+  }
+  .popup:popover-open {
+    animation: none;
+  }
+}

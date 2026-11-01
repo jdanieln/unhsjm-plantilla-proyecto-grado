@@ -1,0 +1,490 @@
+.screen {
+  position: relative;
+  min-height: 100svh;
+  overflow: clip;
+  background:
+    radial-gradient(ellipse at 18% 50%, var(--theme-overlay, #25114a55), transparent 55%), var(--theme-canvas, #090a12);
+}
+
+.screen::before {
+  position: absolute;
+  inset: 0 0 0 58%;
+  content: "";
+  background: linear-gradient(155deg, var(--theme-overlay, #14122277), var(--theme-canvas, #0b0d17));
+  border-left: 1px solid var(--theme-border, #ffffff06);
+  pointer-events: none;
+}
+
+.header,
+.main,
+.footer {
+  position: relative;
+  width: min(1440px, 100%);
+  margin-inline: auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 120px;
+  padding: 12px 64px;
+}
+
+.logo {
+  width: 180px;
+  height: auto;
+  /* El blanco del archivo original se integra al fondo oscuro sin alterar el recurso. */
+  filter: var(--theme-logo-filter, grayscale(1) invert(1));
+  mix-blend-mode: var(--theme-logo-blend, screen);
+}
+
+.headerActions { display: flex; align-items: center; gap: 18px; }
+@media (max-width: 600px) { .headerActions .headerNote { display: none; } }
+
+.headerNote {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--theme-muted, #b9b5cb);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+.headerNote span,
+.eyebrow span,
+.accessNote span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ab80f8;
+  box-shadow: 0 0 12px var(--theme-shadow, #9d62ff66);
+  flex-shrink: 0;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 1.18fr 1fr;
+  align-items: center;
+  gap: 60px;
+  padding: 26px 64px 50px;
+  min-height: calc(100svh - 190px);
+}
+
+.story {
+  min-width: 0;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--theme-accent, #ba9af4);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  margin: 0 0 20px;
+}
+.intro h1 {
+  font-size: clamp(38px, 3.65vw, 55px);
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 1.12;
+  margin: 0;
+}
+.intro h1 span {
+  color: var(--theme-accent, #bc97ff);
+}
+.description {
+  max-width: 440px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.85;
+  margin: 20px 0 0;
+}
+
+.truckScene {
+  position: relative;
+  height: 330px;
+  margin: 8px -22px 12px;
+  isolation: isolate;
+}
+.truckScene::before {
+  content: "";
+  position: absolute;
+  inset: 20% 8% 0;
+  background: radial-gradient(ellipse, var(--theme-overlay, #7830dd33), transparent 68%);
+  z-index: -1;
+}
+.truck {
+  position: absolute;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  filter: drop-shadow(0 24px 28px var(--theme-shadow, #06050d88));
+}
+.orbit {
+  position: absolute;
+  width: 82%;
+  height: 190px;
+  left: 7%;
+  top: 60px;
+  border: 1px solid var(--theme-border, #a575eb18);
+  border-radius: 50%;
+  transform: rotate(-16deg);
+}
+.orbit::after {
+  content: "";
+  position: absolute;
+  inset: -35px;
+  border: 1px dashed var(--theme-border, #a575eb0d);
+  border-radius: 50%;
+}
+.road {
+  position: absolute;
+  width: 95%;
+  height: 1px;
+  top: 86%;
+  left: 0;
+  background: linear-gradient(90deg, transparent, var(--theme-tint, #9754ed88), transparent);
+  transform: rotate(-9deg);
+  box-shadow: 0 8px 24px var(--theme-shadow, #8d3fe077);
+}
+.truckLabel {
+  position: absolute;
+  left: 10px;
+  bottom: 35px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 16px;
+  border: 1px solid var(--theme-border, #b6a0ec2e);
+  border-radius: 12px;
+  background: var(--theme-surface, #171222e8);
+  box-shadow: 0 8px 25px var(--theme-shadow, #0004);
+  backdrop-filter: blur(12px);
+  font-size: 12px;
+  font-weight: 500;
+}
+.truckLabel small {
+  display: block;
+  color: var(--theme-muted, #aaa0bc);
+  font-size: 10px;
+  font-weight: 400;
+  margin-top: 2px;
+}
+.labelIcon {
+  display: grid;
+  place-items: center;
+  color: var(--theme-accent, #bf9cf9);
+  background: var(--theme-overlay, #a066ef1a);
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+}
+.sceneCaption {
+  position: absolute;
+  right: 17px;
+  bottom: 0;
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  color: var(--theme-muted, #83728f);
+}
+
+.benefits {
+  padding: 24px 0 0;
+  margin: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--theme-border, #ffffff12);
+  gap: 18px;
+}
+.benefits li {
+  min-width: 0;
+}
+.benefits svg {
+  color: var(--theme-accent, #aa83ed);
+  margin-bottom: 8px;
+}
+.benefits h2 {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+.benefits p {
+  color: var(--theme-muted, #8f8b9f);
+  font-size: 11px;
+  margin: 0;
+}
+
+.access {
+  position: relative;
+  min-width: 0;
+  width: 100%;
+  max-width: 450px;
+  justify-self: end;
+  scroll-margin-top: 20px;
+}
+.accessGlow {
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  inset: -70px -50px;
+  background: radial-gradient(ellipse, var(--theme-overlay, #6433a91a), transparent 70%);
+}
+.accessNote {
+  color: var(--theme-muted, #8f899f);
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 23px 0 0;
+  text-align: center;
+}
+.accessNote span {
+  width: 4px;
+  height: 4px;
+  opacity: 0.65;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 64px;
+  color: var(--theme-muted, #7e7b8f);
+  font-size: 10px;
+  border-top: 1px solid var(--theme-border, #ffffff07);
+}
+.skipLink {
+  position: fixed;
+  top: 10px;
+  left: 20px;
+  z-index: 10;
+  padding: 10px 16px;
+  border-radius: 6px;
+  background: #793cce;
+  opacity: 0;
+  pointer-events: none;
+}
+.skipLink:focus {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (min-width: 1500px) {
+  .main {
+    gap: 100px;
+  }
+  .truckScene {
+    height: 380px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .header {
+    padding-inline: 36px;
+  }
+  .main {
+    padding-inline: 36px;
+    gap: 32px;
+    grid-template-columns: 1.05fr 1fr;
+  }
+  .intro h1 {
+    font-size: 40px;
+  }
+  .truckScene {
+    height: 290px;
+  }
+  .footer {
+    padding-inline: 36px;
+  }
+}
+
+@media (max-width: 900px) {
+  .screen::before {
+    display: none;
+  }
+  .main {
+    grid-template-columns: 1fr;
+    max-width: 650px;
+    gap: 42px;
+    padding-top: 10px;
+  }
+  .intro {
+    text-align: center;
+  }
+  .eyebrow {
+    justify-content: center;
+  }
+  .description {
+    margin-inline: auto;
+  }
+  .intro h1 {
+    font-size: clamp(36px, 6vw, 48px);
+  }
+  .truckScene {
+    height: 310px;
+    margin-top: 0;
+  }
+  .access {
+    justify-self: center;
+  }
+  .benefits {
+    text-align: center;
+  }
+  .header {
+    height: 105px;
+  }
+  .headerNote {
+    font-size: 10px;
+  }
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding-inline: 22px;
+    height: 90px;
+  }
+  .logo {
+    width: 145px;
+  }
+  .headerNote {
+    max-width: 115px;
+    font-size: 9px;
+    line-height: 1.5;
+  }
+  .main {
+    padding: 22px 22px 40px;
+    gap: 34px;
+  }
+  .eyebrow {
+    font-size: 9px;
+    margin-bottom: 16px;
+  }
+  .intro h1 {
+    font-size: clamp(30px, 8.8vw, 40px);
+  }
+  .description {
+    font-size: 13px;
+  }
+  .truckScene {
+    height: 235px;
+    margin-inline: -10px;
+  }
+  .truckLabel {
+    bottom: 15px;
+    left: 0;
+    font-size: 10px;
+    padding: 8px 10px;
+    gap: 8px;
+  }
+  .truckLabel small {
+    font-size: 8px;
+  }
+  .sceneCaption {
+    display: none;
+  }
+  .benefits {
+    gap: 8px;
+    padding-top: 18px;
+  }
+  .benefits h2 {
+    font-size: 10px;
+  }
+  .benefits p {
+    font-size: 10px;
+  }
+  .footer {
+    padding-inline: 20px;
+    text-align: center;
+  }
+}
+
+/* En escritorio distribuimos el espacio según la altura disponible. */
+@media (min-width: 901px) {
+  .screen {
+    display: flex;
+    flex-direction: column;
+  }
+  .header {
+    height: clamp(64px, 9svh, 100px);
+    flex-shrink: 0;
+    padding-block: 4px;
+  }
+  .logo {
+    width: clamp(125px, 17svh, 180px);
+  }
+  .main {
+    flex: 1;
+    min-height: 0;
+    padding-block: 12px;
+  }
+  .eyebrow {
+    margin-bottom: 12px;
+  }
+  .intro h1 {
+    font-size: clamp(30px, min(3.65vw, 5.4svh), 55px);
+  }
+  .description {
+    margin-top: 14px;
+    line-height: 1.65;
+  }
+  .truckScene {
+    height: clamp(160px, calc(100svh - 460px), 330px);
+    margin-block: 4px 10px;
+  }
+  .truck {
+    width: auto;
+    max-width: 100%;
+    height: 210%;
+    object-fit: contain;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .orbit {
+    top: 15%;
+    height: 60%;
+  }
+  .truckLabel {
+    bottom: 18px;
+    padding: 8px 12px;
+  }
+  .benefits {
+    padding-top: 14px;
+  }
+  .benefits svg {
+    margin-bottom: 4px;
+  }
+  .accessNote {
+    margin-top: 12px;
+  }
+  .footer {
+    flex-shrink: 0;
+    padding-block: 12px;
+  }
+}
+
+@media (min-width: 901px) and (max-height: 700px) {
+  .header {
+    height: 56px;
+  }
+  .logo {
+    width: 112px;
+  }
+  .main,
+  .footer {
+    padding-block: 8px;
+  }
+  .accessNote {
+    display: none;
+  }
+}
