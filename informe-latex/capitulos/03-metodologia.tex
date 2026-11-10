@@ -773,7 +773,9 @@ E & 13 & 7 & 7 & 14 & 0 \\
 \end{tabular}
 \end{table}
 
-Desde A, Vecino Más Cercano elige B (7 km) y luego C (1 km). Ante el empate de 7 km entre D y E desde C, se adopta el desempate alfabético y se elige D. El recorrido resultante A--B--C--D--E--A mide $7+1+7+14+13=42$ km \parencite{contreras2021aplicacion}. Al aplicar un intercambio 2-opt se reemplazan A--B y D--E, cuyo costo conjunto es 21 km, por A--D y B--E, cuyo costo es 16 km. La inversión del segmento intermedio produce A--D--C--B--E--A y una distancia de $9+7+1+7+13=37$ km \parencite{dacosta2021twoopt,uddin2023twoopt}. La reducción respecto de la ruta inicial es $(42-37)/42\times100=11{,}90$\,\%.
+Al aplicar la técnica de Vecino Más Cercano \parencite{contreras2021aplicacion}, desde A se elige B (7 km) y luego C (1 km). Ante el empate de 7 km entre D y E desde C, se adopta el desempate alfabético y se elige D. Con los datos ficticios de la Tabla~\ref{tab:matriz-rutas-hipotetica}, el recorrido resultante A--B--C--D--E--A mide $7+1+7+14+13=42$ km.
+
+Para mejorar ese recorrido se aplica la heurística 2-opt, que intercambia dos aristas e invierte el segmento intermedio \parencite{dacosta2021twoopt,uddin2023twoopt}. En este ejemplo se reemplazan A--B y D--E, cuyo costo conjunto es 21 km, por A--D y B--E, cuyo costo es 16 km. Según la misma matriz ficticia, la inversión produce A--D--C--B--E--A, con una distancia de $9+7+1+7+13=37$ km. La reducción respecto de la ruta inicial es $(42-37)/42\times100=11{,}90$\,\%.
 
 La enumeración de las $4!=24$ secuencias de los destinos, manteniendo fijo A al inicio y al final, confirma que 37 km es el mínimo de esta matriz; la ruta mostrada es una de las que alcanzan ese valor. Esto no demuestra que 2-opt encuentre siempre un mínimo global. La Tabla~\ref{tab:comparacion-rutas-preliminar} separa los cálculos ya comprobados de la evaluación aún pendiente.
 
