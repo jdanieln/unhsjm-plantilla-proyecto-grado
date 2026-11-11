@@ -35,6 +35,10 @@
 % ==========================================
 \usepackage[backend=biber, style=apa]{biblatex}
 \addbibresource{referencias.bib}
+% BibLaTeX permite cortes en números y letras de identificadores URL extensos.
+\setcounter{biburlnumpenalty}{100}
+\setcounter{biburllcpenalty}{100}
+\setcounter{biburlucpenalty}{100}
 
 % ==========================================
 % Justificar texto
@@ -110,12 +114,26 @@
 
 \begin{document}
 
+% Evitar saltos de página inmediatamente después de una palabra cortada.
+\brokenpenalty=10000\relax
+
+\renewcommand{\listtablename}{Índice de tablas}
+\renewcommand{\listfigurename}{Índice de figuras}
+
 % Generar Portada Institucional
 \maketitle
 
 % Tabla de Contenidos / Índice
 \tableofcontents
-\newpage
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Índice de tablas}
+\listoftables
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Índice de figuras}
+\listoffigures
+\clearpage
 
 % ==========================================
 % Inclusión de Capítulos
