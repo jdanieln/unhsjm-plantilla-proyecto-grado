@@ -4,6 +4,8 @@
 \section{Marco Teórico}
 \label{sec:marco-teorico}
 
+El Marco Teórico reúne los antecedentes, conceptos y fundamentos necesarios para comprender los principales elementos que forman parte de TravelDLS. En este apartado se analizan investigaciones relacionadas con la propuesta, se definen los términos utilizados dentro del proyecto y se presentan las bases teóricas que sustentan la gestión del transporte, el seguimiento y la planificación de rutas.
+
 \subsection{Antecedentes del Proyecto}
 \label{sec:antecedentes-proyecto}
 
@@ -25,7 +27,20 @@ Entre las soluciones más cercanas a la propuesta, la \textbf{\hyperref[ant:sult
 
 Asimismo, \textcite{lasluisa2026diseno} utilizan el modelo SaaS multitenant para gestionar flotas y compañías en un sistema de rastreo satelital. TravelDLS comparte este enfoque y lo orienta a conectar la publicación y contratación del servicio con el seguimiento del viaje. El aporte esperado está en la continuidad entre la relación comercial y la operación de transporte, no en el uso de una arquitectura multitenant. El alcance consultado de este antecedente no permite descartar que incluya funciones equivalentes.
 
-En conjunto, estos antecedentes sitúan el aporte de TravelDLS en la adaptación de funciones existentes al servicio de carga pesada en Nicaragua, vinculando la contratación con la gestión y el seguimiento de cada viaje. Las pruebas del proyecto y el mapeo sistemático permitirán valorar su utilidad y precisar su novedad, sin asumir superioridad sobre las soluciones revisadas. A continuación se definen los términos que sustentan este enfoque.
+
+Además de las investigaciones relacionadas con la gestión del transporte, el seguimiento de unidades y la planificación de rutas, se consideran estudios que han utilizado tecnologías para desarrollar aplicaciones web con diferentes funcionalidades. Estos trabajos permiten conocer las razones por las que sus autores seleccionaron determinadas herramientas y los aportes que pueden retomarse para el desarrollo de TravelDLS.
+
+En relación con el desarrollo de la plataforma, \textcite{nguyen2022building} utilizó Next.js en una aplicación de comercio electrónico por sus capacidades de renderizado del lado del servidor y generación de páginas estáticas. Asimismo, \textcite{kolding2021developing} incorporaron Next.js en BikeViz para organizar y presentar información geográfica mediante una aplicación web. Ambos proyectos aportan referentes para el desarrollo de la interfaz de TravelDLS, que permitirá publicar servicios de transporte y consultar información relacionada con
+las operaciones.
+
+Para el desarrollo del backend, \textcite{farinha2025arkivo} seleccionó AdonisJS en la construcción de un sistema de preservación de arte digital debido a su arquitectura MVC, su compatibilidad con TypeScript y las convenciones que facilitan la organización del código. Esta experiencia constituye un referente para la organización de los módulos de TravelDLS. En cuanto al almacenamiento de información,
+\textcite{salunke2024performance} compararon PostgreSQL y MySQL, obteniendo resultados favorables para PostgreSQL en las consultas y operaciones concurrentes evaluadas. Su
+investigación aporta criterios relacionados con el rendimiento de las bases de datos y la gestión de los registros de la plataforma.
+
+En cuanto a la representación geográfica, \textcite{kolding2021developing} también seleccionaron Mapbox GL JS para BikeViz debido a sus posibilidades de personalización, la documentación disponible y la facilidad para incorporar funciones a los mapas. Mediante esta herramienta desarrollaron una interfaz que permitía explorar información geográfica a través de diferentes capas. Este antecedente se relaciona con TravelDLS, donde Mapbox se utilizará para representar las ubicaciones de los vehículos y los recorridos asociados con los viajes.
+
+En conjunto, los antecedentes revisados permiten identificar aportes relacionados con la administración del transporte, la contratación de servicios, la asignación de recursos, el seguimiento de viajes y la planificación de recorridos. Asimismo, las investigaciones tecnológicas presentan experiencias sobre la selección de herramientas para el desarrollo de aplicaciones web y la gestión de información. TravelDLS retoma estos aportes y los adapta al transporte terrestre de carga pesada en Nicaragua, mediante una plataforma que relacionará la solicitud del servicio con la administración y el seguimiento de cada viaje hasta su finalización.
+
 
 \subsection{Definición de Términos}
 

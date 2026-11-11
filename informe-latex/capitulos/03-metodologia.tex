@@ -6,6 +6,8 @@
 \section{Metodología}
 \label{sec:metodologia}
 
+La metodología establece el procedimiento utilizado para orientar el desarrollo de TravelDLS y mantener una relación entre el problema identificado, los objetivos de la solución y el diseño del sistema. En este apartado se presenta el enfoque metodológico adoptado, las fases aplicadas al proyecto y la forma en que se organizará posteriormente el desarrollo del prototipo.
+
 \subsubsection{Enfoque metodológico y tipología del artefacto}
 \label{sec:metodo-enfoque}
 
@@ -133,11 +135,11 @@ La siguiente matriz presenta esta relación inicial, sin asignar porcentajes de 
 	\centering
 	\caption{Matriz inicial de meta-requisitos de TravelDLS}
 	\label{tab:meta-requisitos-traveldls}
-	
+
 	\small
 	\setlength{\tabcolsep}{4.5pt}
 	\renewcommand{\arraystretch}{1.45}
-	
+
 	\begin{tabularx}{\textwidth}{
 			@{}
 			>{\RaggedRight\arraybackslash}p{1.35cm}
@@ -146,69 +148,69 @@ La siguiente matriz presenta esta relación inicial, sin asignar porcentajes de 
 			>{\RaggedRight\arraybackslash}p{2.85cm}
 			@{}
 		}
-		
+
 		\toprule
-		
+
 		\textbf{Código} &
 		\textbf{Necesidad identificada} &
 		\textbf{Meta-requisito previsto} &
 		\textbf{Relación con el diseño} \\
-		
+
 		\midrule
-		
+
 		MR-01 &
 		Organización de información administrativa y operativa. &
 		Registrar y consultar clientes, empresas, vehículos, conductores y órdenes desde una plataforma compartida. &
 		Figuras~\ref{fig:diagrama-clases} y~\ref{fig:diagrama-er}. \\
-		
+
 		\midrule
-		
+
 		MR-02 &
 		Administración de solicitudes de transporte. &
 		Permitir la creación, cotización, aceptación, rechazo y consulta de estados de una orden. &
 		Figuras~\ref{fig:diagrama-estados} y~\ref{fig:diagrama-secuencia}. \\
-		
+
 		\midrule
-		
+
 		MR-03 &
 		Consulta de información sobre las cargas. &
 		Asociar registros de ubicación y estado a las órdenes, permitiendo su consulta por usuarios autorizados. &
 		Figuras~\ref{fig:diagrama-clases},~\ref{fig:diagrama-er} y~\ref{fig:diagrama-secuencia}. \\
-		
+
 		\midrule
-		
+
 		MR-04 &
 		Coordinación de recursos de transporte. &
 		Relacionar conductores y vehículos con las operaciones según las reglas establecidas. &
 		Figuras~\ref{fig:diagrama-clases} y~\ref{fig:diagrama-er}. \\
-		
+
 		\midrule
-		
+
 		MR-05 &
 		Planificación de recorridos con múltiples destinos. &
 		Comparar métodos de optimización con entradas equivalentes y desarrollar el módulo previsto para el prototipo. &
 		\textbf{\hyperref[sec:objetivos-especificos]{Objetivos del proyecto}} y módulo de optimización. \\
-		
+
 		\midrule
-		
+
 		MR-06 &
 		Claridad en el precio del servicio. &
 		Mostrar el monto final de la contratación, incluyendo el porcentaje de mantenimiento, antes de su aceptación. &
 		Figuras~\ref{fig:diagrama-estados} y~\ref{fig:diagrama-secuencia}. \\
-		
+
 		\midrule
-		
+
 		MR-07 &
 		Uso de la plataforma por diferentes empresas. &
 		Mantener diferenciados los registros operativos de cada empresa y establecer controles de acceso según los perfiles. &
 		Figuras~\ref{fig:diagrama-clases} y~\ref{fig:diagrama-er}. \\
-		
+
 		\bottomrule
-		
+
 	\end{tabularx}
-	
+
 	\vspace{0.2cm}
-	
+
 	\begin{minipage}{\textwidth}
 		\footnotesize
 		\textit{Nota.} Los meta-requisitos representan capacidades
@@ -217,7 +219,7 @@ La siguiente matriz presenta esta relación inicial, sin asignar porcentajes de 
 		evidencias correspondientes. La matriz no representa
 		resultados de una evaluación finalizada.
 	\end{minipage}
-	
+
 \end{table}
 
 \subsubsection{Fase 3. Diseño y Desarrollo del Artefacto (Meta-diseños)}
@@ -263,7 +265,7 @@ La metodología de desarrollo de TravelDLS se integra en la fase 3 de la metodol
 
 Esta combinación se enmarca en el enfoque de investigación adoptado para TravelDLS. \textcite{peffers2007dsrm} describen la metodología DSRM como un proceso que comprende la identificación del problema, la definición de los objetivos de la solución, el diseño y desarrollo del artefacto, su demostración, su evaluación y la comunicación de los resultados. En consecuencia, el nivel táctico se concentra en la construcción del sistema a partir de los meta-requisitos establecidos, sin confundir la implementación de las funcionalidades con los resultados que deberán obtenerse durante su evaluación.
 
-La metodología de desarrollo describe cómo se organizará la construcción del artefacto TravelDLS a partir de los siete meta-requisitos definidos en la Tabla~\ref{tab:meta-requisitos-traveldls}. Esta actividad se relaciona con la fase de diseño y desarrollo del artefacto dentro de la metodología de investigación en ciencia del diseño (DSRM).\textcite{peffers2007dsrm} presentan la DSRM como un proceso que vincula la identificación del problema, los objetivos de la solución, el diseño y desarrollo, la demostración, la evaluación y la comunicación de resultados. Por ello, las matrices de esta sección conectan las necesidades del sistema con las decisiones de diseño, las historias de usuario y las formas previstas de comprobar su cumplimiento.
+La metodología de desarrollo describe cómo se organizará la construcción del artefacto TravelDLS a partir de los siete meta-requisitos definidos en la Tabla~\ref{tab:meta-requisitos-traveldls}. Esta actividad se relaciona con la fase de diseño y desarrollo del artefacto dentro de la metodología de investigación en ciencia del diseño (DSRM). \textcite{peffers2007dsrm} presentan la DSRM como un proceso que vincula la identificación del problema, los objetivos de la solución, el diseño y desarrollo, la demostración, la evaluación y la comunicación de resultados. Por ello, las matrices de esta sección conectan las necesidades del sistema con las decisiones de diseño, las historias de usuario y las formas previstas de comprobar su cumplimiento.
 
 Para organizar el trabajo se propone Scrum como marco de gestión y se consideran prácticas técnicas de Extreme Programming (XP) para apoyar la calidad del código. \textcite{bahit2012scrum} explica cómo pueden combinarse ambos enfoques, utilizando Scrum para organizar el trabajo en iteraciones y XP para reforzar las prácticas de desarrollo. La aplicación de estas prácticas en TravelDLS deberá verificarse durante la implementación y mediante las pruebas correspondientes \parencite{beck2000xp, bahit2012scrum, schwaber2020scrum}.
 
@@ -287,7 +289,7 @@ Extreme Programming (XP) propone prácticas de ingeniería que buscan mejorar la
 
 \begin{itemize}
 	\item \textbf{Refactorización continua:} La refactorización consiste en mejorar la estructura interna del código sin modificar su comportamiento observable \parencite{beck2000xp}. En TravelDLS se propone revisar y reorganizar el código conforme se incorporen nuevas funcionalidades, especialmente cuando existan instrucciones repetidas, responsabilidades mezcladas o procedimientos que puedan simplificarse. Esta práctica se aplicará a los componentes del frontend desarrollado con Next.js y a los módulos del backend construido con AdonisJS, procurando conservar la separación entre la interfaz, los controladores, la capa de servicios y el acceso a los datos.
-	
+
 	\item \textbf{Programación en pares y propiedad colectiva del código:} La programación en pares consiste en que dos integrantes colaboren en una misma tarea de programación, mientras que la propiedad colectiva permite que los integrantes del equipo puedan revisar y modificar diferentes partes del código, en lugar de limitar cada componente a una sola persona \parencite{beck2000xp}. Para TravelDLS se propone utilizar estas prácticas en funcionalidades que involucren varios componentes del sistema, como la autenticación, la gestión de órdenes y la optimización de recorridos. La colaboración facilitará el intercambio de conocimientos, la revisión de las soluciones implementadas y el mantenimiento del código. Su aplicación se ajustará a la disponibilidad de los integrantes y a la distribución de las tareas de cada sprint.
 \end{itemize}
 
@@ -494,22 +496,21 @@ Para el seguimiento se incorporó el envío de la ubicación reportada por el di
 En la contratación se desarrollaron el registro de precios de las cargas, la respuesta del cliente a la cotización y un pago simulado por tarjeta o transferencia. Las pruebas unitarias comprueban el cálculo de montos y algunas validaciones del medio de pago; una prueba funcional comprueba el registro de una transferencia simulada y el rechazo de un segundo pago para la misma orden. Sigue pendiente verificar el recargo del 8\,\% y la secuencia completa de cotización, aceptación y pago. Se dispone de documentación técnica del frontend, los mapas y la confirmación de entregas, así como de archivos de prueba para contratos del frontend; los manuales de usuario todavía no se han documentado.
 
 \subsection{Cronograma de actividades}
+\label{sec:cronograma}
 
-El cronograma de trabajo presenta las actividades desarrolladas durante
-el proceso de documentación y desarrollo del software TravelDLS,
-indicando el período establecido para cada una y su estado de avance.
+El cronograma presenta las actividades de documentación y desarrollo de TravelDLS, con el período previsto y su estado de avance. El color verde identifica las actividades completadas y el naranja, las que se encuentran en proceso.
 
 \begin{center}
 	\begin{ganttchart}[
 		hgrid,
 		vgrid,
-		x unit=1.35cm,
+		x unit=0.92cm,
 		y unit title=0.60cm,
-		y unit chart=0.42cm,
+		y unit chart=0.32cm,
 		title height=1,
-		bar height=0.24,
-		group height=0.28,
-		title label font=\scriptsize,
+		bar height=0.23,
+		group height=0.26,
+		title label font=\tiny,
 		bar label font=\scriptsize,
 		group label font=\bfseries\scriptsize,
 		title/.style={
@@ -535,91 +536,140 @@ indicando el período establecido para cada una y su estado de avance.
 			anchor=east,
 			xshift=-0.2cm
 		}
-		]{1}{7}
-		
+		]{1}{10}
+
 		% ENCABEZADO DE SEMANAS
-		\gantttitle{\shortstack{\scriptsize Semana 1\\\tiny 7--11 sep}}{1}
-		\gantttitle{\shortstack{\scriptsize Semana 2\\\tiny 14--18 sep}}{1}
-		\gantttitle{\shortstack{\scriptsize Semana 3\\\tiny 21--25 sep}}{1}
-		\gantttitle{\shortstack{\scriptsize Semana 4\\\tiny 28 sep--2 oct}}{1}
-		\gantttitle{\shortstack{\scriptsize Semana 5\\\tiny 5--9 oct}}{1}
-		\gantttitle{\shortstack{\scriptsize Semana 6\\\tiny 12--16 oct}}{1}
-		\gantttitle{\shortstack{\scriptsize Semana 7\\\tiny 19--23 oct}}{1}\\
-		
+		\gantttitle{\shortstack{S1\\7--11\\sep}}{1}
+		\gantttitle{\shortstack{S2\\14--18\\sep}}{1}
+		\gantttitle{\shortstack{S3\\21--25\\sep}}{1}
+		\gantttitle{\shortstack{S4\\28/9--\\2/10}}{1}
+		\gantttitle{\shortstack{S5\\5--9\\oct}}{1}
+		\gantttitle{\shortstack{S6\\12--16\\oct}}{1}
+		\gantttitle{\shortstack{S7\\19--23\\oct}}{1}
+		\gantttitle{\shortstack{S8\\26--30\\oct}}{1}
+		\gantttitle{\shortstack{S9\\2--6\\nov}}{1}
+		\gantttitle{\shortstack{S10\\9--13\\nov}}{1}\\
+
+		% ======================================
 		% DOCUMENTACIÓN
+		% ======================================
+
 		\ganttgroup{DOCUMENTACIÓN}{1}{7}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Revisión bibliográfica}{1}{1}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Objetivos y tema}{1}{1}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Planteamiento, alcance y limitaciones}{2}{2}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Marco teórico}{2}{2}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Factibilidad del proyecto}{3}{3}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Metodología}{4}{6}\\
-		
-		\ganttbar[bar/.style={fill=proceso,draw=none}]
+
+		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Plan de ejecución}{6}{6}\\
-		
+
 		\ganttbar[bar/.style={fill=proceso,draw=none}]
-		{Resultados del plan de ejecución}{7}{7}\\
-		
+		{Resultados del plan de ejecución}{7}{10}\\
+
+		% ======================================
 		% BACKEND
-		\ganttgroup{BACKEND}{1}{6}\\
-		
+		% ======================================
+
+		\ganttgroup{BACKEND}{1}{10}\\
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Diagrama entidad-relación (DER)}{1}{1}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Usuarios, roles y compañía -- CRUD}{2}{2}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Clientes, conductores y camiones -- CRUD}{3}{3}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Categorías de camiones y órdenes -- CRUD}{4}{4}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Autenticación JWT y pruebas de integración}{4}{4}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Migraciones, modelos y validaciones}{5}{5}\\
-		
-		\ganttbar[bar/.style={fill=proceso,draw=none}]
+
+		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Finalización de CRUD y pruebas del backend}{6}{6}\\
-		
+
+		% SEMANA 7
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Conexión de API con Next.js}{7}{7}\\
+
+		% SEMANA 8
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Servicios para empresa y conductor}{8}{8}\\
+
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Gestión de flota y publicación de servicios}{8}{8}\\
+
+		% SEMANA 9
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Órdenes, cotizaciones e historial}{9}{9}\\
+
+		% SEMANA 10
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Permisos y funciones del administrador}{10}{10}\\
+
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Seguimiento básico y pruebas de la API}{10}{10}\\
+
+		% ======================================
 		% FRONTEND
-		\ganttgroup{FRONTEND}{7}{7}\\
-		
+		% ======================================
+
+	\ganttgroup{FRONTEND}{7}{10}\\
+
+		% SEMANA 7
 		\ganttbar[bar/.style={fill=proceso,draw=none}]
-		{Configuración de Next.js y autenticación JWT}{7}{7}
-		
-	\end{ganttchart}
-	
-	\vspace{0.3cm}
-	
-	\begin{flushleft}
-		\scriptsize
-		\textbf{Estado:}
-		\quad
-		\textcolor{completado}{\rule{0.45cm}{0.16cm}}
-		\; Completado
-		\qquad
-		\textcolor{proceso}{\rule{0.45cm}{0.16cm}}
-		\; En proceso
-	\end{flushleft}
+		{Configuración de Next.js y autenticación JWT}{7}{7}\\
+
+		% SEMANA 8
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Módulo del administrador}{8}{8}\\
+
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Gestión de usuarios y empresas}{8}{8}\\
+
+		% SEMANA 9
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Paneles de empresa y conductor}{9}{9}\\
+
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Gestión de flota, envíos e historial}{9}{9}\\
+
+		% SEMANA 10
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Panel de cliente y consulta de órdenes}{10}{10}\\
+
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Seguimiento básico e integración}{10}{10}\\
+
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Pruebas y entrega final}{10}{10}
+
+		\end{ganttchart}
+
 \end{center}
 
+
 \subsection{Plan de ejecución}
+\label{sec:plan-ejecucion}
 
 El plan de ejecución organiza las acciones de análisis, diseño y evaluación previstas para los tres objetivos específicos de TravelDLS, junto con sus instrumentos de verificación, protagonistas y resultados esperados. La construcción de componentes y las integraciones técnicas se describen en la metodología de desarrollo. Para el primer objetivo se contempla una revisión documental con cadenas de búsqueda en Google Académico, tomando como referencia el mapeo sistemático de \textcite{petersen2008systematic}. La identificación de requisitos se fundamenta en la documentación y los modelos del proyecto; no corresponde a un levantamiento formal con usuarios.
 
@@ -654,7 +704,7 @@ El plan de ejecución organiza las acciones de análisis, diseño y evaluación 
 
 \clearpage
 \subsection{Resultados del plan de ejecución}
-\label{sec:resultados-plan-ejecucion}
+\label{sec:resultados-plan}
 
 Los resultados del análisis, diseño y evaluación preliminar de TravelDLS se presentan de acuerdo con las acciones establecidas en el plan de ejecución. En relación con el \hyperlink{plan-oe1}{OE1}, se realizó la revisión documental y la identificación preliminar de los requisitos del sistema, lo que permitió fundamentar la problemática e identificar las necesidades iniciales de la plataforma. Para orientar la búsqueda de información, se definieron términos en español e inglés relacionados con el seguimiento y rastreo de vehículos y carga, el transporte de mercancías, la logística, los envíos y la optimización de rutas. Asimismo, se analizaron los objetivos, el alcance y los modelos del proyecto para establecer las funcionalidades y los componentes principales de TravelDLS, sin realizar un levantamiento directo con usuarios.
 
@@ -831,13 +881,13 @@ En la Figura~\ref{fig:diagrama-er} se presenta el diagrama entidad-relación de 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{diagrama-er.png}
+	\includegraphics[width=0.88\textwidth,height=0.82\textheight,keepaspectratio]{diagrama-er.png}
 	\caption{Diagrama entidad-relación de TravelDLS: modelado de datos y clases del OE2}
 	\label{fig:diagrama-er}
 \end{figure}
 \end{samepage}
 
-Los diagramas de casos de uso, estados y secuencia corresponden a la acción «Modelado de procesos» del OE2. El primero presenta las funciones por actor; el segundo, los estados de una orden; y el tercero, las interacciones del flujo principal de transporte. En comparación con el resultado esperado de obtener flujos y responsabilidades consistentes entre los modelos, también se considera un cumplimiento parcial: los procesos previstos están representados, pero no se incorpora un registro de revisión comparativa que confirme la coherencia de todas sus reglas.
+Los diagramas de casos de uso, estados y secuencia integran la acción «Modelado de procesos» del OE2. Presentan, respectivamente, las funciones por actor, los estados de una orden y las interacciones del flujo principal de transporte. El resultado esperado exige flujos y responsabilidades consistentes entre modelos. Aunque se representaron los procesos previstos, falta una revisión comparativa que documente la coherencia de sus reglas.
 
 \medskip
 \reservarEspacioFigura{0.84\textheight}
