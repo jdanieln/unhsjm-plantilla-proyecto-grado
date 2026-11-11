@@ -39,6 +39,8 @@
 \setcounter{biburlnumpenalty}{100}
 \setcounter{biburllcpenalty}{100}
 \setcounter{biburlucpenalty}{100}
+% Mantener cada referencia completa en una página; permitir saltos entre entradas.
+\appto\bibsetup{\interlinepenalty=10000\relax}
 
 % ==========================================
 % Justificar texto
@@ -147,6 +149,7 @@
 % ==========================================
 % Referencias Bibliográficas
 % ==========================================
+\clearpage
 \printbibliography[heading=bibintoc, title={Referencias}]
 
 % ==========================================
