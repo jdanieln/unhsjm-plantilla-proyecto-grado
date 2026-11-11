@@ -476,24 +476,26 @@ La Tabla \ref{tab:sprints} presenta una agrupación funcional inicial de las his
 \textit{Nota.} Elaboración propia.
 
 
+
 \subsection{Cronograma de actividades}
 \label{sec:cronograma}
 
-El cronograma de trabajo presenta las actividades desarrolladas durante
-el proceso de documentación y desarrollo del software TravelDLS,
-indicando el período establecido para cada una y su estado de avance.
+El cronograma de trabajo presenta las actividades desarrolladas
+durante el proceso de documentación y desarrollo del software
+TravelDLS, indicando el período establecido para cada una y
+su estado de avance.
 
 \begin{center}
 	\begin{ganttchart}[
 		hgrid,
 		vgrid,
-		x unit=1.35cm,
-		y unit title=0.75cm,
-		y unit chart=0.60cm,
+		x unit=0.92cm,
+		y unit title=0.85cm,
+		y unit chart=0.44cm,
 		title height=1,
-		bar height=0.32,
-		group height=0.36,
-		title label font=\scriptsize,
+		bar height=0.36,
+		group height=0.37,
+		title label font=\tiny,
 		bar label font=\scriptsize,
 		group label font=\bfseries\scriptsize,
 		title/.style={
@@ -519,18 +521,24 @@ indicando el período establecido para cada una y su estado de avance.
 			anchor=east,
 			xshift=-0.2cm
 		}
-		]{1}{7}
+		]{1}{10}
 		
 		% ENCABEZADO DE SEMANAS
-		\gantttitle{\shortstack{\scriptsize Semana 1\\\tiny 7--11 sep}}{1}
-		\gantttitle{\shortstack{\scriptsize Semana 2\\\tiny 14--18 sep}}{1}
-		\gantttitle{\shortstack{\scriptsize Semana 3\\\tiny 21--25 sep}}{1}
-		\gantttitle{\shortstack{\scriptsize Semana 4\\\tiny 28 sep--2 oct}}{1}
-		\gantttitle{\shortstack{\scriptsize Semana 5\\\tiny 5--9 oct}}{1}
-		\gantttitle{\shortstack{\scriptsize Semana 6\\\tiny 12--16 oct}}{1}
-		\gantttitle{\shortstack{\scriptsize Semana 7\\\tiny 19--23 oct}}{1}\\
+		\gantttitle{\shortstack{S1\\7--11\\sep}}{1}
+		\gantttitle{\shortstack{S2\\14--18\\sep}}{1}
+		\gantttitle{\shortstack{S3\\21--25\\sep}}{1}
+		\gantttitle{\shortstack{S4\\28/9--\\2/10}}{1}
+		\gantttitle{\shortstack{S5\\5--9\\oct}}{1}
+		\gantttitle{\shortstack{S6\\12--16\\oct}}{1}
+		\gantttitle{\shortstack{S7\\19--23\\oct}}{1}
+		\gantttitle{\shortstack{S8\\26--30\\oct}}{1}
+		\gantttitle{\shortstack{S9\\2--6\\nov}}{1}
+		\gantttitle{\shortstack{S10\\9--13\\nov}}{1}\\
 		
+		% ======================================
 		% DOCUMENTACIÓN
+		% ======================================
+		
 		\ganttgroup{DOCUMENTACIÓN}{1}{7}\\
 		
 		\ganttbar[bar/.style={fill=completado,draw=none}]
@@ -551,14 +559,17 @@ indicando el período establecido para cada una y su estado de avance.
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Metodología}{4}{6}\\
 		
-		\ganttbar[bar/.style={fill=proceso,draw=none}]
+		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Plan de ejecución}{6}{6}\\
 		
 		\ganttbar[bar/.style={fill=proceso,draw=none}]
-		{Resultados del plan de ejecución}{7}{7}\\
+		{Resultados del plan de ejecución}{7}{10}\\
 		
+		% ======================================
 		% BACKEND
-		\ganttgroup{BACKEND}{1}{6}\\
+		% ======================================
+		
+		\ganttgroup{BACKEND}{1}{10}\\
 		
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Diagrama entidad-relación (DER)}{1}{1}\\
@@ -578,18 +589,68 @@ indicando el período establecido para cada una y su estado de avance.
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Migraciones, modelos y validaciones}{5}{5}\\
 		
-		\ganttbar[bar/.style={fill=proceso,draw=none}]
+		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Finalización de CRUD y pruebas del backend}{6}{6}\\
 		
+		% SEMANA 7
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Conexión de API con Next.js}{7}{7}\\
+		
+		% SEMANA 8
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Servicios para empresa y conductor}{8}{8}\\
+		
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Gestión de flota y publicación de servicios}{8}{8}\\
+		
+		% SEMANA 9
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Órdenes, cotizaciones e historial}{9}{9}\\
+		
+		% SEMANA 10
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Permisos y funciones del administrador}{10}{10}\\
+		
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Seguimiento básico y pruebas de la API}{10}{10}\\
+		
+		% ======================================
 		% FRONTEND
-		\ganttgroup{FRONTEND}{7}{7}\\
+		% ======================================
 		
-		\ganttbar[bar/.style={fill=proceso,draw=none}]
-		{Configuración de Next.js y autenticación JWT}{7}{7}
-		
-	\end{ganttchart}
+	\ganttgroup{FRONTEND}{7}{10}\\
 	
-	\vspace{0.3cm}
+		% SEMANA 7
+		\ganttbar[bar/.style={fill=proceso,draw=none}]
+		{Configuración de Next.js y autenticación JWT}{7}{7}\\
+		
+		% SEMANA 8
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Módulo del administrador}{8}{8}\\
+		
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Gestión de usuarios y empresas}{8}{8}\\
+		
+		% SEMANA 9
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Paneles de empresa y conductor}{9}{9}\\
+		
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Gestión de flota, envíos e historial}{9}{9}\\
+		
+		% SEMANA 10
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Panel de cliente y consulta de órdenes}{10}{10}\\
+		
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Seguimiento básico e integración}{10}{10}\\
+		
+		\ganttbar[bar/.style={fill=completado,draw=none}]
+		{Pruebas y entrega final}{10}{10}
+			
+		\end{ganttchart}
+	
+	\vspace{0.25cm}
 	
 	\begin{flushleft}
 		\scriptsize
@@ -602,6 +663,7 @@ indicando el período establecido para cada una y su estado de avance.
 		\; En proceso
 	\end{flushleft}
 \end{center}
+
 
 \subsection{Plan de ejecución}
 \label{sec:plan-ejecucion}
