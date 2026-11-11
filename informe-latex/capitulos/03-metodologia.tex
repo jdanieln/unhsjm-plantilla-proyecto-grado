@@ -56,7 +56,7 @@ No obstante, el seguimiento estará condicionado por la disponibilidad de conexi
 
 Además de la administración y el seguimiento, otra necesidad identificada corresponde a la organización de recorridos con múltiples destinos. Una empresa transportista puede requerir visitar diferentes puntos durante un mismo servicio, por lo que resulta pertinente analizar el orden en que se realizará el desplazamiento.
 
-La \textbf{\hyperlink{concepto-planificacion-rutas}{planificación de rutas}} permite organizar estos destinos, mientras que la \textbf{\hyperlink{concepto-optimizacion-rutas}{optimización de rutas}} introduce la posibilidad de comparar diferentes alternativas de recorrido según criterios como distancia o tiempo. Esto resulta relevante debido a que el orden de visita influye en la distancia total que puede representar una operación.
+La \textbf{\hyperlink{concepto-planificacion-rutas}{planificación de rutas}} organiza los destinos. La \mbox{\textbf{\hyperlink{concepto-optimizacion-rutas}{optimización de rutas}}} permite comparar recorridos según criterios como la distancia o el tiempo. Esto resulta relevante debido a que el orden de visita influye en la distancia total que puede representar una operación.
 
 
 En el contexto nacional, \textcite{aragon2018implementacion}
@@ -135,11 +135,11 @@ La siguiente matriz presenta esta relación inicial, sin asignar porcentajes de 
 	\centering
 	\caption{Matriz inicial de meta-requisitos de TravelDLS}
 	\label{tab:meta-requisitos-traveldls}
-	
+
 	\small
 	\setlength{\tabcolsep}{4.5pt}
 	\renewcommand{\arraystretch}{1.45}
-	
+
 	\begin{tabularx}{\textwidth}{
 			@{}
 			>{\RaggedRight\arraybackslash}p{1.35cm}
@@ -148,69 +148,69 @@ La siguiente matriz presenta esta relación inicial, sin asignar porcentajes de 
 			>{\RaggedRight\arraybackslash}p{2.85cm}
 			@{}
 		}
-		
+
 		\toprule
-		
+
 		\textbf{Código} &
 		\textbf{Necesidad identificada} &
 		\textbf{Meta-requisito previsto} &
 		\textbf{Relación con el diseño} \\
-		
+
 		\midrule
-		
+
 		MR-01 &
 		Organización de información administrativa y operativa. &
 		Registrar y consultar clientes, empresas, vehículos, conductores y órdenes desde una plataforma compartida. &
 		Figuras~\ref{fig:diagrama-clases} y~\ref{fig:diagrama-er}. \\
-		
+
 		\midrule
-		
+
 		MR-02 &
 		Administración de solicitudes de transporte. &
 		Permitir la creación, cotización, aceptación, rechazo y consulta de estados de una orden. &
 		Figuras~\ref{fig:diagrama-estados} y~\ref{fig:diagrama-secuencia}. \\
-		
+
 		\midrule
-		
+
 		MR-03 &
 		Consulta de información sobre las cargas. &
 		Asociar registros de ubicación y estado a las órdenes, permitiendo su consulta por usuarios autorizados. &
 		Figuras~\ref{fig:diagrama-clases},~\ref{fig:diagrama-er} y~\ref{fig:diagrama-secuencia}. \\
-		
+
 		\midrule
-		
+
 		MR-04 &
 		Coordinación de recursos de transporte. &
 		Relacionar conductores y vehículos con las operaciones según las reglas establecidas. &
 		Figuras~\ref{fig:diagrama-clases} y~\ref{fig:diagrama-er}. \\
-		
+
 		\midrule
-		
+
 		MR-05 &
 		Planificación de recorridos con múltiples destinos. &
 		Comparar métodos de optimización con entradas equivalentes y desarrollar el módulo previsto para el prototipo. &
 		\textbf{\hyperref[sec:objetivos-especificos]{Objetivos del proyecto}} y módulo de optimización. \\
-		
+
 		\midrule
-		
+
 		MR-06 &
 		Claridad en el precio del servicio. &
 		Mostrar el monto final de la contratación, incluyendo el porcentaje de mantenimiento, antes de su aceptación. &
 		Figuras~\ref{fig:diagrama-estados} y~\ref{fig:diagrama-secuencia}. \\
-		
+
 		\midrule
-		
+
 		MR-07 &
 		Uso de la plataforma por diferentes empresas. &
 		Mantener diferenciados los registros operativos de cada empresa y establecer controles de acceso según los perfiles. &
 		Figuras~\ref{fig:diagrama-clases} y~\ref{fig:diagrama-er}. \\
-		
+
 		\bottomrule
-		
+
 	\end{tabularx}
-	
+
 	\vspace{0.2cm}
-	
+
 	\begin{minipage}{\textwidth}
 		\footnotesize
 		\textit{Nota.} Los meta-requisitos representan capacidades
@@ -219,7 +219,7 @@ La siguiente matriz presenta esta relación inicial, sin asignar porcentajes de 
 		evidencias correspondientes. La matriz no representa
 		resultados de una evaluación finalizada.
 	\end{minipage}
-	
+
 \end{table}
 
 \subsubsection{Fase 3. Diseño y Desarrollo del Artefacto (Meta-diseños)}
@@ -249,6 +249,15 @@ La relación entre ambos diagramas es importante porque las operaciones represen
 
 En cuanto a la organización tecnológica, el diseño documentado contempla una plataforma web cuyo frontend utiliza Next.js y cuyo backend se desarrolla con AdonisJS. Estos componentes permiten separar la interfaz utilizada por los usuarios de los procedimientos encargados de procesar solicitudes, aplicar las reglas de negocio y administrar la información almacenada en la base de datos.
 
+\paragraph{Diseño propuesto para la optimización de rutas}
+El módulo de optimización de TravelDLS aún no está implementado. Como parte del meta-diseño se propone incorporar Google OR-Tools en una etapa posterior, con entradas y restricciones documentadas. Se distinguen dos ejercicios: un trayecto directo entre una recogida A y una entrega B, utilizado solo para ilustrar la elección de un camino en una red, y un recorrido que parte de A después de recoger la carga y visita varios destinos. Este segundo caso corresponde a la planificación con múltiples destinos prevista en los meta-requisitos y en el plan de ejecución.
+
+Para el trayecto directo se propone representar la red vial mediante un grafo dirigido $G=(V,E)$, con un costo no negativo $c_{ij}$ para cada arco disponible. Una posible formulación en \texttt{SimpleMinCostFlow} asigna una unidad de suministro a A, una unidad de demanda a B, cero a los nodos intermedios y capacidad unitaria a cada arco \parencite{googleMinCostFlow}. La conservación del flujo se expresa como $\sum_j x_{vj}-\sum_i x_{iv}=b_v$, donde $b_A=1$, $b_B=-1$ y $b_v=0$ para los demás nodos; el objetivo es minimizar $\sum_{(i,j)\in E}c_{ij}x_{ij}$. Con costos enteros positivos, la unidad de flujo permite identificar un camino de costo mínimo. Las conexiones, sentidos de circulación y restricciones para vehículos de carga deberán obtenerse de datos viales adecuados; OR-Tools no los aporta por sí solo. Este ejercicio de camino mínimo no sustituye la comparación de métodos para múltiples destinos.
+
+Para varias entregas se propone \texttt{RoutingModel}, con A como inicio fijo, una matriz común de distancias enteras y la obligación de visitar todos los destinos \parencite{googleTSP}. El ejercicio académico supondrá el retorno a A, conforme al TSP descrito en el marco teórico; antes de aplicar el modelo a un viaje real habrá que definir si el vehículo efectivamente regresa al origen y considerar las restricciones operativas pertinentes. Si se añaden recogidas y entregas emparejadas, deberán imponerse además las condiciones de mismo vehículo y precedencia, no solo registrar los pares mediante \texttt{AddPickupAndDelivery} \parencite{googlePickupDelivery}.
+
+La comparación prevista para múltiples destinos utilizará la misma matriz, origen, destinos y condición de retorno para Vecino Más Cercano, su mejora mediante 2-opt y OR-Tools. Se registrarán el orden de visita, la distancia total y el tiempo de cálculo bajo condiciones de ejecución documentadas. Los ejercicios hipotéticos del apartado de resultados permiten verificar operaciones matemáticas, pero no constituyen pruebas de funcionamiento ni mediciones de rendimiento del módulo futuro. Tampoco se presupone que el solucionador de rutas encuentre siempre el óptimo global \parencite{googleTSP}.
+
 \subsection{Metodología de Desarrollo}
 \label{sec:metodologia-desarrollo}
 
@@ -256,7 +265,7 @@ La metodología de desarrollo de TravelDLS se integra en la fase 3 de la metodol
 
 Esta combinación se enmarca en el enfoque de investigación adoptado para TravelDLS. \textcite{peffers2007dsrm} describen la metodología DSRM como un proceso que comprende la identificación del problema, la definición de los objetivos de la solución, el diseño y desarrollo del artefacto, su demostración, su evaluación y la comunicación de los resultados. En consecuencia, el nivel táctico se concentra en la construcción del sistema a partir de los meta-requisitos establecidos, sin confundir la implementación de las funcionalidades con los resultados que deberán obtenerse durante su evaluación.
 
-La metodología de desarrollo describe cómo se organizará la construcción del artefacto TravelDLS a partir de los siete meta-requisitos definidos en la Tabla~\ref{tab:meta-requisitos-traveldls}. Esta actividad se relaciona con la fase de diseño y desarrollo del artefacto dentro de la metodología de investigación en ciencia del diseño (DSRM).\textcite{peffers2007dsrm} presentan la DSRM como un proceso que vincula la identificación del problema, los objetivos de la solución, el diseño y desarrollo, la demostración, la evaluación y la comunicación de resultados. Por ello, las matrices de esta sección conectan las necesidades del sistema con las decisiones de diseño, las historias de usuario y las formas previstas de comprobar su cumplimiento.
+La metodología de desarrollo describe cómo se organizará la construcción del artefacto TravelDLS a partir de los siete meta-requisitos definidos en la Tabla~\ref{tab:meta-requisitos-traveldls}. Esta actividad se relaciona con la fase de diseño y desarrollo del artefacto dentro de la metodología de investigación en ciencia del diseño (DSRM). \textcite{peffers2007dsrm} presentan la DSRM como un proceso que vincula la identificación del problema, los objetivos de la solución, el diseño y desarrollo, la demostración, la evaluación y la comunicación de resultados. Por ello, las matrices de esta sección conectan las necesidades del sistema con las decisiones de diseño, las historias de usuario y las formas previstas de comprobar su cumplimiento.
 
 Para organizar el trabajo se propone Scrum como marco de gestión y se consideran prácticas técnicas de Extreme Programming (XP) para apoyar la calidad del código. \textcite{bahit2012scrum} explica cómo pueden combinarse ambos enfoques, utilizando Scrum para organizar el trabajo en iteraciones y XP para reforzar las prácticas de desarrollo. La aplicación de estas prácticas en TravelDLS deberá verificarse durante la implementación y mediante las pruebas correspondientes \parencite{beck2000xp, bahit2012scrum, schwaber2020scrum}.
 
@@ -264,7 +273,7 @@ Para organizar el trabajo se propone Scrum como marco de gestión y se considera
 
 Scrum es un marco de trabajo que permite abordar problemas complejos mediante un proceso iterativo e incremental. Se fundamenta en el empirismo y el pensamiento Lean, y establece la transparencia, la inspección y la adaptación como pilares para gestionar el trabajo. Estos principios permiten revisar el avance, identificar desviaciones y ajustar las actividades según la información obtenida durante el desarrollo \parencite{schwaber2020scrum}.
 
-Para TravelDLS, se propone utilizar Scrum para organizar las actividades de desarrollo mediante un Product Backlog, historias de usuario y Sprints. El Product Backlog reunirá las funcionalidades pendientes del sistema y se actualizará conforme se definan nuevas necesidades o se precise el alcance de las ya identificadas. Las historias de usuario describirán las funcionalidades desde la perspectiva de los perfiles que utilizarán la plataforma, manteniendo su relación con los meta-requisitos establecidos. El Product Backlog reúne las historias de usuario priorizadas según su valor funcional y las dependencias entre tareas. En cada sprint, el equipo selecciona el trabajo que abordará y revisa el incremento obtenido; la retrospectiva permite identificar ajustes para la siguiente iteración (Bahit, 2012; Schwaber \& Sutherland, 2020). La asignación de historias a los sprints es provisional y debe concordar con el cronograma vigente.
+Para TravelDLS, se propone utilizar Scrum para organizar las actividades de desarrollo mediante un Product Backlog, historias de usuario y Sprints. El Product Backlog reunirá las funcionalidades pendientes del sistema y se actualizará conforme se definan nuevas necesidades o se precise el alcance de las ya identificadas. Las historias de usuario describirán las funcionalidades desde la perspectiva de los perfiles que utilizarán la plataforma, manteniendo su relación con los meta-requisitos establecidos. El Product Backlog reúne las historias de usuario priorizadas según su valor funcional y las dependencias entre tareas. En cada sprint, el equipo selecciona el trabajo que abordará y revisa el incremento obtenido; la retrospectiva permite identificar ajustes para la siguiente iteración (Bahit, 2012; Schwaber \& Sutherland, 2020). La asignación de historias a los sprints es provisional y debe concordar con el \mbox{cronograma vigente}.
 
 El trabajo se organizará en Sprints de dos a tres semanas, según la planificación propuesta en el documento metodológico. Al inicio de cada Sprint se establecerá un objetivo y se seleccionarán los elementos del Product Backlog que se atenderán, considerando su prioridad, complejidad y dependencias técnicas. Durante la ejecución se desarrollarán las funcionalidades previstas y se realizarán las comprobaciones correspondientes. Al finalizar cada Sprint, se revisará el incremento obtenido y se identificarán ajustes para las iteraciones siguientes, mediante actividades de revisión y retrospectiva (Schwaber \& Sutherland, 2020).
 
@@ -280,7 +289,7 @@ Extreme Programming (XP) propone prácticas de ingeniería que buscan mejorar la
 
 \begin{itemize}
 	\item \textbf{Refactorización continua:} La refactorización consiste en mejorar la estructura interna del código sin modificar su comportamiento observable \parencite{beck2000xp}. En TravelDLS se propone revisar y reorganizar el código conforme se incorporen nuevas funcionalidades, especialmente cuando existan instrucciones repetidas, responsabilidades mezcladas o procedimientos que puedan simplificarse. Esta práctica se aplicará a los componentes del frontend desarrollado con Next.js y a los módulos del backend construido con AdonisJS, procurando conservar la separación entre la interfaz, los controladores, la capa de servicios y el acceso a los datos.
-	
+
 	\item \textbf{Programación en pares y propiedad colectiva del código:} La programación en pares consiste en que dos integrantes colaboren en una misma tarea de programación, mientras que la propiedad colectiva permite que los integrantes del equipo puedan revisar y modificar diferentes partes del código, en lugar de limitar cada componente a una sola persona \parencite{beck2000xp}. Para TravelDLS se propone utilizar estas prácticas en funcionalidades que involucren varios componentes del sistema, como la autenticación, la gestión de órdenes y la optimización de recorridos. La colaboración facilitará el intercambio de conocimientos, la revisión de las soluciones implementadas y el mantenimiento del código. Su aplicación se ajustará a la disponibilidad de los integrantes y a la distribución de las tareas de cada sprint.
 \end{itemize}
 
@@ -325,7 +334,7 @@ Los meta-diseños resumen las decisiones técnicas previstas para responder a lo
 
 \subsubsection{Matriz de trazabilidad de historias de usuario}
 
-La Tabla \ref{tab:trazabilidad_tactica} muestra la contribución de cada historia de usuario a los meta-requisitos de la Tabla\ref{tab:meta-requisitos-traveldls}.
+La Tabla~\ref{tab:trazabilidad_tactica} muestra la contribución de cada historia de usuario a los meta-requisitos de la Tabla~\ref{tab:meta-requisitos-traveldls}.
 
 
 \begingroup
@@ -478,25 +487,29 @@ La Tabla \ref{tab:sprints} presenta una agrupación funcional inicial de las his
 \textit{Nota.} Elaboración propia.
 
 
+\subsubsection{Construcción del prototipo}
+
+La construcción de TravelDLS se organiza mediante las historias de usuario y los sprints propuestos. En el backend se desarrollaron rutas y servicios para autenticación, administración de usuarios y recursos de transporte, gestión de órdenes, cotización, asignación de conductores, pagos simulados, consulta de ubicación y confirmación de entregas. En el frontend se incorporaron interfaces para administración, clientes, empresas transportistas y conductores, con pantallas para consultar recursos y pedidos, solicitar transporte, responder a cotizaciones y consultar información del viaje. La disponibilidad de estos componentes no supone que todos los recorridos entre interfaz y servicios se hayan verificado.
+
+Para el seguimiento se incorporó el envío de la ubicación reportada por el dispositivo del conductor y su consulta por participantes autorizados. La visualización utiliza OpenStreetMap y Leaflet, y durante el desarrollo el trazado de rutas puede consultar un servicio de prueba basado en OSRM. El backend conserva la última posición asociada al pedido, pero aún no construye un historial de puntos. La incorporación de Mapbox y del historial requiere adaptar las vistas y definir el almacenamiento de ubicaciones sucesivas. También se incorporó código para gestionar con Cloudinary fotografías de perfiles, empresas y entregas; las pruebas unitarias validan los archivos antes de su carga, pero falta comprobar el envío al servicio externo.
+
+En la contratación se desarrollaron el registro de precios de las cargas, la respuesta del cliente a la cotización y un pago simulado por tarjeta o transferencia. Las pruebas unitarias comprueban el cálculo de montos y algunas validaciones del medio de pago; una prueba funcional comprueba el registro de una transferencia simulada y el rechazo de un segundo pago para la misma orden. Sigue pendiente verificar el recargo del 8\,\% y la secuencia completa de cotización, aceptación y pago. Se dispone de documentación técnica del frontend, los mapas y la confirmación de entregas, así como de archivos de prueba para contratos del frontend; los manuales de usuario todavía no se han documentado.
 
 \subsection{Cronograma de actividades}
 \label{sec:cronograma}
 
-El cronograma de trabajo presenta las actividades desarrolladas
-durante el proceso de documentación y desarrollo del software
-TravelDLS, indicando el período establecido para cada una y
-su estado de avance.
+El cronograma presenta las actividades de documentación y desarrollo de TravelDLS, con el período previsto y su estado de avance. El color verde identifica las actividades completadas y el naranja, las que se encuentran en proceso.
 
 \begin{center}
 	\begin{ganttchart}[
 		hgrid,
 		vgrid,
 		x unit=0.92cm,
-		y unit title=0.85cm,
-		y unit chart=0.44cm,
+		y unit title=0.60cm,
+		y unit chart=0.32cm,
 		title height=1,
-		bar height=0.36,
-		group height=0.37,
+		bar height=0.23,
+		group height=0.26,
 		title label font=\tiny,
 		bar label font=\scriptsize,
 		group label font=\bfseries\scriptsize,
@@ -524,7 +537,7 @@ su estado de avance.
 			xshift=-0.2cm
 		}
 		]{1}{10}
-		
+
 		% ENCABEZADO DE SEMANAS
 		\gantttitle{\shortstack{S1\\7--11\\sep}}{1}
 		\gantttitle{\shortstack{S2\\14--18\\sep}}{1}
@@ -536,141 +549,129 @@ su estado de avance.
 		\gantttitle{\shortstack{S8\\26--30\\oct}}{1}
 		\gantttitle{\shortstack{S9\\2--6\\nov}}{1}
 		\gantttitle{\shortstack{S10\\9--13\\nov}}{1}\\
-		
+
 		% ======================================
 		% DOCUMENTACIÓN
 		% ======================================
-		
+
 		\ganttgroup{DOCUMENTACIÓN}{1}{7}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Revisión bibliográfica}{1}{1}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Objetivos y tema}{1}{1}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Planteamiento, alcance y limitaciones}{2}{2}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Marco teórico}{2}{2}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Factibilidad del proyecto}{3}{3}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Metodología}{4}{6}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Plan de ejecución}{6}{6}\\
-		
+
 		\ganttbar[bar/.style={fill=proceso,draw=none}]
 		{Resultados del plan de ejecución}{7}{10}\\
-		
+
 		% ======================================
 		% BACKEND
 		% ======================================
-		
+
 		\ganttgroup{BACKEND}{1}{10}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Diagrama entidad-relación (DER)}{1}{1}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Usuarios, roles y compañía -- CRUD}{2}{2}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Clientes, conductores y camiones -- CRUD}{3}{3}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Categorías de camiones y órdenes -- CRUD}{4}{4}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Autenticación JWT y pruebas de integración}{4}{4}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Migraciones, modelos y validaciones}{5}{5}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Finalización de CRUD y pruebas del backend}{6}{6}\\
-		
+
 		% SEMANA 7
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Conexión de API con Next.js}{7}{7}\\
-		
+
 		% SEMANA 8
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Servicios para empresa y conductor}{8}{8}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Gestión de flota y publicación de servicios}{8}{8}\\
-		
+
 		% SEMANA 9
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Órdenes, cotizaciones e historial}{9}{9}\\
-		
+
 		% SEMANA 10
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Permisos y funciones del administrador}{10}{10}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Seguimiento básico y pruebas de la API}{10}{10}\\
-		
+
 		% ======================================
 		% FRONTEND
 		% ======================================
-		
+
 	\ganttgroup{FRONTEND}{7}{10}\\
-	
+
 		% SEMANA 7
 		\ganttbar[bar/.style={fill=proceso,draw=none}]
 		{Configuración de Next.js y autenticación JWT}{7}{7}\\
-		
+
 		% SEMANA 8
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Módulo del administrador}{8}{8}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Gestión de usuarios y empresas}{8}{8}\\
-		
+
 		% SEMANA 9
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Paneles de empresa y conductor}{9}{9}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Gestión de flota, envíos e historial}{9}{9}\\
-		
+
 		% SEMANA 10
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Panel de cliente y consulta de órdenes}{10}{10}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Seguimiento básico e integración}{10}{10}\\
-		
+
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Pruebas y entrega final}{10}{10}
-			
+
 		\end{ganttchart}
-	
-	\vspace{0.25cm}
-	
-	\begin{flushleft}
-		\scriptsize
-		\textbf{Estado:}
-		\quad
-		\textcolor{completado}{\rule{0.45cm}{0.16cm}}
-		\; Completado
-		\qquad
-		\textcolor{proceso}{\rule{0.45cm}{0.16cm}}
-		\; En proceso
-	\end{flushleft}
+
 \end{center}
 
 
 \subsection{Plan de ejecución}
 \label{sec:plan-ejecucion}
 
-El plan de ejecución organiza las acciones previstas para los tres objetivos específicos de TravelDLS, junto con sus instrumentos de verificación, protagonistas y resultados esperados. Para el primer objetivo se contempla una revisión documental con cadenas de búsqueda en Google Académico, tomando como referencia el mapeo sistemático de \textcite{petersen2008systematic}. La identificación de requisitos se fundamenta en la documentación y los modelos del proyecto; no corresponde a un levantamiento formal con usuarios.
+El plan de ejecución organiza las acciones de análisis, diseño, evaluación y comunicación previstas para los tres objetivos específicos de TravelDLS, junto con sus instrumentos de verificación, protagonistas y resultados esperados. La construcción de componentes y las integraciones técnicas se describen en la metodología de desarrollo. Para el primer objetivo se contempla una revisión documental con cadenas de búsqueda en Google Académico, tomando como referencia el mapeo sistemático de \textcite{petersen2008systematic}. La identificación de requisitos se fundamenta en la documentación y los modelos del proyecto; no corresponde a un levantamiento formal con usuarios.
 
 	\begingroup
 	\scriptsize
@@ -692,16 +693,13 @@ El plan de ejecución organiza las acciones previstas para los tres objetivos es
 	\endlastfoot
 	\hypertarget{plan-oe1}{OE1} & Revisión documental y diagnóstico & Seleccionar antecedentes, examinar los procesos de transporte de carga pesada y delimitar necesidades de gestión, seguimiento y planificación de rutas. & Cadenas de búsqueda aplicadas en Google Académico, tomando como referencia el procedimiento de mapeo sistemático (Systematic Mapping) de Petersen et al. (2008). & Equipo investigador. & Problemática fundamentada y necesidades iniciales identificadas. \\ \midrule
 	OE1 & Identificación de requisitos del sistema & Analizar los objetivos, el alcance y los modelos de TravelDLS para identificar las funcionalidades y necesidades técnicas de la plataforma. No se realizó levantamiento directo con usuarios. & Documento del proyecto, diagramas UML y entidad-relación. & Equipo investigador. & Se identificaron preliminarmente las funcionalidades y componentes de TravelDLS mediante análisis documental, sin validación directa con usuarios. \\ \midrule
-	OE1 & Comparación de algoritmos & Definir escenarios con múltiples destinos, obtener una matriz de distancias y comparar Vecino Más Cercano, su mejora con 2-opt y Google OR-Tools. & Matriz de distancias, pruebas de recorridos y cuadro comparativo. & Equipo de desarrollo. & Comparación documentada para sustentar decisiones del módulo de optimización. \\ \midrule
+	OE1 & Análisis de métodos de rutas & Definir un escenario hipotético con múltiples destinos, calcular recorridos con Vecino Más Cercano y 2-opt, y estudiar la formulación de Google OR-Tools para una comparación posterior bajo las mismas condiciones. & Matriz de distancias hipotética, cálculos reproducibles y criterios de comparación. & Equipo investigador. & Fundamentos y datos de referencia para evaluar los métodos cuando OR-Tools se integre; sin atribuirle resultados de ejecución. \\ \midrule
 	OE2 & Definición de arquitectura & Establecer la organización del frontend con Next.js, el backend con AdonisJS bajo MVC y capa de servicios, la base de datos PostgreSQL y los mecanismos de acceso por empresa. & Documento de arquitectura y esquema de componentes. & Equipo de desarrollo. & Arquitectura y responsabilidades técnicas de los componentes definidas. \\ \midrule
 	\hypertarget{plan-oe2}{OE2} & Modelado de datos y clases & Elaborar y revisar los diagramas de clases y entidad-relación, considerando usuarios, roles, empresas, vehículos, conductores, clientes, órdenes y pagos. & Diagramas UML y entidad-relación revisados. & Equipo de desarrollo. & Modelos coherentes con las entidades y relaciones previstas en TravelDLS. \\ \midrule
 	OE2 & Modelado de procesos & Revisar los diagramas de casos de uso, estados y secuencia, unificando las reglas sobre cotización, pago, asignación del conductor y seguimiento de las órdenes. & Diagramas de casos de uso, estados y secuencia; registro de revisión. & Equipo de desarrollo y asesoría académica. & Flujos de negocio y responsabilidades consistentes entre los modelos. \\ \midrule
-	OE3 & Construcción del backend & Desarrollar la autenticación mediante JWT y las operaciones de administración de usuarios, roles, empresas, clientes, conductores, vehículos y órdenes. & Repositorio de código, endpoints y pruebas de API. & Equipo de desarrollo. & Servicios principales del backend funcionales. \\ \midrule
-	\hypertarget{plan-oe3}{OE3} & Desarrollo del frontend & Construir las interfaces para los tres perfiles de TravelDLS e incorporar los procesos de consulta de empresas, solicitud de transporte, cotización y aceptación de servicios. & Pantallas implementadas y pruebas de navegación. & Equipo de desarrollo y usuarios de prueba. & Flujos de interacción disponibles en la plataforma web. \\ \midrule
-	OE3 & Integración de seguimiento & Incorporar Mapbox, registrar las ubicaciones reportadas por el conductor y permitir consultas autorizadas del estado y el historial de cada orden. Gestionar con Cloudinary las fotografías de perfiles y empresas. & Pruebas de integración, registros de seguimiento y consultas del mapa. & Equipo de desarrollo y conductores de prueba. & Información de ubicación y progreso de las cargas disponible según los permisos. \\ \midrule
-	OE3 & Implementación de pagos & Mostrar el precio final del servicio, incluido el recargo del 8\,\% para mantenimiento, antes de su aceptación. Desarrollar el registro o simulación del pago según el alcance del prototipo. & Casos de prueba de cotización, aceptación y pago. & Equipo de desarrollo y clientes de prueba. & Proceso de contratación y pago coherente con las reglas de negocio aprobadas. \\ \midrule
-	OE3 & Módulo de optimización & Integrar Google OR-Tools con los destinos y costos de desplazamiento definidos para el prototipo, permitiendo calcular recorridos que apoyen la planificación. & Código del módulo, pruebas de rutas y resultados de ejecución. & Equipo de desarrollo. & Módulo de optimización integrado y recorridos calculados para escenarios establecidos. \\ \midrule
-	OE3 & Pruebas y documentación & Ejecutar pruebas funcionales en escenarios académicos, registrar incidencias identificadas y elaborar documentación técnica y manuales de usuario. & Matriz de pruebas, registro de incidencias y manuales. & Equipo de desarrollo y participantes de las pruebas. & Prototipo verificado en los escenarios definidos y documentación inicial del sistema. \\
+	\hypertarget{plan-oe3}{OE3} & Diseño conceptual del módulo de optimización & Especificar los destinos, costos, restricciones, entradas y salidas del modelo de rutas con Google OR-Tools para orientar su futura integración, sin presentar el módulo como implementado. & Formulación del problema, matriz de distancias y criterios de evaluación. & Equipo investigador y de desarrollo. & Diseño documentado y compromiso de integrar y evaluar el módulo en una etapa posterior. \\ \midrule
+	OE3 & Evaluación preliminar del prototipo & Definir escenarios y criterios de prueba, ejecutar los casos disponibles y registrar los resultados observados y los aspectos aún no verificados. & Casos de prueba, registro de ejecución y matriz de resultados. & Equipo de desarrollo y participantes de las pruebas. & Evidencia delimitada de los comportamientos comprobados y de las verificaciones pendientes. \\ \midrule
+	OE3 & Elaboración de video informativo & Sintetizar el problema, los participantes, las etapas de un pedido y los alcances actuales y previstos de TravelDLS en una pieza audiovisual. & Archivo del video y guion; revisión de correspondencia con el alcance documentado. & Equipo investigador. & Video que explique la propuesta y distinga las funciones descritas del prototipo de las capacidades previstas. \\
 	\end{longtable}
 	\endgroup
 
@@ -709,7 +707,7 @@ El plan de ejecución organiza las acciones previstas para los tres objetivos es
 \subsection{Resultados del plan de ejecución}
 \label{sec:resultados-plan}
 
-Los resultados obtenidos durante el desarrollo de TravelDLS se presentan de acuerdo con los objetivos y las acciones establecidos en el plan de ejecución. En relación con el \hyperlink{plan-oe1}{OE1}, se realizó la revisión documental y la identificación preliminar de los requisitos del sistema, lo que permitió fundamentar la problemática e identificar las necesidades iniciales de la plataforma. Para orientar la búsqueda de información, se definieron términos en español e inglés relacionados con el seguimiento y rastreo de vehículos y carga, el transporte de mercancías, la logística, los envíos y la optimización de rutas. Asimismo, se analizaron los objetivos, el alcance y los modelos del proyecto para establecer las funcionalidades y los componentes principales de TravelDLS, sin realizar un levantamiento directo con usuarios.
+Los resultados del análisis, diseño, evaluación preliminar y comunicación de TravelDLS se presentan de acuerdo con las acciones establecidas en el plan de ejecución. En relación con el \hyperlink{plan-oe1}{OE1}, se realizó la revisión documental y la identificación preliminar de los requisitos del sistema, lo que permitió fundamentar la problemática e identificar las necesidades iniciales de la plataforma. Para orientar la búsqueda de información, se definieron términos en español e inglés relacionados con el seguimiento y rastreo de vehículos y carga, el transporte de mercancías, la logística, los envíos y la optimización de rutas. Asimismo, se analizaron los objetivos, el alcance y los modelos del proyecto para establecer las funcionalidades y los componentes principales de TravelDLS, sin realizar un levantamiento directo con usuarios.
 
 Las cadenas de búsqueda utilizadas para la revisión documental combinan palabras clave y operadores booleanos, como \texttt{AND} y \texttt{OR}, con el propósito de orientar la consulta de información relacionada con el transporte de carga, el seguimiento de vehículos, la optimización de rutas y las herramientas tecnológicas consideradas para el desarrollo de TravelDLS.
 
@@ -789,55 +787,179 @@ La consulta de documentación sobre Mapbox, sus API y SDK permitió conocer las 
 
 Las búsquedas sobre Cloudinary y el almacenamiento de imágenes y recursos multimedia en aplicaciones web permitieron consultar información sobre servicios para gestionar este tipo de archivos. Los resultados se consideraron en la selección de tecnologías y en el análisis de la viabilidad técnica de TravelDLS, con el propósito de evaluar una alternativa para el almacenamiento y la gestión de recursos gráficos asociados al sistema.
 
-En relación con el \hyperlink{plan-oe2}{OE2}, se definió la arquitectura del sistema y se elaboraron modelos para representar la estructura de TravelDLS y la organización de sus datos. Entre estos resultados se encuentra el diagrama entidad-relación, que representa las principales entidades de la plataforma, como usuarios, roles, empresas, vehículos, conductores, clientes, órdenes y pagos, así como las relaciones entre ellas. Estos modelos sirven de referencia para organizar la información y describir los componentes y procesos principales del sistema.
+\paragraph{Ejercicios preliminares de optimización de rutas}
+Para la acción «Análisis de métodos de rutas» del OE1 se prepararon dos ejercicios \emph{hipotéticos y reproducibles}: un camino entre una recogida y una entrega, como ilustración complementaria, y un recorrido con cuatro destinos, relacionado directamente con el escenario del plan. Estos ejercicios permiten documentar los cálculos de Vecino Más Cercano y 2-opt y establecer una matriz común para la comparación futura con Google OR-Tools. Las distancias siguientes pertenecen únicamente a los datos ficticios de cada ejercicio; no son distancias reales ni resultados obtenidos por OR-Tools.
 
-Por último, en cuanto al  \hyperlink{plan-oe3}{OE3}, se completó la construcción del backend de TravelDLS, incluyendo la autenticación mediante JWT y las operaciones de administración de usuarios, roles, empresas, clientes, conductores, vehículos y órdenes. Con ello, se implementaron los principales servicios del backend previstos en el plan de ejecución. El desarrollo del frontend continúa en proceso, por lo que los resultados descritos corresponden a los avances alcanzados hasta la finalización del backend.
+\textbf{Ejercicio complementario: trayecto directo A--B.} Se consideraron cuatro nodos: A (recogida), B (entrega) y dos intersecciones, X e Y. Las conexiones disponibles y sus distancias hipotéticas son A--X (4 km), X--B (6 km), A--Y (3 km), Y--B (10 km) y A--B (12 km). Se supone que pueden recorrerse en los sentidos indicados. La Tabla~\ref{tab:caminos-hipoteticos} compara los tres caminos posibles de esta red simplificada.
 
+\begin{table}[H]
+\centering
+\caption{Caminos del ejercicio directo A--B}
+\label{tab:caminos-hipoteticos}
+\begin{tabular}{lcc}
+\toprule
+Camino & Cálculo & Distancia \\
+\midrule
+A--X--B & $4+6$ & 10 km \\
+A--B & $12$ & 12 km \\
+A--Y--B & $3+10$ & 13 km \\
+\bottomrule
+\end{tabular}
+\end{table}
 
+El menor costo es 10 km para A--X--B. Este valor se obtuvo por enumeración de los caminos del ejemplo; queda pendiente comprobar la salida de \texttt{SimpleMinCostFlow} con la misma red. En este caso no hay un orden de entregas que reorganizar, por lo que Vecino Más Cercano y 2-opt no se aplican a la comparación.
+
+\textbf{Ejercicio principal: una recogida y cuatro entregas.} Se fijó A como punto de recogida inicial y B, C, D y E como destinos obligatorios. Para este ejercicio se supone un solo vehículo, distancias simétricas y retorno a A. La Tabla~\ref{tab:matriz-rutas-hipotetica} muestra la matriz ficticia, expresada en kilómetros.
+
+\begin{table}[H]
+\centering
+\caption{Matriz de distancias hipotéticas para cinco ubicaciones}
+\label{tab:matriz-rutas-hipotetica}
+\begin{tabular}{crrrrr}
+\toprule
+Nodo & A & B & C & D & E \\
+\midrule
+A & 0 & 7 & 8 & 9 & 13 \\
+B & 7 & 0 & 1 & 7 & 7 \\
+C & 8 & 1 & 0 & 7 & 7 \\
+D & 9 & 7 & 7 & 0 & 14 \\
+E & 13 & 7 & 7 & 14 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Al aplicar la técnica de Vecino Más Cercano \parencite{contreras2021aplicacion}, desde A se elige B (7 km) y luego C (1 km). Ante el empate de 7 km entre D y E desde C, se adopta el desempate alfabético y se elige D. Con los datos ficticios de la Tabla~\ref{tab:matriz-rutas-hipotetica}, el recorrido resultante A--B--C--D--E--A mide $7+1+7+14+13=42$ km.
+
+Para mejorar ese recorrido se aplica la heurística 2-opt, que intercambia dos aristas e invierte el segmento intermedio \parencite{dacosta2021twoopt,uddin2023twoopt}. En este ejemplo se reemplazan A--B y D--E, cuyo costo conjunto es 21 km, por A--D y B--E, cuyo costo es 16 km. Según la misma matriz ficticia, la inversión produce A--D--C--B--E--A, con una distancia de $9+7+1+7+13=37$ km. La reducción respecto de la ruta inicial es $(42-37)/42\times100=11{,}90$\,\%.
+
+La enumeración de las $4!=24$ secuencias de los destinos, manteniendo fijo A al inicio y al final, confirma que 37 km es el mínimo de esta matriz; la ruta mostrada es una de las que alcanzan ese valor. Esto no demuestra que 2-opt encuentre siempre un mínimo global. La Tabla~\ref{tab:comparacion-rutas-preliminar} separa los cálculos ya comprobados de la evaluación aún pendiente.
+
+\begin{table}[H]
+\centering
+\caption{Estado de la comparación del ejercicio con múltiples destinos}
+\label{tab:comparacion-rutas-preliminar}
+\begin{tabular}{@{}p{0.52\textwidth}p{0.18\textwidth}p{0.2\textwidth}@{}}
+\toprule
+Procedimiento & Distancia & Estado \\
+\midrule
+Vecino Más Cercano & 42 km & Cálculo manual \\
+Vecino Más Cercano y 2-opt & 37 km & Cálculo manual \\
+Enumeración de 24 recorridos & 37 km & Mínimo verificado \\
+Google OR-Tools (\texttt{RoutingModel}) & Pendiente & Sin implementación \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Se asume el compromiso de integrar el módulo de optimización con Google OR-Tools en una etapa posterior del desarrollo de TravelDLS, conforme al objetivo específico del proyecto. Para completar la comparación se ejecutará \texttt{RoutingModel} sobre la misma matriz y condiciones, se registrarán el recorrido obtenido y su distancia, y se medirán los tiempos de cálculo bajo un entorno común. La demostración directa podrá comprobarse por separado con \texttt{SimpleMinCostFlow}. Hasta entonces, este resultado documenta una preparación matemática y criterios para la evaluación futura, sin atribuir al prototipo rutas optimizadas ni dar por cumplida la implementación del módulo.
+
+En relación con el \hyperlink{plan-oe2}{OE2}, se definió una arquitectura que separa la interfaz desarrollada con Next.js, los controladores y servicios del backend construido con AdonisJS y la persistencia en PostgreSQL. Se elaboraron los modelos de clases y entidad-relación para representar usuarios, roles, empresas, vehículos, conductores, clientes, órdenes, cargas y pagos, así como sus asociaciones. Estos modelos permiten describir la organización prevista de los datos y las responsabilidades de los componentes. Aún queda pendiente documentar en un esquema de componentes la interacción entre las tres capas y comprobar de manera sistemática la correspondencia de los modelos con las estructuras implementadas y las reglas de acceso por empresa. Por ello, se presenta un diseño elaborado, sin afirmar que su revisión integral se haya completado.
+
+Como evidencia de las acciones de «Modelado de datos y clases» y «Modelado de procesos» previstas para el OE2 en el plan de ejecución, se presentan a continuación los diagramas elaborados. Primero se muestran los modelos de la estructura y los datos del sistema; después, los modelos de sus procesos. Estas figuras documentan el avance del diseño, cuya correspondencia con la implementación todavía requiere una revisión sistemática.
+
+\newcommand{\reservarEspacioFigura}[1]{%
+	\par
+	\ifdim\dimexpr\pagegoal-\pagetotal\relax<#1\relax
+		\newpage
+	\fi
+}
+
+\reservarEspacioFigura{0.62\textheight}
+\begin{samepage}
 En la Figura~\ref{fig:diagrama-clases} se presentan las clases principales de TravelDLS, sus atributos y las relaciones entre usuarios, empresas, clientes, conductores y órdenes. También se muestran los servicios encargados de la autenticación, la gestión de órdenes y los pagos simulados.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{diagrama-clases.png}
-	\caption{Diagrama de clases de TravelDLS}
+	\caption{Diagrama de clases de TravelDLS: modelado de datos y clases del OE2}
 	\label{fig:diagrama-clases}
 \end{figure}
+\end{samepage}
 
+\medskip
+\reservarEspacioFigura{0.78\textheight}
+\begin{samepage}
 En la Figura~\ref{fig:diagrama-er} se presenta el diagrama entidad-relación de TravelDLS, que muestra las tablas de la base de datos y cómo se relacionan entre sí. Este diagrama permite comprender cómo se almacena la información del sistema y sirve como guía para organizar los datos durante el desarrollo.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{diagrama-er.png}
-	\caption{Diagrama entidad-relación de TravelDLS}
+	\includegraphics[width=0.88\textwidth,height=0.82\textheight,keepaspectratio]{diagrama-er.png}
+	\caption{Diagrama entidad-relación de TravelDLS: modelado de datos y clases del OE2}
 	\label{fig:diagrama-er}
 \end{figure}
+\end{samepage}
 
-\clearpage
-Los diagramas de casos de uso, estados y secuencia corresponden a la acción «Modelado de procesos» del OE2. El primero presenta las funciones por actor; el segundo, los estados de una orden; y el tercero, las interacciones del flujo principal de transporte. En comparación con el resultado esperado de obtener flujos y responsabilidades consistentes entre los modelos, también se considera un cumplimiento parcial: los procesos previstos están representados, pero no se incorpora un registro de revisión comparativa que confirme la coherencia de todas sus reglas.
+Los diagramas de casos de uso, estados y secuencia integran la acción «Modelado de procesos» del OE2. Presentan, respectivamente, las funciones por actor, los estados de una orden y las interacciones del flujo principal de transporte. El resultado esperado exige flujos y responsabilidades consistentes entre modelos. Aunque se representaron los procesos previstos, falta una revisión comparativa que documente la coherencia de sus reglas.
 
+\medskip
+\reservarEspacioFigura{0.84\textheight}
+\begin{samepage}
 En la Figura~\ref{fig:diagrama-casos-uso} se describen las funciones previstas para el cliente, la empresa transportista y el conductor, como solicitar transporte, gestionar recursos y reportar la ubicación del viaje. El actor «Usuario» agrupa las funciones compartidas de acceso y administración de la cuenta.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{diagrama-casos-uso.png}
-	\caption{Diagrama de casos de uso de TravelDLS}
+	\includegraphics[width=0.88\textwidth,height=0.82\textheight,keepaspectratio]{diagrama-casos-uso.png}
+	\caption{Diagrama de casos de uso de TravelDLS: modelado de procesos del OE2}
 	\label{fig:diagrama-casos-uso}
 \end{figure}
 
-En la Figura~\ref{fig:diagrama-estados} se representa el recorrido de una orden desde su creación y cotización hasta la entrega o anulación. El diagrama incluye el procesamiento del pago, la asignación del conductor y las transiciones previstas ante fallos de pago o interrupciones del viaje.
+\smallskip
+La Figura~\ref{fig:diagrama-estados} representa los estados de una orden desde su creación hasta la entrega o anulación, incluidos el pago, la asignación del conductor y las transiciones ante fallos.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{diagrama-estado-actualizado.png}
-	\caption{Diagrama de estados de una orden de transporte}
+	\caption{Diagrama de estados de una orden de transporte: modelado de procesos del OE2}
 	\label{fig:diagrama-estados}
 \end{figure}
+\end{samepage}
 
+\medskip
+\reservarEspacioFigura{0.86\textheight}
+\begin{samepage}
 En la Figura~\ref{fig:diagrama-secuencia} se muestra el intercambio de solicitudes y respuestas entre el cliente, la empresa, el conductor, el frontend, el backend y la base de datos. Las interacciones se organizan en creación del pedido, aprobación del precio, pago simulado, asignación del conductor y seguimiento hasta la entrega.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth,height=0.86\textheight,keepaspectratio]{diagrama-secuencia.png}
-	\caption{Diagrama de secuencia del proceso principal de una orden}
+	\includegraphics[width=\textwidth,height=0.75\textheight,keepaspectratio]{diagrama-secuencia.png}
+	\caption{Diagrama de secuencia del proceso principal de una orden: modelado de procesos del OE2}
 	\label{fig:diagrama-secuencia}
 \end{figure}
+\end{samepage}
+
+\clearpage
+En relación con el \hyperlink{plan-oe3}{OE3}, se formuló un diseño conceptual del módulo de optimización para recorridos con múltiples destinos. Se definieron un origen, una matriz de costos y la condición de visitar todos los destinos, así como la necesidad de registrar el orden de visita, la distancia total y el tiempo de cálculo cuando se ejecute la comparación. Este resultado corresponde a la especificación del modelo; Google OR-Tools aún no se integró al prototipo. Se mantiene el compromiso de implementar el módulo y comprobar sus recorridos en una etapa posterior, por lo que el objetivo de implementación no se presenta como cumplido.
+
+Para la acción «Evaluación preliminar del prototipo» se incorporaron pruebas unitarias de reglas de entrega, cifrado, validación de imágenes y operaciones de pago, junto con pruebas funcionales de autenticación, recursos de transporte, órdenes, permisos y respuestas de la API. En una ejecución realizada el 9 de noviembre de 2026 con \texttt{pnpm test} sobre una base de datos aislada para pruebas, se registraron 14 casos unitarios y 33 funcionales aprobados, sin fallos. La Tabla~\ref{tab:pruebas-backend-oe3} resume el resultado observado; el registro completo de la ejecución se conserva como evidencia técnica.
+
+\begin{table}[H]
+\centering
+\caption{Resultado de la evaluación preliminar del backend para el OE3}
+\label{tab:pruebas-backend-oe3}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Suite & Aprobadas & Fallidas & Total \\
+\midrule
+Unitaria & 14 & 0 & 14 \\
+Funcional & 33 & 0 & 33 \\
+\midrule
+Total & 47 & 0 & 47 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+La aprobación de los casos ejecutados documenta únicamente el comportamiento verificado en esos escenarios; no equivale a una evaluación integral del prototipo. Aún falta consolidar una matriz que relacione cada caso funcional con su resultado, fecha e incidencia, y ampliar las pruebas de flujos completos, navegación e integraciones externas. La evaluación del módulo de optimización también permanece pendiente hasta que se implemente Google OR-Tools.
+
+\clearpage
+\enlargethispage{\baselineskip}
+Para la acción «Elaboración de video informativo» del OE3 se preparó una pieza audiovisual de un minuto y treinta y seis segundos que presenta a clientes, empresas transportistas y conductores a través de las etapas de solicitud, cotización, asignación, viaje y entrega. El video aclara que el pago del prototipo es simulado y que la ubicación consultada corresponde a la última posición compartida por el conductor, sin representar un seguimiento permanente. La planificación de recorridos con varios destinos se expone como una capacidad prevista. Esta pieza facilita la comprensión de TravelDLS, pero no constituye evidencia de implementación ni de evaluación del módulo de optimización. El video puede consultarse en \href{https://drive.google.com/file/d/1W6NnBVoQYwdqoSPIq6x3dcinMvR0S9kD/view?usp=drive_link}{\textbf{Google Drive}}.
+
+\subsection{Compromisos para la siguiente etapa}
+\label{sec:compromisos-siguiente-etapa}
+
+Los ejercicios preliminares de rutas, la consulta actual de ubicaciones y el flujo de pago simulado permiten delimitar las capacidades pendientes. Para completarlas se asumen los siguientes compromisos:
+
+\begin{itemize}
+	\item Se completará el módulo de optimización con Google OR-Tools para recorridos con múltiples destinos. La implementación utilizará la matriz de distancias y las condiciones definidas en los ejercicios preliminares. Después, se comparará el recorrido obtenido con Vecino Más Cercano y 2-opt bajo los mismos datos y se registrarán el orden de visita, la distancia total y el tiempo de cálculo de cada método. Esta comparación permitirá evaluar el módulo con evidencia reproducible, sin anticipar resultados que aún no se han comprobado.
+	\item Se integrará Mapbox en la visualización y consulta de ubicaciones del seguimiento de viajes. Actualmente, esas vistas utilizan OpenStreetMap y Leaflet; por ello, será necesario adaptar el mapa para representar con Mapbox la posición reportada por el conductor y asociada a cada orden. Una vez realizada la integración, se comprobará que los participantes autorizados puedan consultar la ubicación correspondiente y que esta se muestre correctamente en la interfaz. Hasta completar esa verificación, Mapbox permanecerá como componente pendiente.
+	\item Se integrará una pasarela de pagos para sustituir el cobro simulado por un proceso de pago efectivo. En esta etapa, la aceptación de una cotización registra un pago por tarjeta o transferencia sin efectuar una transacción real. En la siguiente etapa se incorporará un proveedor de pagos y se verificará, primero en su entorno de pruebas, la confirmación de las transacciones y el manejo de pagos rechazados o duplicados. También se comprobará que el precio final mostrado al cliente incluya el recargo del 8\,\% previsto antes de confirmar el servicio. La pasarela se considerará integrada únicamente cuando el flujo completo haya sido comprobado.
+\end{itemize}
