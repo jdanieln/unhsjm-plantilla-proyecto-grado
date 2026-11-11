@@ -332,7 +332,7 @@ Los meta-diseños resumen las decisiones técnicas previstas para responder a lo
 
 \subsubsection{Matriz de trazabilidad de historias de usuario}
 
-La Tabla \ref{tab:trazabilidad_tactica} muestra la contribución de cada historia de usuario a los meta-requisitos de la Tabla\ref{tab:meta-requisitos-traveldls}.
+La Tabla~\ref{tab:trazabilidad_tactica} muestra la contribución de cada historia de usuario a los meta-requisitos de la Tabla~\ref{tab:meta-requisitos-traveldls}.
 
 
 \begingroup
@@ -901,12 +901,9 @@ La aprobación de los casos ejecutados documenta únicamente el comportamiento v
 \subsection{Compromisos para la siguiente etapa}
 \label{sec:compromisos-siguiente-etapa}
 
-Los resultados parciales anteriores delimitan las actividades que se asumen como compromiso de continuidad. Las capacidades y verificaciones enumeradas a continuación no se presentan como resultados alcanzados en esta etapa:
+Los ejercicios preliminares de rutas y la consulta actual de ubicaciones permiten delimitar el trabajo pendiente, pero no acreditan la integración de Google OR-Tools ni de Mapbox. Para completar estas capacidades se asumen los siguientes compromisos:
 
 \begin{itemize}
-	\item Se integrará Google OR-Tools mediante \texttt{RoutingModel} para los recorridos con múltiples destinos y se comparará su salida con Vecino Más Cercano y 2-opt sobre la misma matriz y condiciones. Se registrarán el recorrido, la distancia y el tiempo de cálculo antes de valorar el cumplimiento del objetivo de optimización.
-	\item Se documentará el esquema de componentes de la arquitectura y se revisará la correspondencia entre los diagramas de clases, entidad-relación, casos de uso, estados y secuencia, las estructuras implementadas y las reglas de acceso por empresa.
-	\item Se incorporarán Mapbox y un historial de ubicaciones sucesivas para las órdenes; asimismo, se comprobará mediante pruebas de integración la carga y recuperación de imágenes con Cloudinary.
-	\item Se verificará la aplicación del recargo del 8\,\% y el flujo completo de cotización, aceptación y pago simulado, incluidas las variantes que aún no cuentan con casos funcionales suficientes.
-	\item Se ampliarán las pruebas de navegación por perfil, los flujos completos y las integraciones externas. Se consolidará una matriz con caso, fecha, resultado e incidencia y se elaborarán los manuales de usuario pendientes.
+	\item Se completará el módulo de optimización con Google OR-Tools para recorridos con múltiples destinos. La implementación utilizará la matriz de distancias y las condiciones definidas en los ejercicios preliminares. Después, se comparará el recorrido obtenido con Vecino Más Cercano y 2-opt bajo los mismos datos y se registrarán el orden de visita, la distancia total y el tiempo de cálculo de cada método. Esta comparación permitirá evaluar el módulo con evidencia reproducible, sin anticipar resultados que aún no se han comprobado.
+	\item Se integrará Mapbox en la visualización y consulta de ubicaciones del seguimiento de viajes. Actualmente, esas vistas utilizan OpenStreetMap y Leaflet; por ello, será necesario adaptar el mapa para representar con Mapbox la posición reportada por el conductor y asociada a cada orden. Una vez realizada la integración, se comprobará que los participantes autorizados puedan consultar la ubicación correspondiente y que esta se muestre correctamente en la interfaz. Hasta completar esa verificación, Mapbox permanecerá como componente pendiente.
 \end{itemize}
