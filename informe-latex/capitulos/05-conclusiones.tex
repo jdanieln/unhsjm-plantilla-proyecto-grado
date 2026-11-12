@@ -1,2 +1,14 @@
 % Capítulo 5: Conclusiones
 % Propósito: Sintetizar las conclusiones obtenidas en función de los objetivos alcanzados y plantear recomendaciones o trabajos futuros.
+
+\section{Conclusiones}
+
+El análisis realizado permitió definir los requerimientos iniciales de TravelDLS y establecer una base para evaluar los métodos de optimización de rutas. Mediante un ejercicio hipotético con múltiples destinos, Vecino Más Cercano generó un recorrido de 42 km y 2-opt lo redujo a 37 km, equivalente a una mejora del 11,90 \%. Estos resultados corresponden únicamente a datos ficticios utilizados con fines de comparación; la evaluación con Google OR-Tools bajo las mismas condiciones aún permanece pendiente.
+
+La arquitectura del sistema quedó definida mediante un frontend en Next.js, un backend en AdonisJS y PostgreSQL para la persistencia de datos. Los diagramas de clases, entidad-relación, casos de uso, estados y secuencia permitieron representar las principales entidades, relaciones y flujos de TravelDLS, estableciendo la estructura necesaria para orientar el desarrollo de los módulos de la plataforma.
+
+El prototipo alcanzó avances funcionales en autenticación, gestión de usuarios y recursos de transporte, órdenes, cotizaciones, asignación de conductores, pagos simulados, ubicación y confirmación de entregas. La evaluación preliminar del backend registró 47 pruebas aprobadas y ninguna fallida, correspondientes a 14 pruebas unitarias y 33 funcionales. Google OR-Tools, Mapbox, el pago real y algunas verificaciones de flujos completos permanecen pendientes.
+
+TravelDLS presenta una base funcional suficiente para continuar su desarrollo como plataforma orientada a la gestión, localización y seguimiento del transporte terrestre de carga pesada. El cumplimiento completo del objetivo general dependerá de finalizar las integraciones pendientes y validar de forma integral los principales flujos del sistema.
+
+A partir de las conclusiones obtenidas y de los aspectos que aún requieren desarrollo o validación, se presentan las siguientes recomendaciones con el propósito de orientar las próximas mejoras de TravelDLS y fortalecer la continuidad del proyecto.
