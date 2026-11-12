@@ -1,0 +1,63 @@
+\clearpage
+\appendix
+\phantomsection
+\addcontentsline{toc}{section}{Apéndice: Modelo de flujo de caja de TravelDLS}
+
+\section{Modelo de flujo de caja de TravelDLS}
+\label{anexo:flujo-caja}
+
+Este anexo presenta el modelo de flujo de caja utilizado para respaldar la viabilidad económica de TravelDLS. La información fue transcrita del archivo digital \href{run:anexos/flujo-caja-traveldls.xlsx}{flujo-caja-traveldls.xlsx}, incluido como anexo del proyecto. Los supuestos base se presentan en la Tabla~\ref{tab:supuestos-economicos}, dentro de la viabilidad económica.
+
+\begin{table}[H]
+	\centering
+	\caption{Contribución estimada por envío}
+	\label{tab:anexo-contribucion-envio}
+	\begin{tabularx}{\textwidth}{>{\RaggedRight\arraybackslash}X r >{\RaggedRight\arraybackslash}X}
+		\toprule
+		Concepto & Valor (C\$) & Explicación \\
+		\midrule
+		Precio final que paga el cliente & 3,954.96 & Precio base equivalente a USD~100 más el porcentaje de TravelDLS. \\
+		Ingreso bruto de TravelDLS & 292.96 & Porcentaje agregado al precio base, correspondiente al 8\,\%. \\
+		Comisión cobrada por la pasarela & 118.65 & Costo estimado por procesar el pago, equivalente al 3\,\% del total cobrado al cliente. \\
+		Ingreso neto de TravelDLS por envío & 174.31 & Monto que queda para TravelDLS después de pagar la comisión de la pasarela. \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Flujo de caja proyectado}
+	\label{tab:anexo-flujo-caja-proyectado}
+	{\small
+		\setlength{\tabcolsep}{4pt}
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{lrrrrrr}
+				\toprule
+				Concepto & Año 0 & Año 1 & Año 2 & Año 3 & Año 4 & Año 5 \\
+				\midrule
+				Envíos por mes & 0 & 60 & 90 & 120 & 150 & 180 \\
+				Ingresos de TravelDLS & -- & 125,503.20 & 188,254.80 & 251,006.40 & 313,758.00 & 376,509.60 \\
+				Costos operativos & -- & 68,992.08 & 69,431.52 & 69,431.52 & 69,431.52 & 69,431.52 \\
+				Inversión inicial & $-$56,834.24 & -- & -- & -- & -- & -- \\
+				Flujo neto & $-$56,834.24 & 56,511.12 & 118,823.28 & 181,574.88 & 244,326.48 & 307,078.08 \\
+				Flujo acumulado & $-$56,834.24 & $-$323.12 & 118,500.16 & 300,075.04 & 544,401.52 & 851,479.60 \\
+				\bottomrule
+			\end{tabular}%
+		}
+	}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Indicadores financieros del modelo}
+	\label{tab:anexo-indicadores-financieros}
+	\begin{tabularx}{\textwidth}{l r l >{\RaggedRight\arraybackslash}X}
+		\toprule
+		Indicador & Resultado & Unidad & Concepto \\
+		\midrule
+		VAN & 547,106.97 & C\$ & Valor actual de todos los flujos futuros menos la inversión inicial, usando una tasa de descuento del 12\,\%. \\
+		TIR & 162 & \% & Rentabilidad implícita del proyecto según sus flujos de caja. \\
+		PRI & 1.002 & Años & Tiempo aproximado que tarda en recuperarse la inversión inicial. \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
