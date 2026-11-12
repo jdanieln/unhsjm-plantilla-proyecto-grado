@@ -121,9 +121,89 @@ Como TravelDLS se desarrollará en el marco de este proyecto académico y se con
 \subsection{Viabilidad del proyecto}
 \label{sec:viabilidad}
 
-Una vez definido lo que formará parte del proyecto y los límites bajo los cuales será desarrollado, corresponde analizar si la propuesta puede llevarse a la práctica con los recursos, tecnologías y condiciones disponibles. Para ello, la viabilidad de TravelDLS se estudia desde diferentes perspectivas.
+
+Una vez definido lo que formará parte del proyecto y los límites bajo los cuales será desarrollado, corresponde analizar si la propuesta puede llevarse a la práctica
+con los recursos, tecnologías y condiciones disponibles. Para ello, la viabilidad de TravelDLS se estudia desde cuatro perspectivas: técnica, operativa, económica y legal.
+La Tabla~\ref{tab:matriz-viabilidad} presenta un resumen de los principales aspectos considerados en cada una, los cuales se desarrollan con mayor detalle en los apartados correspondientes.
+
+
+\begin{table}[H]
+	\centering
+	\caption{Matriz resumen de viabilidad del proyecto TravelDLS}
+	\label{tab:matriz-viabilidad}
+	
+	\small
+	\renewcommand{\arraystretch}{1.4}
+	
+	\begin{tabularx}{\textwidth}{
+			>{\RaggedRight\arraybackslash}p{3cm}
+			>{\RaggedRight\arraybackslash}X
+		}
+		\toprule
+		\textbf{Tipo de viabilidad} & \textbf{Descripción} \\
+		\midrule
+		
+		\hyperref[sec:viabilidad-tecnica]{Viabilidad técnica} &
+		TravelDLS cuenta con una base tecnológica para
+		desarrollar los principales componentes de la plataforma.
+		Se utilizarán Next.js para el frontend, AdonisJS 6 para
+		el backend y PostgreSQL como base de datos. Además,
+		se incorporarán JWT para la autenticación, Cloudinary
+		para el almacenamiento de imágenes, Mapbox para
+		la localización y Google OR-Tools para la optimización
+		de rutas. El despliegue del frontend y backend se
+		realizará mediante Vercel y Render, respectivamente. \\
+		
+		\midrule
+		
+		\hyperref[sec:viabilidad-operativa]{Viabilidad operativa} &
+		La plataforma estará disponible mediante un navegador
+		web, permitiendo que empresas transportistas, conductores
+		y clientes accedan a las funciones correspondientes
+		a su participación en el servicio. Las empresas podrán
+		administrar vehículos, conductores, cargas y viajes,
+		mientras que los conductores consultarán sus recorridos
+		asignados y los clientes podrán conocer el estado de
+		los servicios contratados. La información se mantendrá
+		centralizada para facilitar su consulta y actualización
+		durante las operaciones de transporte. \\
+		
+		\midrule
+		
+		\hyperref[sec:viabilidad-economica]{Viabilidad económica} &
+		La inversión inicial estimada de TravelDLS es de
+		C\$56,834.24, con costos operativos mensuales de
+		C\$5,749.34. El modelo de ingresos considera un recargo
+		del 8 \% sobre el precio establecido por la empresa
+		transportista. La proyección financiera a cinco años
+		presenta un Valor Actual Neto (VAN) de C\$547,106.97,
+		una Tasa Interna de Retorno (TIR) del 162 \% y un
+		Período de Recuperación de la Inversión (PRI) de
+		1.002 años. Estos resultados respaldan la viabilidad
+		económica del proyecto bajo los supuestos establecidos. \\
+		
+		\midrule
+		
+		\hyperref[sec:viabilidad-legal]{Viabilidad legal} &
+		La viabilidad legal de TravelDLS se sustenta en las
+		normas nicaragüenses relacionadas con la protección
+		de datos personales, la contratación electrónica,
+		la seguridad de la información, el transporte terrestre
+		de carga y los derechos de los consumidores.
+		Se consideran las leyes No. 787, No. 729, No. 641,
+		No. 524 y No. 842, así como el Decreto No. 42-2005.
+		Estas disposiciones establecen las condiciones que
+		deberán cumplirse durante el funcionamiento de
+		la plataforma. \\
+		
+		\bottomrule
+	\end{tabularx}
+	
+\end{table}
+
 
 \subsubsection{Viabilidad Técnica}
+\label{sec:viabilidad-tecnica}
 
 TravelDLS se considera técnicamente viable porque las tecnologías seleccionadas permiten desarrollar los principales componentes planteados para la plataforma y cuentan con antecedentes recientes de uso en aplicaciones web y sistemas relacionados. La propuesta utilizará Next.js para el frontend, AdonisJS 6 para el backend, PostgreSQL como base de datos, JWT para la autenticación, Cloudinary para el almacenamiento de imágenes, Mapbox para las funciones de localización y Google OR-Tools para el módulo de optimización de rutas. La selección de estas herramientas también considera la posibilidad de mantener separados los diferentes componentes del sistema para facilitar su organización y mantenimiento.
 
@@ -156,6 +236,7 @@ En conjunto, los antecedentes revisados muestran que las tecnologías selecciona
 Contar con tecnologías adecuadas y una estructura definida permite establecer que el sistema puede construirse desde el punto de vista técnico. Sin embargo, también es necesario analizar cómo estas herramientas podrán utilizarse dentro de las actividades diarias de empresas, conductores y clientes, lo que conduce al estudio de la viabilidad operativa.
 
 \subsubsection{Viabilidad Operativa}
+\label{sec:viabilidad-operativa}
 
 La viabilidad operativa de TravelDLS se basa en que será una plataforma web accesible mediante un navegador, por lo que las empresas transportistas no necesitarán instalar una versión independiente del sistema ni mantener servidores propios. El acceso estará dividido principalmente entre empresas transportistas, conductores y clientes, mostrando a cada usuario las funciones relacionadas con su participación dentro del servicio.
 
@@ -172,6 +253,7 @@ El funcionamiento de TravelDLS dependerá de factores como la conexión a Intern
 Además de comprobar que TravelDLS puede integrarse a las actividades de sus posibles usuarios, es necesario determinar si su desarrollo y funcionamiento pueden sostenerse económicamente. Por esta razón, el siguiente análisis considera la inversión inicial, los costos operativos y los ingresos que podrían generarse mediante el modelo propuesto para la plataforma.
 
 \subsubsection{Viabilidad Económica}
+\label{sec:viabilidad-economica}
 
 La inversión inicial de TravelDLS se calcula sumando el desarrollo del sistema, el dominio del primer año y la configuración, las pruebas y la puesta en marcha: C\$52,732.80 + C\$439.44 + C\$3,662.00 = C\$56,834.24. Para expresar en córdobas los importes presupuestados en dólares, se multiplica cada monto por C\$36.62. Este valor corresponde al redondeo a dos decimales del tipo de cambio oficial de C\$36.6243 por USD~1.00 publicado por el Banco Central de Nicaragua para 2026 \parencite{bcn2026tipocambio}. A continuación se explica la procedencia de los rubros que integran esta estimación académica.
 
@@ -251,6 +333,7 @@ Con una tasa académica de descuento del 12\,\%, el modelo obtiene un valor actu
 No obstante, la sostenibilidad económica no constituye el único aspecto que debe considerarse antes de implementar TravelDLS. Debido a que la plataforma gestionará datos personales, ubicaciones, contrataciones y servicios relacionados con el transporte terrestre, también debe revisarse el marco legal aplicable a su funcionamiento.
 
 \subsubsection{Viabilidad Legal}
+\label{sec:viabilidad-legal}
 
 La viabilidad legal de TravelDLS se sustenta en las normas nicaragüenses que regulan la protección de datos, el comercio electrónico y el transporte terrestre de carga. La Ley No. 787, Ley de Protección de Datos Personales, es necesaria porque la plataforma manejará información de empresas, conductores y clientes, incluyendo ubicaciones en tiempo real, fotografías de perfil y documentos de identidad. Su artículo 4 condiciona la creación de ficheros de datos personales a que exista autorización y consentimiento del titular, lo cual obliga a TravelDLS a implementar mecanismos de consentimiento informado durante el registro de usuarios. El artículo 5 pide que los datos sean los necesarios para el fin que se persigue, de modo que la plataforma no puede recolectar información más allá de la que realmente utiliza para gestionar los viajes. El artículo 7 obliga a informar al titular para qué se usarán sus datos, quién los verá y cómo puede ejercer sus derechos de acceso, rectificación o cancelación \parencite[Arts.4,5 y 7]{ley787_2012}. Sin esta ley, TravelDLS no tendría un marco claro para tratar la información de los usuarios, y las empresas transportistas podrían exponerse a reclamos por el mal uso de datos de sus conductores o clientes.
 

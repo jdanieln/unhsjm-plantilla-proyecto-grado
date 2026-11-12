@@ -222,6 +222,56 @@ La siguiente matriz presenta esta relación inicial, sin asignar porcentajes de 
 
 \end{table}
 
+\subsubsection{Requerimientos funcionales y no funcionales de TravelDLS}
+
+A partir de las necesidades identificadas durante el análisis del proyecto, se definieron los requerimientos funcionales y no funcionales que orientan el diseño y desarrollo de TravelDLS. Estos requerimientos establecen las capacidades que deberá proporcionar la plataforma y las condiciones técnicas que deberán considerarse durante su implementación. Su definición se realizó mediante el análisis documental, los objetivos, el alcance y los modelos del sistema, sin realizar en esta etapa un levantamiento directo con usuarios.
+
+\paragraph{Requerimientos funcionales}
+
+\begin{itemize}
+	
+	\item \textit{Gestión de usuarios y perfiles:} El sistema deberá permitir el registro, inicio de sesión y gestión de perfiles para empresas transportistas, conductores y clientes. También deberá permitir la administración de fotografías y logotipos mediante Cloudinary, aplicando mecanismos de autenticación y control de acceso.
+	
+	\item \textit{Administración de recursos logísticos:} Las empresas transportistas deberán poder registrar, consultar y actualizar vehículos, conductores y categorías de camiones, manteniendo separada la información correspondiente a cada empresa.
+	
+	\item \textit{Publicación y contratación de servicios:} La plataforma deberá permitir que las empresas transportistas publiquen servicios y que los clientes puedan consultarlos y contratarlos, relacionando información de la carga, origen, destino y precio.
+	
+	\item \textit{Gestión del ciclo de las órdenes:} El sistema deberá permitir administrar las solicitudes de transporte mediante diferentes estados, incluyendo la creación de la solicitud, cotización por parte de la empresa, aceptación o rechazo del cliente, inicio del viaje, entrega y cancelación cuando corresponda.
+	
+	\item \textit{Asignación de recursos al viaje:} Las empresas transportistas deberán poder asignar conductores y vehículos a las órdenes que cumplan con las condiciones establecidas para iniciar el servicio.
+	
+	\item \textit{Gestión de pagos:} La plataforma deberá contemplar la integración de una pasarela de pago y mostrar al cliente el precio final del servicio antes de su aceptación, incluyendo el recargo del 8~\% destinado al mantenimiento de TravelDLS.
+	
+	\item \textit{Localización y seguimiento:} El sistema deberá permitir registrar y consultar la ubicación compartida por el conductor durante un viaje. La visualización de esta información se plantea mediante Mapbox, permitiendo su consulta por parte del cliente y la empresa transportista de acuerdo con sus permisos.
+	
+	\item \textit{Planificación y optimización de rutas:} TravelDLS deberá incorporar un módulo para recorridos con múltiples destinos utilizando Google OR-Tools. Los resultados deberán poder compararse con Vecino Más Cercano y 2-opt bajo condiciones equivalentes.
+	
+\end{itemize}
+
+\paragraph{Requerimientos no funcionales}
+
+\begin{itemize}
+	
+	\item \textit{Arquitectura y despliegue:} TravelDLS deberá funcionar como una plataforma web bajo un modelo SaaS y multitenant. La arquitectura estará compuesta por un frontend independiente desarrollado con Next.js y un backend desarrollado con AdonisJS, complementado con una capa de servicios.
+	
+	\item \textit{Persistencia de datos:} La información del sistema deberá almacenarse en PostgreSQL, manteniendo las relaciones entre empresas, usuarios, conductores, vehículos, órdenes, cargas, pagos y demás registros asociados.
+	
+	\item \textit{Separación de información:} Los datos correspondientes a cada empresa transportista deberán mantenerse diferenciados, evitando que los usuarios puedan consultar o modificar información perteneciente a otras organizaciones sin autorización.
+	
+	\item \textit{Seguridad y privacidad:} El acceso a los recursos deberá estar protegido mediante autenticación y autorización según el perfil del usuario. Las comunicaciones deberán utilizar mecanismos seguros como HTTPS y deberán considerarse las disposiciones aplicables de la Ley No. 787 de Protección de Datos Personales de Nicaragua.
+	
+	\item \textit{Cumplimiento legal:} El funcionamiento de la plataforma deberá considerar las disposiciones relacionadas con contratación electrónica, protección al consumidor y transporte terrestre, incluyendo la Ley No. 729, la Ley No. 524, el Decreto No. 42-2005 y la Ley No. 842.
+	
+	\item \textit{Disponibilidad y conectividad:} Las funciones de seguimiento dependerán de la conexión a Internet, del dispositivo utilizado por el conductor y de la disponibilidad de los servicios de ubicación. El sistema deberá considerar situaciones en las que temporalmente no puedan recibirse nuevas coordenadas.
+	
+	\item \textit{Dependencia de servicios externos:} Algunas funcionalidades dependerán de servicios externos como Mapbox para la visualización de mapas y Cloudinary para el almacenamiento de recursos multimedia, por lo que su disponibilidad deberá considerarse durante la operación del sistema.
+	
+	\item \textit{Mantenibilidad:} La separación entre frontend, backend, servicios y base de datos deberá facilitar la organización del código, las modificaciones futuras y el mantenimiento de los diferentes componentes de TravelDLS.
+	
+\end{itemize}
+
+Los requerimientos definidos sirven como base para establecer los meta-requisitos y las decisiones de diseño de TravelDLS. Su cumplimiento deberá comprobarse progresivamente mediante los criterios de aceptación, las pruebas funcionales y las evidencias generadas durante el desarrollo del prototipo.
+
 \subsubsection{Fase 3. Diseño y Desarrollo del Artefacto (Meta-diseños)}
 \label{sec:metodo-fase3}
 
@@ -505,7 +555,7 @@ El cronograma presenta las actividades de documentación y desarrollo de TravelD
 		hgrid,
 		vgrid,
 		x unit=0.92cm,
-		y unit title=0.60cm,
+		y unit title= 0.9cm,
 		y unit chart=0.32cm,
 		title height=1,
 		bar height=0.23,
@@ -542,7 +592,7 @@ El cronograma presenta las actividades de documentación y desarrollo de TravelD
 		\gantttitle{\shortstack{S1\\7--11\\sep}}{1}
 		\gantttitle{\shortstack{S2\\14--18\\sep}}{1}
 		\gantttitle{\shortstack{S3\\21--25\\sep}}{1}
-		\gantttitle{\shortstack{S4\\28/9--\\2/10}}{1}
+		\gantttitle{\shortstack{S4\\28 sep--\\2 oct}}{1}
 		\gantttitle{\shortstack{S5\\5--9\\oct}}{1}
 		\gantttitle{\shortstack{S6\\12--16\\oct}}{1}
 		\gantttitle{\shortstack{S7\\19--23\\oct}}{1}
@@ -577,7 +627,7 @@ El cronograma presenta las actividades de documentación y desarrollo de TravelD
 		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Plan de ejecución}{6}{6}\\
 
-		\ganttbar[bar/.style={fill=proceso,draw=none}]
+		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Resultados del plan de ejecución}{7}{10}\\
 
 		% ======================================
@@ -636,7 +686,7 @@ El cronograma presenta las actividades de documentación y desarrollo de TravelD
 	\ganttgroup{FRONTEND}{7}{10}\\
 
 		% SEMANA 7
-		\ganttbar[bar/.style={fill=proceso,draw=none}]
+		\ganttbar[bar/.style={fill=completado,draw=none}]
 		{Configuración de Next.js y autenticación JWT}{7}{7}\\
 
 		% SEMANA 8
